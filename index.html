@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moddulagudem Mitra Mandali | Ganesh Utsav 2026</title>
+  <title>Team Bajarangdal | Ganesh Utsav 2026</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -16,6 +16,8 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- html2pdf.js for High-Quality Instant Invoice Downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -117,7 +119,7 @@
       <div class="absolute text-5xl font-decorative text-amber-400 drop-shadow-[0_0_35px_rgba(247,195,95,0.9)]">ॐ</div>
     </div>
 
-    <h2 class="font-cinzel text-xs tracking-[0.35em] text-amber-300 uppercase mb-2">Moddulagudem Mitra Mandali</h2>
+    <h2 class="font-cinzel text-xs tracking-[0.35em] text-amber-300 uppercase mb-2">Team Bajarangdal</h2>
     <h1 class="font-decorative text-3xl sm:text-5xl font-black text-gold-gradient tracking-tight">శ్రీ గణేష్ ఉత్సవం 2026</h1>
     <p class="text-xs text-slate-400 mt-2 tracking-widest uppercase">Sacred Celebrations • Pure Devotion</p>
 
@@ -132,7 +134,7 @@
   <nav class="fixed top-0 left-0 w-full z-40 bg-[#05010B]/85 backdrop-blur-xl border-b border-amber-500/20 px-4 sm:px-8 py-3.5 flex items-center justify-between">
     <div class="flex items-center gap-2.5">
       <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-black font-black text-xs shadow-[0_0_12px_rgba(247,195,95,0.6)]">ॐ</div>
-      <span class="font-cinzel font-black tracking-wider text-xs sm:text-sm md:text-base text-gold-gradient">MODDULAGUDEM MITRA MANDALI</span>
+      <span class="font-cinzel font-black tracking-wider text-xs sm:text-sm md:text-base text-gold-gradient">TEAM BAJARANGDAL</span>
     </div>
 
     <div class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-slate-300">
@@ -161,7 +163,7 @@
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 backdrop-blur-md mb-3">
         <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
         <span class="font-cinzel text-amber-300 text-[11px] sm:text-xs font-bold tracking-widest uppercase">
-          శ్రీ గణేష్ ఉత్సవ కమిటీ • మోద్దులగూడెం మిత్ర మండలి
+          శ్రీ గణేష్ ఉత్సవ కమిటీ • టీమ్ బజరంగ్ దళ్
         </span>
       </div>
 
@@ -176,7 +178,7 @@
           <img 
             id="heroGaneshaImg" 
             class="w-full h-full object-cover rounded-full filter brightness-105 contrast-105 group-hover:scale-105 transition duration-700"
-            alt="Moddulagudem Lord Ganesha"
+            alt="Lord Ganesha - Team Bajarangdal"
             onerror="this.src='https://images.unsplash.com/photo-1567591370504-20b1e42ba93d?auto=format&fit=crop&w=1000&q=80'"
           />
         </div>
@@ -220,7 +222,7 @@
     <div id="eventsContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
 
-  <!-- ================= 02. CHANDA SECTION (FULLY DYNAMIC SEVAS) ================= -->
+  <!-- ================= 02. CHANDA SECTION (TEAM BAJARANGDAL) ================= -->
   <section id="chanda" class="py-20 px-4 max-w-5xl mx-auto border-t border-amber-500/10 z-10 relative">
     <div class="text-center mb-12">
       <span class="text-xs font-bold tracking-[0.25em] text-amber-400 uppercase">02 • Devotion & Seva</span>
@@ -234,7 +236,7 @@
           <img id="displayQrCode" class="w-48 h-48 sm:w-52 sm:h-52 object-contain" alt="UPI QR Code" />
         </div>
         <h4 id="displayHeadName" class="font-cinzel text-base font-bold text-slate-100">Ganesh (President)</h4>
-        <p id="displayUpiId" class="text-xs font-mono text-amber-400 mt-0.5">UPI: moddulagudem@upi</p>
+        <p id="displayUpiId" class="text-xs font-mono text-amber-400 mt-0.5">UPI: team-bajarangdal@upi</p>
         <p class="text-[11px] text-slate-400 mt-2">Scan or tap QR with Google Pay, PhonePe, Paytm or BHIM</p>
       </div>
 
@@ -244,7 +246,7 @@
             <h3 class="font-cinzel font-bold text-lg text-amber-300">Choose Chanda Amount</h3>
             <span id="selectedAmountBadge" class="text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Selected: ₹501</span>
           </div>
-          <p class="text-xs text-slate-300 mt-1 leading-relaxed">Dedicated to sacred poojas, laddu auctions, and grand community Annadanam by <strong class="text-amber-400">Moddulagudem Mitra Mandali</strong>.</p>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">Dedicated to sacred poojas, laddu auctions, and grand community Annadanam by <strong class="text-amber-400">Team Bajarangdal</strong>.</p>
 
           <!-- Dynamic Seva Buttons Grid -->
           <div id="sevaButtonsContainer" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5"></div>
@@ -270,7 +272,7 @@
     <div class="text-center mb-12">
       <span class="text-xs font-bold tracking-[0.25em] text-amber-400 uppercase">03 • Devotee Offerings</span>
       <h2 class="font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-2">భక్తుల విరాళాల జాబితా</h2>
-      <p class="text-sm text-slate-400 mt-1">Honoring all donors contributing to Moddulagudem Ganesh Utsav</p>
+      <p class="text-sm text-slate-400 mt-1">Honoring all donors contributing to Team Bajarangdal Ganesh Utsav</p>
     </div>
 
     <div class="card-glass rounded-3xl p-6 sm:p-8 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-amber-400/40">
@@ -294,7 +296,7 @@
     <div class="text-center mb-14">
       <span class="text-xs font-bold tracking-[0.25em] text-amber-400 uppercase">04 • Dedicated Youth</span>
       <h2 class="font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-2">Committee Members</h2>
-      <p class="text-sm text-slate-400 mt-1">మన మోద్దులగూడెం మిత్ర మండలి సభ్యులు</p>
+      <p class="text-sm text-slate-400 mt-1">మన టీమ్ బజరంగ్ దళ్ సభ్యులు</p>
     </div>
     <div id="committeeContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
   </section>
@@ -309,7 +311,7 @@
     <div id="momentsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
   </section>
 
-  <!-- ================= DEVOTEE REGISTRATION POPUP ================= -->
+  <!-- ================= DEVOTEE REGISTRATION POPUP (WITH SURNAME) ================= -->
   <div id="devoteeConfirmModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-md w-full p-6 text-center shadow-2xl relative">
       <button onclick="toggleDevoteeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
@@ -322,10 +324,17 @@
       <p class="text-[11px] text-slate-400 mt-0.5">Your name will instantly appear on the Live Donors Board</p>
 
       <div class="mt-4 space-y-2.5 text-left">
-        <div>
-          <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Your Full Name (పేరు)</label>
-          <input id="user-donor-name" type="text" placeholder="e.g. Ramesh Reddy" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Surname (ఇంటి పేరు)</label>
+            <input id="user-donor-surname" type="text" placeholder="e.g. Vangapalli" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">First Name (పేరు)</label>
+            <input id="user-donor-name" type="text" placeholder="e.g. Ramesh" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
         </div>
+
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Paid Amount (మొత్తం ₹)</label>
@@ -338,13 +347,105 @@
         </div>
         <div>
           <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Gothram / Village (గోత్రం / గ్రామం)</label>
-          <input id="user-donor-gothram" type="text" placeholder="e.g. Shiva Gothram / Moddulagudem" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="user-donor-gothram" type="text" placeholder="e.g. Shiva Gothram / Team Bajarangdal" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
       </div>
 
       <button onclick="submitDevoteePayment()" class="mt-5 w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 transition">
-        Publish to Live Board ✦
+        Publish & Generate Official Receipt ✦
       </button>
+    </div>
+  </div>
+
+  <!-- ================= POST-SUBMISSION RECEIPT DOWNLOAD MODAL ================= -->
+  <div id="receiptSuccessModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#120626] border border-amber-400/50 rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative">
+      <button onclick="toggleReceiptSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="w-14 h-14 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-3 text-amber-400 border border-amber-500/40">
+        <i data-lucide="file-check" class="w-8 h-8 text-amber-400"></i>
+      </div>
+
+      <h3 class="font-cinzel text-xl font-bold text-slate-100">చందా రసీదు / Invoice</h3>
+      <p id="receiptSuccessMsg" class="text-xs text-slate-300 mt-1">Thank you for your sacred contribution!</p>
+
+      <div class="my-5 p-3 rounded-2xl bg-white/5 border border-white/10 text-left text-xs space-y-1.5">
+        <p class="text-slate-400">Name: <span id="r-modal-name" class="font-bold text-white"></span></p>
+        <p class="text-slate-400">Amount: <span id="r-modal-amt" class="font-bold text-amber-400"></span></p>
+        <p class="text-slate-400">Seva: <span id="r-modal-seva" class="text-slate-200"></span></p>
+        <p class="text-slate-400">Date & Time: <span id="r-modal-time" class="text-slate-300"></span></p>
+      </div>
+
+      <button id="downloadPdfReceiptBtn" onclick="downloadCurrentReceiptPdf()" class="w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 transition flex items-center justify-center gap-2">
+        <i data-lucide="download" class="w-4 h-4"></i> Download PDF Receipt (రసీదు)
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= INVISIBLE HIGH-DEFINITION RECEIPT TEMPLATE (FOR HTML2PDF) ================= -->
+  <div id="printableInvoiceContainer" style="display: none;">
+    <div id="printableInvoice" style="width: 650px; padding: 35px; background: #ffffff; color: #111827; font-family: 'Plus Jakarta Sans', sans-serif; border: 4px solid #B81D24; position: relative; border-radius: 12px;">
+      
+      <!-- Decorative Inner Border -->
+      <div style="border: 2px dashed #F5B041; padding: 25px; border-radius: 8px;">
+        
+        <!-- Header -->
+        <div style="text-align: center; border-bottom: 2px solid #E5E7EB; padding-bottom: 18px;">
+          <div style="font-size: 32px; color: #B81D24; font-weight: 900; margin-bottom: 4px;">ॐ</div>
+          <h1 style="font-family: 'Cinzel', serif; font-size: 26px; font-weight: 900; color: #B81D24; margin: 0; text-transform: uppercase; letter-spacing: 1px;">TEAM BAJARANGDAL</h1>
+          <h2 style="font-size: 16px; font-weight: 700; color: #D97706; margin: 4px 0 0 0;">శ్రీ గణేష్ ఉత్సవం 2026 • అధికారిక విరాళ రసీదు</h2>
+          <p style="font-size: 11px; color: #6B7280; margin: 4px 0 0 0; text-transform: uppercase; letter-spacing: 0.5px;">Ganesh Utsav Pooja, Annadanam & Seva Official Receipt</p>
+        </div>
+
+        <!-- Receipt Meta -->
+        <div style="display: flex; justify-content: space-between; margin-top: 16px; font-size: 12px; color: #4B5563;">
+          <div><strong>Receipt No:</strong> <span id="inv-no">TB-2026-0001</span></div>
+          <div><strong>Date & Time:</strong> <span id="inv-date-time">31 Aug 2026 • 10:00 AM</span></div>
+        </div>
+
+        <!-- Devotee & Transaction Details Table -->
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px;">
+          <tr style="background-color: #FEF3C7; border: 1px solid #FCD34D;">
+            <th style="padding: 10px; text-align: left; color: #92400E; width: 40%;">వివరణ (Field)</th>
+            <th style="padding: 10px; text-align: left; color: #92400E; width: 60%;">వివరాలు (Devotee & Payment Details)</th>
+          </tr>
+          <tr style="border-bottom: 1px solid #E5E7EB;">
+            <td style="padding: 10px; font-weight: 600; color: #374151;">Devotee Full Name (ఇంటి పేరుతో):</td>
+            <td style="padding: 10px; font-weight: 700; color: #111827; font-size: 15px;" id="inv-devotee-name">Vangapalli Ramesh</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #E5E7EB;">
+            <td style="padding: 10px; font-weight: 600; color: #374151;">Gothram / Village (గోత్రం / గ్రామం):</td>
+            <td style="padding: 10px; color: #374151;" id="inv-gothram">Shiva Gothram</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #E5E7EB;">
+            <td style="padding: 10px; font-weight: 600; color: #374151;">Seva Type (సేవ రకం):</td>
+            <td style="padding: 10px; font-weight: 600; color: #B81D24;" id="inv-seva">Annadanam Seva</td>
+          </tr>
+          <tr style="background-color: #FFFBEB; border-bottom: 2px solid #F5B041;">
+            <td style="padding: 12px 10px; font-weight: 800; color: #B81D24; font-size: 15px;">Chanda Amount (మొత్తం విరాళం):</td>
+            <td style="padding: 12px 10px; font-weight: 900; color: #B81D24; font-size: 20px;" id="inv-amount">₹1,116</td>
+          </tr>
+        </table>
+
+        <!-- Blessings & Authorization Footer -->
+        <div style="margin-top: 25px; display: flex; justify-content: space-between; align-items: flex-end;">
+          <div style="font-size: 11px; color: #4B5563; max-width: 320px; line-height: 1.4;">
+            <p style="margin: 0; font-style: italic; color: #92400E; font-weight: 600;">"సర్వేజనాః సుఖినోభవంతు | గణపతి బాప్పా మోరియా!"</p>
+            <p style="margin: 4px 0 0 0;">May Lord Ganesha bestow eternal peace, prosperity, and happiness upon your family.</p>
+          </div>
+
+          <div style="text-align: center;">
+            <div style="display: inline-block; padding: 6px 14px; border: 2px solid #059669; color: #059669; font-weight: 800; font-size: 11px; text-transform: uppercase; border-radius: 6px; transform: rotate(-4deg); margin-bottom: 8px;">
+              ✓ VERIFIED DONATION
+            </div>
+            <p style="font-size: 11px; font-weight: 700; color: #111827; margin: 0;">Ganesh (President)</p>
+            <p style="font-size: 10px; color: #6B7280; margin: 0;">Team Bajarangdal Committee</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -358,7 +459,7 @@
         <i data-lucide="shield" class="w-7 h-7"></i>
       </div>
       <h3 class="font-cinzel text-xl font-bold text-slate-100">Leader Control Gate</h3>
-      <p class="text-xs text-slate-400 mt-1">Moddulagudem Mitra Mandali Admin</p>
+      <p class="text-xs text-slate-400 mt-1">Team Bajarangdal Admin</p>
 
       <div class="mt-6 space-y-3 text-left">
         <div>
@@ -416,17 +517,18 @@
         </div>
 
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Pooja & Seva Rates (Edit Price/Name or Delete)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Pooja & Seva Rates</h4>
           <div id="adminSevasList" class="space-y-2 max-h-64 overflow-y-auto"></div>
         </div>
       </div>
 
-      <!-- Tab 2: Donors Edit & Removal -->
+      <!-- Tab 2: Donors Edit, Removal & Receipt Printing -->
       <div id="tab-donors-edit" class="space-y-6 hidden">
         <div class="bg-black/30 p-4 rounded-2xl border border-white/5 space-y-3">
           <h4 id="donorFormTitle" class="text-xs font-bold uppercase tracking-wider text-amber-400">Manual Donor Entry</h4>
-          <div class="grid grid-cols-2 gap-2">
-            <input id="in-donor-name" type="text" placeholder="Devotee Name" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+          <div class="grid grid-cols-3 gap-2">
+            <input id="in-donor-surname" type="text" placeholder="Surname (ఇంటి పేరు)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+            <input id="in-donor-name" type="text" placeholder="First Name" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
             <input id="in-donor-amount" type="number" placeholder="Amount in ₹" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
           </div>
           <div class="grid grid-cols-2 gap-2">
@@ -440,7 +542,7 @@
         </div>
 
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Donors List (Edit or Delete)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Donors List (Edit, Delete & PDF Receipts)</h4>
           <div id="adminDonorsList" class="space-y-2 max-h-64 overflow-y-auto"></div>
         </div>
       </div>
@@ -459,7 +561,7 @@
           <button onclick="saveNewMember()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 transition">Save Member</button>
         </div>
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Members (Change Photo or Remove)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Members</h4>
           <div id="adminMemberList" class="space-y-2"></div>
         </div>
       </div>
@@ -477,7 +579,7 @@
           <button onclick="saveNewMoment()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 transition">Save Moment</button>
         </div>
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Moments (Change Photo or Remove)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Moments</h4>
           <div id="adminMomentsList" class="space-y-2"></div>
         </div>
       </div>
@@ -504,7 +606,7 @@
           </div>
           <div>
             <label class="block text-[11px] text-slate-400 mb-1">UPI ID</label>
-            <input id="cfg-upi-id" type="text" placeholder="e.g. 9876543210@ybl or username@oksbi" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+            <input id="cfg-upi-id" type="text" placeholder="e.g. team-bajarangdal@upi" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
           </div>
           <div>
             <label class="block text-[11px] text-slate-400 mb-1">Upload Custom QR Code Image</label>
@@ -532,7 +634,7 @@
           <button onclick="saveNewEvent()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 transition">Save Event</button>
         </div>
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Events (Change Photo or Remove)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Events</h4>
           <div id="adminEventList" class="space-y-2"></div>
         </div>
       </div>
@@ -560,13 +662,13 @@
       <div class="mt-6 inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 border border-amber-400/60 shadow-[0_0_25px_rgba(247,195,95,0.3)]">
         <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
         <span class="font-decorative font-bold text-xs sm:text-sm text-amber-300 tracking-wider">
-          MODDULAGUDEM MITRA MANDALI
+          TEAM BAJARANGDAL
         </span>
       </div>
     </div>
 
     <div class="space-y-2">
-      <div class="font-decorative text-gold-gradient text-xl font-black">మొద్దులగూడెం మిత్ర మండలి</div>
+      <div class="font-decorative text-gold-gradient text-xl font-black">టీమ్ బజరంగ్ దళ్</div>
       <p class="text-slate-400 font-cinzel text-xs tracking-widest">Ganapati Bappa Morya • Ganesh Utsav 2026</p>
       
       <div class="pt-6">
@@ -578,7 +680,7 @@
     </div>
   </footer>
 
-  <!-- ================= CORE LOGIC & TARGETED CLOUD SYNC ================= -->
+  <!-- ================= CORE LOGIC & PDF INVOICE GENERATOR ================= -->
   <script>
     const firebaseConfig = {
   apiKey: "AIzaSyDYWkEr1FKAUNcmk2xFnbgC56v5B85pbWA",
@@ -613,7 +715,6 @@
       { title: "Maha Annadanam & Prasadam Cooking", tag: "Behind The Scenes", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" }
     ];
 
-    // Default Dynamic Sevas
     const defaultSevas = [
       { title: "Pooja Seva", amount: 101 },
       { title: "Prasadam", amount: 251 },
@@ -623,8 +724,8 @@
 
     const defaultChanda = {
       headName: "Ganesh (President)",
-      upiId: "moddulagudem@upi",
-      qrImg: "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=moddulagudem@upi&pn=ModdulagudemMitraMandali"
+      upiId: "team-bajarangdal@upi",
+      qrImg: "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi://pay?pa=team-bajarangdal@upi&pn=TeamBajarangdal"
     };
 
     let heroGaneshaImg = defaultHeroGanesha;
@@ -637,6 +738,7 @@
     let currentSelectedAmount = 501;
     let editingDonorIndex = null;
     let editingSevaIndex = null;
+    let latestGeneratedDonorReceipt = null;
 
     let db = null;
     try {
@@ -725,8 +827,9 @@
         return;
       }
 
-      container.innerHTML = donorsData.map((d) => {
+      container.innerHTML = donorsData.map((d, index) => {
         total += Number(d.amount) || 0;
+        const displayName = d.surname ? `${d.surname} ${d.name}` : d.name;
         return `
           <div class="p-3.5 bg-white/5 border border-white/10 hover:border-amber-400/50 rounded-2xl flex items-center justify-between transition">
             <div class="flex items-center gap-3">
@@ -734,13 +837,18 @@
                 ॐ
               </div>
               <div>
-                <h4 class="font-cinzel font-bold text-sm text-slate-100">${d.name}</h4>
-                <p class="text-[10px] text-amber-300/80">${d.seva || 'Pooja Seva'} • ${d.gothram || 'Moddulagudem'}</p>
+                <h4 class="font-cinzel font-bold text-sm text-slate-100">${displayName}</h4>
+                <p class="text-[10px] text-amber-300/80">${d.seva || 'Pooja Seva'} • ${d.gothram || 'Team Bajarangdal'}</p>
               </div>
             </div>
-            <div class="text-right">
-              <span class="font-cinzel font-black text-amber-400 text-base">₹${Number(d.amount).toLocaleString('en-IN')}</span>
-              <span class="block text-[9px] text-slate-400">${d.date || 'Received'}</span>
+            <div class="flex items-center gap-3">
+              <div class="text-right">
+                <span class="font-cinzel font-black text-amber-400 text-base">₹${Number(d.amount).toLocaleString('en-IN')}</span>
+                <span class="block text-[9px] text-slate-400">${d.date || 'Received'}</span>
+              </div>
+              <button onclick="downloadSpecificDonorPdf(${index})" title="Download Receipt PDF" class="p-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500 hover:text-black transition">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+              </button>
             </div>
           </div>
         `;
@@ -790,7 +898,7 @@
     }
 
     function renderAdminLists() {
-      // 1. Sevas / Rates Manager
+      // 1. Sevas List
       const sList = document.getElementById('adminSevasList');
       if (sList) {
         sList.innerHTML = sevasData.map((s, i) => `
@@ -806,25 +914,29 @@
         `).join('');
       }
 
-      // 2. Donors Edit & Delete List
+      // 2. Donors List
       const dList = document.getElementById('adminDonorsList');
       if (dList) {
         if (!donorsData || donorsData.length === 0) {
           dList.innerHTML = `<p class="text-[11px] text-slate-400 text-center py-3">No donor records found.</p>`;
         } else {
-          dList.innerHTML = donorsData.map((d, i) => `
-            <div class="p-2.5 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
-              <div>
-                <p class="text-xs font-bold text-white">${d.name} — <span class="text-amber-400">₹${d.amount}</span></p>
-                <p class="text-[10px] text-slate-400">${d.seva || 'Seva'} • ${d.gothram || ''}</p>
-                <span class="text-[9px] text-slate-400">${d.date || ''}</span>
+          dList.innerHTML = donorsData.map((d, i) => {
+            const displayName = d.surname ? `${d.surname} ${d.name}` : d.name;
+            return `
+              <div class="p-2.5 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
+                <div>
+                  <p class="text-xs font-bold text-white">${displayName} — <span class="text-amber-400">₹${d.amount}</span></p>
+                  <p class="text-[10px] text-slate-400">${d.seva || 'Seva'} • ${d.gothram || ''}</p>
+                  <span class="text-[9px] text-slate-400">${d.date || ''}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="downloadSpecificDonorPdf(${i})" title="Receipt" class="px-2 py-1 bg-amber-500/20 text-amber-300 text-[11px] rounded-lg font-bold border border-amber-500/30">PDF</button>
+                  <button onclick="startEditDonor(${i})" class="px-2 py-1 bg-amber-500 hover:bg-amber-400 text-black text-[11px] rounded-lg font-bold">Edit</button>
+                  <button onclick="removeDonor(${i})" class="px-2 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-[11px] rounded-lg font-semibold">Delete</button>
+                </div>
               </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="startEditDonor(${i})" class="px-2 py-1 bg-amber-500 hover:bg-amber-400 text-black text-[11px] rounded-lg font-bold">Edit</button>
-                <button onclick="removeDonor(${i})" class="px-2 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-[11px] rounded-lg font-semibold">Delete</button>
-              </div>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         }
       }
 
@@ -923,7 +1035,7 @@
       }
     }
 
-    // --- SEVAS & POOJA RATE CRUD MANAGEMENT ---
+    // --- SEVAS CRUD MANAGEMENT ---
     function saveNewSeva() {
       const title = document.getElementById('in-seva-title').value.trim();
       const amount = Number(document.getElementById('in-seva-amount').value.trim());
@@ -978,9 +1090,9 @@
 
     // --- PAYMENT APP LAUNCHER ---
     function openPaymentAndDevoteePopup() {
-      const cleanUpi = (chandaData.upiId || 'moddulagudem@upi').trim();
-      const cleanName = (chandaData.headName || 'Moddulagudem Mitra Mandali').trim();
-      const note = 'Moddulagudem Ganesh Chanda';
+      const cleanUpi = (chandaData.upiId || 'team-bajarangdal@upi').trim();
+      const cleanName = (chandaData.headName || 'Team Bajarangdal').trim();
+      const note = 'Team Bajarangdal Ganesh Chanda';
 
       const upiUrl = `upi://pay?pa=${cleanUpi}&pn=${encodeURIComponent(cleanName)}&am=${currentSelectedAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
       
@@ -1003,50 +1115,120 @@
       modal.classList.toggle('flex');
     }
 
-    function getFormattedTimestamp() {
-      const now = new Date();
-      return now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) + ' • ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    function toggleReceiptSuccessModal() {
+      const modal = document.getElementById('receiptSuccessModal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
     }
 
+    function getFormattedTimestamp() {
+      const now = new Date();
+      return now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + ' • ' + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+    }
+
+    // --- SUBMISSION & RECEIPT POPUP ENGINE ---
     function submitDevoteePayment() {
+      const surname = document.getElementById('user-donor-surname').value.trim();
       const name = document.getElementById('user-donor-name').value.trim();
       const amount = document.getElementById('user-donor-amount').value.trim();
       const seva = document.getElementById('user-donor-seva').value;
-      const gothram = document.getElementById('user-donor-gothram').value.trim() || "Moddulagudem Devotee";
+      const gothram = document.getElementById('user-donor-gothram').value.trim() || "Team Bajarangdal Devotee";
 
       if (!name || !amount) {
-        alert("Please fill your Name and Amount!");
+        alert("Please enter your Name and Amount!");
         return;
       }
 
-      donorsData.unshift({
+      const receiptId = 'TB-' + Math.floor(100000 + Math.random() * 900000);
+      const timestamp = getFormattedTimestamp();
+
+      const newDonorObj = {
+        receiptId,
+        surname,
         name,
         amount: Number(amount),
         seva,
         gothram,
-        date: getFormattedTimestamp()
-      });
+        date: timestamp
+      };
 
+      donorsData.unshift(newDonorObj);
       syncNode('donorsData', donorsData);
+
       toggleDevoteeModal();
       triggerFlowerRain();
-      alert("ధన్యవాదాలు! Your Chanda has been successfully recorded and published to the Live Board!");
+
+      // Show receipt modal
+      latestGeneratedDonorReceipt = newDonorObj;
+      const fullName = surname ? `${surname} ${name}` : name;
+      document.getElementById('r-modal-name').innerText = fullName;
+      document.getElementById('r-modal-amt').innerText = `₹${Number(amount).toLocaleString('en-IN')}`;
+      document.getElementById('r-modal-seva').innerText = seva;
+      document.getElementById('r-modal-time').innerText = timestamp;
+
+      toggleReceiptSuccessModal();
     }
 
+    // --- HIGH RESOLUTION PDF GENERATOR (HTML2PDF) ---
+    function generateAndDownloadPdf(donorObj) {
+      const fullName = donorObj.surname ? `${donorObj.surname} ${donorObj.name}` : donorObj.name;
+      const receiptNo = donorObj.receiptId || ('TB-' + Math.floor(100000 + Math.random() * 900000));
+      const dateTime = donorObj.date || getFormattedTimestamp();
+
+      document.getElementById('inv-no').innerText = receiptNo;
+      document.getElementById('inv-date-time').innerText = dateTime;
+      document.getElementById('inv-devotee-name').innerText = fullName;
+      document.getElementById('inv-gothram').innerText = donorObj.gothram || 'Team Bajarangdal';
+      document.getElementById('inv-seva').innerText = donorObj.seva || 'Pooja Seva';
+      document.getElementById('inv-amount').innerText = `₹${Number(donorObj.amount).toLocaleString('en-IN')}`;
+
+      const element = document.getElementById('printableInvoice');
+      const printableContainer = document.getElementById('printableInvoiceContainer');
+      printableContainer.style.display = 'block';
+
+      const opt = {
+        margin:       10,
+        filename:     `TeamBajarangdal_Receipt_${fullName.replace(/\s+/g, '_')}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        printableContainer.style.display = 'none';
+      });
+    }
+
+    function downloadCurrentReceiptPdf() {
+      if (latestGeneratedDonorReceipt) {
+        generateAndDownloadPdf(latestGeneratedDonorReceipt);
+      }
+    }
+
+    function downloadSpecificDonorPdf(index) {
+      const donor = donorsData[index];
+      if (donor) {
+        generateAndDownloadPdf(donor);
+      }
+    }
+
+    // --- LEADER DIRECT MANUAL ENTRY ---
     function saveNewDonorDirect() {
+      const surname = document.getElementById('in-donor-surname').value.trim();
       const name = document.getElementById('in-donor-name').value.trim();
       const amount = document.getElementById('in-donor-amount').value.trim();
-      const gothram = document.getElementById('in-donor-gothram').value.trim() || "Moddulagudem";
+      const gothram = document.getElementById('in-donor-gothram').value.trim() || "Team Bajarangdal";
       const seva = document.getElementById('in-donor-seva').value.trim() || "Utsav Chanda";
 
       if (!name || !amount) {
-        alert("Please enter donor name and amount!");
+        alert("Please enter First Name and Amount!");
         return;
       }
 
       if (editingDonorIndex !== null) {
         donorsData[editingDonorIndex] = {
           ...donorsData[editingDonorIndex],
+          surname,
           name,
           amount: Number(amount),
           gothram,
@@ -1058,6 +1240,8 @@
         document.getElementById('cancelEditDonorBtn').classList.add('hidden');
       } else {
         donorsData.unshift({
+          receiptId: 'TB-' + Math.floor(100000 + Math.random() * 900000),
+          surname,
           name,
           amount: Number(amount),
           gothram,
@@ -1067,6 +1251,7 @@
       }
 
       syncNode('donorsData', donorsData);
+      document.getElementById('in-donor-surname').value = '';
       document.getElementById('in-donor-name').value = '';
       document.getElementById('in-donor-amount').value = '';
       document.getElementById('in-donor-gothram').value = '';
@@ -1077,6 +1262,7 @@
     function startEditDonor(index) {
       editingDonorIndex = index;
       const d = donorsData[index];
+      document.getElementById('in-donor-surname').value = d.surname || '';
       document.getElementById('in-donor-name').value = d.name;
       document.getElementById('in-donor-amount').value = d.amount;
       document.getElementById('in-donor-gothram').value = d.gothram || '';
@@ -1089,6 +1275,7 @@
 
     function cancelDonorEdit() {
       editingDonorIndex = null;
+      document.getElementById('in-donor-surname').value = '';
       document.getElementById('in-donor-name').value = '';
       document.getElementById('in-donor-amount').value = '';
       document.getElementById('in-donor-gothram').value = '';

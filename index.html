@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- GSAP Core & ScrollTrigger -->
@@ -184,8 +184,9 @@
       <a href="#chanda" class="hover:text-amber-400 transition">Chanda / విరాళాలు</a>
       <a href="#history" class="hover:text-amber-400 transition">Donors Board</a>
       <a href="#committee" class="hover:text-amber-400 transition">Committee</a>
+      <a href="#baktula-photos" class="hover:text-amber-400 transition text-amber-300">📸 భక్తుల ఫోటోలు</a>
       <a href="#journey" class="hover:text-amber-400 transition">Journey</a>
-      <a href="#moments" class="hover:text-amber-400 transition">Moments & BTS</a>
+      <a href="#moments" class="hover:text-amber-400 transition">Moments</a>
     </div>
 
     <div class="flex items-center gap-2">
@@ -215,11 +216,11 @@
       <p class="reveal-right font-cinzel text-slate-300 text-xs sm:text-base mt-1.5 font-semibold tracking-wider">11 DAYS OF SACRED RITUALS & DIVINE CELEBRATIONS</p>
 
       <div class="reveal-up flex flex-col sm:flex-row items-center gap-3 mt-4 mb-2 w-full justify-center">
+        <a href="#baktula-photos" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-cinzel text-xs font-black tracking-widest uppercase spring-btn flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25">
+          <i data-lucide="camera" class="w-4 h-4"></i> DEVOTEE DARSHAN PHOTOS
+        </a>
         <a href="#events" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-amber-500/20 border border-amber-400/60 text-amber-300 font-cinzel text-xs font-bold tracking-widest uppercase spring-btn flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10">
           <i data-lucide="calendar" class="w-4 h-4"></i> EXPLORE EVENTS
-        </a>
-        <a href="#committee" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white/5 border border-white/20 text-slate-200 font-cinzel text-xs font-bold tracking-widest uppercase spring-btn flex items-center justify-center gap-2 hover:border-amber-400 hover:text-amber-300">
-          <i data-lucide="users" class="w-4 h-4"></i> MEET OUR YOUTH
         </a>
       </div>
 
@@ -341,7 +342,7 @@
     </div>
   </section>
 
-  <!-- ================= 04. COMMITTEE MEMBERS (FULL-BOX RECTANGULAR CAROUSEL) ================= -->
+  <!-- ================= 04. COMMITTEE MEMBERS ================= -->
   <section id="committee" class="py-16 px-4 max-w-7xl mx-auto border-t border-amber-500/10 z-10 relative">
     <div class="text-center mb-8">
       <span class="reveal-left text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">04 • Dedicated Youth</span>
@@ -352,16 +353,57 @@
       </p>
     </div>
 
-    <!-- Carousel Sized so Next Card Peeks In -->
     <div class="relative w-full">
       <div id="committeeContainer" class="flex gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 px-2 snap-x snap-mandatory hide-scrollbar"></div>
     </div>
   </section>
 
-  <!-- ================= 05. JOURNEY: FROM STHAPANA TO VISARJAN ================= -->
+  <!-- ================= 05. BAKTULA - DEVOTEES PHOTOS (LOCATED DIRECTLY AFTER COMMITTEE) ================= -->
+  <section id="baktula-photos" class="py-20 px-4 max-w-7xl mx-auto border-t border-amber-500/20 z-10 relative">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest mb-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Pandal Darshan Photos
+      </div>
+      <h2 class="font-decorative text-3xl sm:text-5xl font-black text-gold-gradient">భక్తుల ఫోటోలు • Devotee Photos</h2>
+      <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl mx-auto">
+        Scan the pandal QR code, find your photo & download directly in full HD quality.
+      </p>
+      
+      <!-- Auto Expiry Notice -->
+      <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-[11px] font-semibold mt-2.5">
+        <i data-lucide="clock" class="w-3.5 h-3.5"></i> Photos automatically delete after 2 hours
+      </div>
+    </div>
+
+    <!-- Pandal Xerox QR Code & Photo Leader Upload Action -->
+    <div class="max-w-xl mx-auto card-glass rounded-3xl p-6 text-center mb-10 border-amber-400/40 relative shadow-2xl">
+      <div class="flex flex-col sm:flex-row items-center justify-around gap-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-300 block mb-1">Pandal Display QR Code</span>
+          <p class="text-[11px] text-slate-400 max-w-[200px]">Print & display this QR code at the pandal for visitors.</p>
+          <div class="inline-block p-2 bg-white rounded-2xl shadow-inner mt-2">
+            <img id="pandalSectionQr" class="w-32 h-32 object-contain" alt="Pandal Devotees QR">
+          </div>
+        </div>
+
+        <div class="space-y-3 text-center sm:text-left">
+          <h4 class="font-cinzel text-base font-bold text-slate-100">Photo Leader Portal</h4>
+          <p class="text-xs text-slate-300">Assigned volunteers can log in (ID: <code>Image</code>) to upload devotees' photos.</p>
+          <button onclick="openImageLeaderLogin()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider spring-btn flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+            <i data-lucide="camera" class="w-4 h-4"></i> Upload Devotee Clicks
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Devotee Photos Grid -->
+    <div id="devoteePhotosContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"></div>
+  </section>
+
+  <!-- ================= 06. JOURNEY: FROM STHAPANA TO VISARJAN ================= -->
   <section id="journey" class="py-16 px-4 max-w-4xl mx-auto border-t border-amber-500/10 z-10 relative">
     <div class="text-center mb-12">
-      <span class="reveal-right text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">05 • Our Journey</span>
+      <span class="reveal-right text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">06 • Our Journey</span>
       <h2 class="reveal-left font-decorative text-2xl sm:text-5xl font-black text-slate-100 mt-1">From Sthapana to Visarjan</h2>
       <p class="reveal-up text-xs sm:text-sm text-slate-400 mt-1">స్థాపన నుండి నిమజ్జనం వరకు — Eleven days of sacred devotion</p>
     </div>
@@ -397,10 +439,10 @@
     </div>
   </section>
 
-  <!-- ================= 06. BEHIND THE SCENES & BEST MOMENTS ================= -->
+  <!-- ================= 07. BEHIND THE SCENES & BEST MOMENTS ================= -->
   <section id="moments" class="py-16 px-4 max-w-7xl mx-auto border-t border-amber-500/10 z-10 relative">
     <div class="text-center mb-6">
-      <span class="reveal-left text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">06 • Gallery & Memories</span>
+      <span class="reveal-left text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">07 • Gallery & Memories</span>
       <h2 class="reveal-right font-decorative text-2xl sm:text-5xl font-black text-slate-100 mt-1">Behind The Scenes & Moments</h2>
       <p class="reveal-up text-xs sm:text-sm text-slate-400 mt-1">పందిరి అలంకరణ, పూజలు, సంబరాలు & మన జ్ఞాపకాలు</p>
     </div>
@@ -415,129 +457,145 @@
     <div id="momentsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
   </section>
 
-  <!-- ================= LIGHTBOX MODAL ================= -->
-  <div id="galleryLightboxModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-4">
-    <button onclick="closeGalleryLightbox()" class="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full bg-white/10 z-50 cursor-pointer spring-btn">
+  <!-- ================= FOOTER ================= -->
+  <footer class="pt-16 pb-12 border-t border-amber-500/20 text-center bg-gradient-to-b from-[#05010B] via-[#090217] to-[#020005] relative z-10 px-4">
+    <div class="reveal-scale max-w-3xl mx-auto mb-8 card-glass rounded-3xl p-6 sm:p-8 border border-amber-400/35 relative shadow-2xl">
+      <div class="text-3xl text-amber-400 mb-2">ॐ</div>
+      <blockquote class="font-cinzel text-sm sm:text-lg font-bold text-amber-200/90 leading-relaxed italic">
+        "వక్రతుండ మహాకాయ సూర్యకోటి సమప్రభ |<br class="hidden sm:inline"> నిర్విఘ్నం కురు మే దేవ సర్వకార్యేషు సర్వదా ||"
+      </blockquote>
+      <p class="font-sans text-xs text-slate-300 mt-3 leading-relaxed font-light">
+        "May Lord Ganesha remove all obstacles from your path, bless your life with wisdom, peace, prosperity, and eternal happiness."
+      </p>
+      
+      <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 border border-amber-400/60 shadow-[0_0_20px_rgba(247,195,95,0.3)]">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+        <span class="font-decorative font-bold text-xs text-amber-300 tracking-wider">
+          TEAM BAJARANGDAL
+        </span>
+      </div>
+    </div>
+
+    <div class="space-y-1.5">
+      <div class="font-decorative text-gold-gradient text-lg sm:text-xl font-black">టీమ్ బజరంగ్ దళ్</div>
+      <p class="text-slate-400 font-cinzel text-[11px] tracking-widest">Ganapati Bappa Morya • Ganesh Utsav 2026</p>
+      
+      <!-- DEVELOPER BADGE WITH EMBEDDED PHOTO -->
+      <div class="pt-4 flex justify-center">
+        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-amber-400/30 text-xs shadow-md spring-btn">
+          <img src="IMG_20260509_093915.jpg" alt="Bhukya Abhiram" class="w-7 h-7 rounded-full object-cover object-top border border-amber-400/80 shadow" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
+          <span class="text-slate-400">Designed with devotion by</span> 
+          <span class="font-black text-amber-400 tracking-wider font-cinzel text-xs sm:text-sm drop-shadow-[0_0_12px_rgba(247,195,95,0.8)]">"Bhukya Abhiram"</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= DEVOTEE FULL RESOLUTION & PDF DOWNLOAD MODAL ================= -->
+  <div id="devoteeDownloadModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4">
+    <button onclick="closeDevoteeDownloadModal()" class="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full bg-white/10 z-50 cursor-pointer spring-btn">
       <i data-lucide="x" class="w-5 h-5"></i>
     </button>
     
-    <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-amber-500 hover:text-black transition z-50 cursor-pointer spring-btn">
-      <i data-lucide="chevron-left" class="w-5 h-5"></i>
-    </button>
-
-    <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-amber-500 hover:text-black transition z-50 cursor-pointer spring-btn">
-      <i data-lucide="chevron-right" class="w-5 h-5"></i>
-    </button>
-
-    <div class="max-w-3xl w-full flex flex-col items-center">
-      <div id="lightboxMediaContainer" class="w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/60 border border-amber-500/30"></div>
-      <div class="mt-3 text-center">
-        <span id="lightboxTag" class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-wider"></span>
-        <h3 id="lightboxTitle" class="font-cinzel text-lg font-bold text-white mt-1.5"></h3>
+    <div class="max-w-md w-full flex flex-col items-center">
+      <div class="w-full max-h-[65vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/70 border border-amber-500/40 p-1">
+        <img id="devoteeModalDisplayImg" src="" class="max-w-full max-h-[62vh] object-contain rounded-xl">
       </div>
-    </div>
-  </div>
-
-  <!-- ================= RESPONSIVE CROPPER MODAL ================= -->
-  <div id="cropperModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-lg w-full p-5 text-center shadow-2xl relative my-auto">
-      <h3 class="font-cinzel text-base font-bold text-amber-300 mb-1">Adjust & Crop Photo</h3>
-      <p class="text-[11px] text-slate-400 mb-3">Drag, pinch, or zoom to adjust portrait frame</p>
       
-      <div class="h-60 sm:h-72 w-full bg-black/60 overflow-hidden rounded-2xl border border-white/10 flex items-center justify-center">
-        <img id="cropperImageTarget" src="" class="max-w-full max-h-full">
+      <div class="w-full mt-3 text-center">
+        <span id="devoteeModalTimeTag" class="text-xs text-amber-300 font-medium"></span>
       </div>
 
-      <div class="grid grid-cols-2 gap-3 mt-4">
-        <button onclick="closeCropperModal()" class="py-2.5 bg-white/10 text-white font-bold text-xs rounded-xl hover:bg-white/20 spring-btn cursor-pointer">Cancel</button>
-        <button onclick="applyCroppedImage()" class="py-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 spring-btn cursor-pointer">Crop & Save ✦</button>
+      <div class="grid grid-cols-2 gap-3 w-full mt-4">
+        <button onclick="downloadDevoteeLosslessJpg()" class="py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider spring-btn flex items-center justify-center gap-1.5 shadow-lg cursor-pointer">
+          <i data-lucide="image" class="w-4 h-4"></i> Download HD Photo
+        </button>
+        <button onclick="downloadDevoteeSouvenirPdf()" class="py-3 rounded-xl bg-gradient-to-r from-amber-500 via-rose-500 to-amber-600 text-white font-extrabold text-xs uppercase tracking-wider spring-btn flex items-center justify-center gap-1.5 shadow-lg cursor-pointer">
+          <i data-lucide="file-text" class="w-4 h-4"></i> Download PDF
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= DEVOTEE REGISTRATION POPUP ================= -->
-  <div id="devoteeConfirmModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-md w-full p-5 sm:p-6 text-center shadow-2xl relative">
-      <button onclick="toggleDevoteeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
+  <!-- ================= IMAGE LEADER LOGIN MODAL (ID: Image | Pass: 1111) ================= -->
+  <div id="imageLeaderLoginModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-sm w-full p-5 text-center shadow-2xl relative">
+      <button onclick="toggleImageLeaderLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
-      <div class="w-11 h-11 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-400 border border-amber-500/40">
-        <i data-lucide="heart" class="w-5 h-5 fill-amber-400"></i>
+      <div class="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-400 border border-amber-500/40">
+        <i data-lucide="camera" class="w-7 h-7"></i>
       </div>
-      <h3 class="font-cinzel text-base sm:text-lg font-bold text-slate-100">Record Your Chanda / మీ పేరు నమోదు</h3>
-      <p class="text-[11px] text-slate-400 mt-0.5">Your name will instantly appear on the Live Donors Board</p>
+      <h3 class="font-cinzel text-lg font-bold text-slate-100">Photo Leader Login</h3>
+      <p class="text-xs text-slate-400 mt-0.5">Upload devotee photos from pandal</p>
 
-      <div class="mt-4 space-y-2.5 text-left">
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Surname (ఇంటి పేరు)</label>
-            <input id="user-donor-surname" type="text" placeholder="e.g. Vangapalli" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">First Name (పేరు)</label>
-            <input id="user-donor-name" type="text" placeholder="e.g. Ramesh" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Paid Amount (మొత్తం ₹)</label>
-            <input id="user-donor-amount" type="number" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-amber-400 font-bold outline-none">
-          </div>
-          <div>
-            <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Seva Type</label>
-            <select id="user-donor-seva" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white outline-none"></select>
-          </div>
+      <div class="mt-4 space-y-3 text-left">
+        <div>
+          <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Photo Leader ID</label>
+          <input id="img-login-id" type="text" placeholder="Enter ID (Image)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
         <div>
-          <label class="block text-[10px] text-slate-400 mb-1 font-semibold uppercase">Gothram / Village (గోత్రం / గ్రామం)</label>
-          <input id="user-donor-gothram" type="text" placeholder="e.g. Shiva Gothram / Team Bajarangdal" class="w-full bg-[#1c0c38] border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Password</label>
+          <input id="img-login-pass" type="password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+        </div>
+      </div>
+      <div id="imgLoginError" class="text-rose-400 text-xs mt-2 hidden font-semibold">Incorrect Photo Leader ID or Password!</div>
+
+      <button onclick="verifyImageLeaderLogin()" class="mt-4 w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 spring-btn cursor-pointer">
+        Authorize & Open Uploader
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= IMAGE LEADER UPLOAD DASHBOARD ================= -->
+  <div id="imageLeaderDashboardModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 max-h-[92vh] overflow-y-auto shadow-2xl">
+      
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-0.5">📸 Live Pandal Uploader Active</span>
+          <h3 class="font-cinzel text-base sm:text-lg font-bold text-amber-400">DEVOTEE PHOTOS PORTAL</h3>
+        </div>
+        <button onclick="logoutImageLeader()" class="px-3.5 py-1 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white text-xs font-bold transition flex items-center gap-1 cursor-pointer spring-btn">
+          <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
+        </button>
+      </div>
+
+      <div class="mt-4 space-y-4">
+        <div class="bg-black/30 p-4 rounded-2xl border border-white/5 space-y-3 text-left">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Upload Devotee Camera Clicks</h4>
+          <p class="text-[11px] text-slate-300">Select photos taken with devotees. They are kept in high resolution and auto-delete after 2 hours.</p>
+          
+          <input id="devoteeMultiFileInput" type="file" accept="image/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
+          
+          <button onclick="uploadDevoteePhotosBatch()" class="w-full py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl hover:brightness-110 shadow-lg spring-btn transition cursor-pointer">
+            Publish Devotee Photos ✦
+          </button>
+        </div>
+
+        <!-- Devotee Photos in Admin -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Live Devotee Photos (<span id="devoteePhotoCount">0</span> active)</h4>
+          <div id="adminDevoteePhotoList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
         </div>
       </div>
 
-      <button onclick="submitDevoteePayment()" class="mt-4 w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 spring-btn cursor-pointer">
-        Publish & Generate Official Receipt ✦
-      </button>
+      <div class="mt-4 pt-3 border-t border-white/10 flex justify-end">
+        <button onclick="closeImageLeaderDashboard()" class="px-5 py-2 bg-white/10 text-white font-bold text-xs rounded-xl hover:bg-white/20 spring-btn cursor-pointer">Close Portal</button>
+      </div>
     </div>
   </div>
 
-  <!-- ================= POST-SUBMISSION RECEIPT MODAL ================= -->
-  <div id="receiptSuccessModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="bg-[#120626] border border-amber-400/50 rounded-3xl max-w-sm w-full p-5 text-center shadow-2xl relative">
-      <button onclick="toggleReceiptSuccessModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-400 border border-amber-500/40">
-        <i data-lucide="file-check" class="w-7 h-7 text-amber-400"></i>
-      </div>
-
-      <h3 class="font-cinzel text-lg font-bold text-slate-100">చందా రసీదు / Invoice</h3>
-      <p class="text-xs text-slate-300 mt-0.5">Thank you for your sacred contribution!</p>
-
-      <div class="my-4 p-3 rounded-2xl bg-white/5 border border-white/10 text-left text-xs space-y-1">
-        <p class="text-slate-400">Name: <span id="r-modal-name" class="font-bold text-white"></span></p>
-        <p class="text-slate-400">Amount: <span id="r-modal-amt" class="font-bold text-amber-400"></span></p>
-        <p class="text-slate-400">Seva: <span id="r-modal-seva" class="text-slate-200"></span></p>
-        <p class="text-slate-400">Date & Time: <span id="r-modal-time" class="text-slate-300"></span></p>
-      </div>
-
-      <button onclick="downloadCurrentReceiptPdf()" class="w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 spring-btn flex items-center justify-center gap-2 cursor-pointer">
-        <i data-lucide="download" class="w-4 h-4"></i> Download Official PDF
-      </button>
-    </div>
-  </div>
-
-  <!-- ================= LEADER LOGIN MODAL ================= -->
+  <!-- ================= PRESIDENT LEADER LOGIN MODAL (Ganesh | 0000) ================= -->
   <div id="loginModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-sm w-full p-5 text-center shadow-2xl relative">
       <button onclick="toggleLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
       <div class="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-2 text-amber-400 border border-amber-500/40">
-        <i data-lucide="shield" class="w-6 h-6"></i>
+        <i data-lucide="shield" class="w-7 h-7"></i>
       </div>
-      <h3 class="font-cinzel text-lg font-bold text-slate-100">Leader Control Gate</h3>
+      <h3 class="font-cinzel text-lg font-bold text-slate-100">President Control Gate</h3>
       <p class="text-xs text-slate-400 mt-0.5">Team Bajarangdal Admin</p>
 
       <div class="mt-4 space-y-3 text-left">
@@ -558,7 +616,7 @@
     </div>
   </div>
 
-  <!-- ================= LEADER ADMIN DASHBOARD ================= -->
+  <!-- ================= PRESIDENT ADMIN DASHBOARD ================= -->
   <div id="adminModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-3xl w-full p-4 sm:p-7 max-h-[92vh] overflow-y-auto shadow-2xl">
       
@@ -646,15 +704,24 @@
           <input id="in-mem-name" type="text" placeholder="Full Name" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
           <input id="in-mem-role" type="text" placeholder="Role (e.g. President / Youth Lead)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
           <input id="in-mem-tag" type="text" placeholder="Tag (e.g. CORE / CULTURAL / LOGISTICS)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
-          <input id="in-mem-insta" type="text" placeholder="Instagram Username" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+          <input id="in-mem-insta" type="text" placeholder="Instagram Username (optional)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+          
           <div>
-            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Upload Member Photo</label>
-            <input id="in-mem-file" type="file" accept="image/*" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
+            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Choose Photo (Cropper Opens Immediately)</label>
+            <input id="in-mem-file" type="file" accept="image/*" onchange="handleMemberFileInstantCrop(this)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
           </div>
-          <button onclick="startAddMemberWithCrop()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 spring-btn cursor-pointer">Save Member</button>
+
+          <div id="memberCroppedPreviewBox" class="hidden items-center gap-3 p-2.5 bg-white/5 rounded-xl border border-amber-400/40">
+            <img id="memberCroppedPreviewImg" src="" class="w-12 h-14 object-cover rounded-lg border border-amber-400">
+            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
+              <i data-lucide="check" class="w-4 h-4"></i> Photo cropped & ready!
+            </span>
+          </div>
+
+          <button onclick="saveNewMember()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 spring-btn cursor-pointer">Save Member</button>
         </div>
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Members</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Members (Change Photo or Delete)</h4>
           <div id="adminMemberList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
         </div>
       </div>
@@ -699,9 +766,8 @@
           <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Change Homepage Ganesha Picture</h4>
           <div>
             <label class="block text-[11px] text-slate-400 mb-1">Select from Phone Gallery</label>
-            <input id="cfg-hero-file" type="file" accept="image/*" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
+            <input id="cfg-hero-file" type="file" accept="image/*" onchange="startHeroGaneshaCropInstant(this)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
           </div>
-          <button onclick="startHeroGaneshaCrop()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 spring-btn transition cursor-pointer">Crop & Update Picture</button>
         </div>
       </div>
 
@@ -756,39 +822,41 @@
     </div>
   </div>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="pt-16 pb-12 border-t border-amber-500/20 text-center bg-gradient-to-b from-[#05010B] via-[#090217] to-[#020005] relative z-10 px-4">
-    <div class="reveal-scale max-w-3xl mx-auto mb-8 card-glass rounded-3xl p-6 sm:p-8 border border-amber-400/35 relative shadow-2xl">
-      <div class="text-3xl text-amber-400 mb-2">ॐ</div>
-      <blockquote class="font-cinzel text-sm sm:text-lg font-bold text-amber-200/90 leading-relaxed italic">
-        "వక్రతుండ మహాకాయ సూర్యకోటి సమప్రభ |<br class="hidden sm:inline"> నిర్విఘ్నం కురు మే దేవ సర్వకార్యేషు సర్వదా ||"
-      </blockquote>
-      <p class="font-sans text-xs text-slate-300 mt-3 leading-relaxed font-light">
-        "May Lord Ganesha remove all obstacles from your path, bless your life with wisdom, peace, prosperity, and eternal happiness."
-      </p>
-      
-      <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 via-amber-400/30 to-amber-500/20 border border-amber-400/60 shadow-[0_0_20px_rgba(247,195,95,0.3)]">
-        <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-        <span class="font-decorative font-bold text-xs text-amber-300 tracking-wider">
-          TEAM BAJARANGDAL
-        </span>
+  <!-- ================= LIGHTBOX & CROPPER MODALS ================= -->
+  <div id="galleryLightboxModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-4">
+    <button onclick="closeGalleryLightbox()" class="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full bg-white/10 z-50 cursor-pointer spring-btn">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+    <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-amber-500 hover:text-black transition z-50 cursor-pointer spring-btn">
+      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+    </button>
+    <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-amber-500 hover:text-black transition z-50 cursor-pointer spring-btn">
+      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+    </button>
+    <div class="max-w-3xl w-full flex flex-col items-center">
+      <div id="lightboxMediaContainer" class="w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/60 border border-amber-500/30"></div>
+      <div class="mt-3 text-center">
+        <span id="lightboxTag" class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold uppercase tracking-wider"></span>
+        <h3 id="lightboxTitle" class="font-cinzel text-lg font-bold text-white mt-1.5"></h3>
       </div>
     </div>
+  </div>
 
-    <div class="space-y-1.5">
-      <div class="font-decorative text-gold-gradient text-lg sm:text-xl font-black">టీమ్ బజరంగ్ దళ్</div>
-      <p class="text-slate-400 font-cinzel text-[11px] tracking-widest">Ganapati Bappa Morya • Ganesh Utsav 2026</p>
-      
-      <div class="pt-4">
-        <div class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-amber-400/30 text-xs shadow-md spring-btn">
-          <span class="text-slate-400">Designed with devotion by</span> 
-          <span class="font-black text-amber-400 tracking-wider font-cinzel text-xs sm:text-sm ml-1 drop-shadow-[0_0_12px_rgba(247,195,95,0.8)]">"Abhi"</span>
-        </div>
+  <div id="cropperModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-lg w-full p-5 text-center shadow-2xl relative my-auto">
+      <h3 class="font-cinzel text-base font-bold text-amber-300 mb-1">Adjust & Crop Photo</h3>
+      <p class="text-[11px] text-slate-400 mb-3">Drag, pinch, or zoom to adjust portrait frame</p>
+      <div class="h-60 sm:h-72 w-full bg-black/60 overflow-hidden rounded-2xl border border-white/10 flex items-center justify-center">
+        <img id="cropperImageTarget" src="" class="max-w-full max-h-full">
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-4">
+        <button onclick="closeCropperModal()" class="py-2.5 bg-white/10 text-white font-bold text-xs rounded-xl hover:bg-white/20 spring-btn cursor-pointer">Cancel</button>
+        <button onclick="applyCroppedImage()" class="py-2.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-widest rounded-xl hover:opacity-95 shadow-lg shadow-amber-500/20 spring-btn cursor-pointer">Crop & Save ✦</button>
       </div>
     </div>
-  </footer>
+  </div>
 
-  <!-- ================= CORE SCRIPT ENGINE ================= -->
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     const firebaseConfig = {
   apiKey: "AIzaSyDYWkEr1FKAUNcmk2xFnbgC56v5B85pbWA",
@@ -841,9 +909,11 @@
     let eventsData = defaultEvents;
     let committeeData = defaultCommittee;
     let momentsData = defaultMoments;
+    let devoteePhotosData = [];
     let filteredMoments = [...defaultMoments];
     let activeMomentsFilter = 'all';
     let currentLightboxIndex = 0;
+    let selectedDevoteeItem = null;
 
     let sevasData = defaultSevas;
     let donorsData = []; 
@@ -855,6 +925,7 @@
 
     let cropper = null;
     let pendingCropCallback = null;
+    let pendingNewMemberCroppedImg = "";
 
     let db = null;
     try {
@@ -871,9 +942,21 @@
             sevasData = Array.isArray(val.sevasData) ? val.sevasData : defaultSevas;
             donorsData = Array.isArray(val.donorsData) ? val.donorsData : [];
             chandaData = val.chandaData || defaultChanda;
+            
             filterMomentsGallery(activeMomentsFilter);
             renderAll();
           }
+        });
+
+        db.ref('devoteePandalPhotos').on('value', (snapshot) => {
+          const val = snapshot.val();
+          if (val) {
+            devoteePhotosData = Object.keys(val).map(key => ({ ...val[key], firebaseKey: key }));
+          } else {
+            devoteePhotosData = [];
+          }
+          cleanExpiredDevoteePhotos();
+          renderDevoteePhotos();
         });
       }
     } catch(e) {
@@ -885,6 +968,275 @@
         db.ref('ganeshUtsavData/' + nodePath).set(nodeData);
       }
       renderAll();
+    }
+
+    // --- 2-HOUR AUTO EXPIRY ENGINE ---
+    const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
+
+    function cleanExpiredDevoteePhotos() {
+      const now = Date.now();
+      devoteePhotosData.forEach(p => {
+        if ((now - p.timestamp) >= TWO_HOURS_MS) {
+          if (db && p.firebaseKey) {
+            db.ref('devoteePandalPhotos/' + p.firebaseKey).remove();
+          }
+        }
+      });
+      devoteePhotosData = devoteePhotosData.filter(p => (now - p.timestamp) < TWO_HOURS_MS);
+    }
+
+    setInterval(() => {
+      cleanExpiredDevoteePhotos();
+      renderDevoteePhotos();
+    }, 60000);
+
+    function renderDevoteePhotos() {
+      const container = document.getElementById('devoteePhotosContainer');
+      const countEl = document.getElementById('devoteePhotoCount');
+      if (countEl) countEl.innerText = devoteePhotosData.length;
+
+      if (!container) return;
+
+      if (!devoteePhotosData || devoteePhotosData.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full text-center py-12 card-glass rounded-3xl p-6">
+            <i data-lucide="camera" class="w-10 h-10 text-amber-400 mx-auto mb-2 opacity-60"></i>
+            <h4 class="font-cinzel text-base font-bold text-slate-100">ప్రస్తుతానికి భక్తుల ఫోటోలు లేవు</h4>
+            <p class="text-xs text-slate-400 mt-1">Visit our pandal & ask our volunteers to snap your Darshan photo!</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = devoteePhotosData.map((p, index) => {
+        const remainingMinutes = Math.max(0, Math.round((TWO_HOURS_MS - (Date.now() - p.timestamp)) / 60000));
+        return `
+          <div onclick="openDevoteeDownloadModal(${index})" class="card-glass rounded-2xl overflow-hidden cursor-pointer relative group shadow-xl border border-amber-400/30">
+            <div class="relative h-52 sm:h-64 w-full overflow-hidden bg-black/60">
+              <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+              
+              <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-amber-400/50 text-amber-300 text-[9px] font-bold flex items-center gap-1">
+                <i data-lucide="clock" class="w-3 h-3 text-rose-400"></i> ${remainingMinutes}m left
+              </span>
+
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-2.5">
+                <span class="text-xs text-white font-bold flex items-center gap-1 drop-shadow">
+                  <i data-lucide="download" class="w-3.5 h-3.5 text-amber-400"></i> Save High Quality
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Update Pandal Section QR Code
+      const directUrl = window.location.origin + window.location.pathname + '#baktula-photos';
+      const pandalQr = document.getElementById('pandalSectionQr');
+      if (pandalQr) pandalQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(directUrl)}`;
+
+      // Update Admin List
+      const adminList = document.getElementById('adminDevoteePhotoList');
+      if (adminList) {
+        adminList.innerHTML = devoteePhotosData.map((p, i) => `
+          <div class="flex items-center justify-between p-2 bg-white/5 rounded-xl border border-white/10">
+            <div class="flex items-center gap-2.5">
+              <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover">
+              <span class="text-[11px] text-slate-300">${p.timeStr || 'Uploaded'}</span>
+            </div>
+            <button onclick="removeDevoteePhoto('${p.firebaseKey}', ${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
+          </div>
+        `).join('');
+      }
+
+      lucide.createIcons();
+    }
+
+    function openDevoteeDownloadModal(index) {
+      selectedDevoteeItem = devoteePhotosData[index];
+      if (!selectedDevoteeItem) return;
+
+      document.getElementById('devoteeModalDisplayImg').src = selectedDevoteeItem.img;
+      document.getElementById('devoteeModalTimeTag').innerText = `Captured: ${selectedDevoteeItem.timeStr} • Auto-expires in 2 hours`;
+      
+      const modal = document.getElementById('devoteeDownloadModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeDevoteeDownloadModal() {
+      const modal = document.getElementById('devoteeDownloadModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      selectedDevoteeItem = null;
+    }
+
+    // Safe Base64 to Blob HD Photo Downloader
+    function downloadDevoteeLosslessJpg() {
+      if (!selectedDevoteeItem || !selectedDevoteeItem.img) return;
+
+      const base64Data = selectedDevoteeItem.img;
+      const parts = base64Data.split(';base64,');
+      const contentType = parts[0].split(':')[1] || 'image/jpeg';
+      const raw = window.atob(parts[1]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
+
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+
+      const blob = new Blob([uInt8Array], { type: contentType });
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `TeamBajarangdal_Darshan_${Date.now()}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      triggerFlowerRain();
+    }
+
+    function downloadDevoteeSouvenirPdf() {
+      if (!selectedDevoteeItem) return;
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      doc.setDrawColor(184, 29, 36);
+      doc.setLineWidth(1.5);
+      doc.rect(8, 8, 194, 281);
+
+      doc.setDrawColor(245, 176, 65);
+      doc.setLineWidth(0.6);
+      doc.rect(11, 11, 188, 275);
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.setTextColor(184, 29, 36);
+      doc.text("TEAM BAJARANGDAL", 105, 24, { align: "center" });
+
+      doc.setFontSize(12);
+      doc.setTextColor(217, 119, 6);
+      doc.text("SRI GANESH UTSAV 2026 • OFFICIAL DEVOTEE DARSHAN SOUVENIR", 105, 31, { align: "center" });
+
+      try {
+        doc.addImage(selectedDevoteeItem.img, 'JPEG', 18, 38, 174, 210, undefined, 'FAST');
+      } catch (e) {
+        console.error("PDF image embed issue:", e);
+      }
+
+      doc.setFontSize(11);
+      doc.setFont("helvetica", "bolditalic");
+      doc.setTextColor(146, 64, 14);
+      doc.text('"Ganapati Bappa Morya | May Lord Ganesha Bless Your Family"', 105, 260, { align: "center" });
+
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(107, 114, 128);
+      doc.text(`Captured at Main Pandal • Time: ${selectedDevoteeItem.timeStr || 'Festival Darshan'}`, 105, 267, { align: "center" });
+
+      doc.save(`TeamBajarangdal_Darshan_Souvenir_${Date.now()}.pdf`);
+      triggerFlowerRain();
+    }
+
+    // --- PHOTO LEADER ACTIONS (ID: Image | Pass: 1111) ---
+    function openImageLeaderLogin() {
+      const isAuth = sessionStorage.getItem('img_leader_auth') === 'true';
+      if (isAuth) {
+        openImageLeaderDashboard();
+      } else {
+        toggleImageLeaderLoginModal();
+      }
+    }
+
+    function toggleImageLeaderLoginModal() {
+      const modal = document.getElementById('imageLeaderLoginModal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+      document.getElementById('imgLoginError').classList.add('hidden');
+      document.getElementById('img-login-id').value = '';
+      document.getElementById('img-login-pass').value = '';
+    }
+
+    function verifyImageLeaderLogin() {
+      const id = document.getElementById('img-login-id').value.trim();
+      const pass = document.getElementById('img-login-pass').value.trim();
+
+      if (id === 'Image' && pass === '1111') {
+        sessionStorage.setItem('img_leader_auth', 'true');
+        toggleImageLeaderLoginModal();
+        openImageLeaderDashboard();
+        triggerFlowerRain();
+      } else {
+        document.getElementById('imgLoginError').classList.remove('hidden');
+      }
+    }
+
+    function openImageLeaderDashboard() {
+      const modal = document.getElementById('imageLeaderDashboardModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      renderDevoteePhotos();
+    }
+
+    function closeImageLeaderDashboard() {
+      const modal = document.getElementById('imageLeaderDashboardModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function logoutImageLeader() {
+      sessionStorage.removeItem('img_leader_auth');
+      closeImageLeaderDashboard();
+    }
+
+    async function uploadDevoteePhotosBatch() {
+      const fileInput = document.getElementById('devoteeMultiFileInput');
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert("Please select at least 1 photo!");
+        return;
+      }
+
+      for (let i = 0; i < fileInput.files.length; i++) {
+        const file = fileInput.files[i];
+        const highRes = await compressFileToJpeg(file, 1400, 0.82);
+        const timeNow = new Date();
+        const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+        const photoObj = {
+          img: highRes,
+          timestamp: Date.now(),
+          timeStr: timeStr
+        };
+
+        if (db) {
+          db.ref('devoteePandalPhotos').push(photoObj);
+        } else {
+          devoteePhotosData.unshift(photoObj);
+        }
+      }
+
+      fileInput.value = '';
+      renderDevoteePhotos();
+      triggerFlowerRain();
+      alert("Photos published in High Quality! They will automatically delete in 2 hours.");
+    }
+
+    function removeDevoteePhoto(key, index) {
+      if (confirm("Delete this photo?")) {
+        if (db && key && key !== 'undefined') {
+          db.ref('devoteePandalPhotos/' + key).remove();
+        }
+        devoteePhotosData.splice(index, 1);
+        renderDevoteePhotos();
+      }
     }
 
     function renderHero() {
@@ -980,11 +1332,9 @@
       const container = document.getElementById('committeeContainer');
       container.innerHTML = committeeData.map((mem) => `
         <div class="flex-shrink-0 w-[68vw] max-w-[240px] sm:w-64 snap-center card-glass rounded-3xl overflow-hidden text-center flex flex-col justify-between relative group shadow-2xl border border-amber-400/30">
-          
           <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-[#100520]">
             <img src="${mem.img}" alt="${mem.name}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
             <div class="absolute inset-0 bg-gradient-to-t from-[#0e041e] via-[#0e041e]/30 to-transparent"></div>
-            
             <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-amber-500/90 text-black text-[9px] font-extrabold uppercase tracking-widest shadow">
               ${mem.tag || 'TEAM'}
             </span>
@@ -1153,7 +1503,7 @@
       document.getElementById('in-moment-video').value = '';
       filesInput.value = '';
       triggerFlowerRain();
-      alert("Photos & Videos saved successfully!");
+      alert("Moments saved successfully!");
     }
 
     function compressFileToJpeg(file, maxWidth = 650, quality = 0.6) {
@@ -1181,6 +1531,7 @@
       });
     }
 
+    // --- CROPPER ENGINE ---
     function openCropper(imageSrc, aspectRatio, callback) {
       const modal = document.getElementById('cropperModal');
       const targetImg = document.getElementById('cropperImageTarget');
@@ -1222,42 +1573,59 @@
       closeCropperModal();
     }
 
-    function startHeroGaneshaCrop() {
-      const fileInput = document.getElementById('cfg-hero-file');
-      if (fileInput.files && fileInput.files[0]) {
+    function handleMemberFileInstantCrop(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          openCropper(e.target.result, 0.85, cropped => {
+            pendingNewMemberCroppedImg = cropped;
+            document.getElementById('memberCroppedPreviewImg').src = cropped;
+            document.getElementById('memberCroppedPreviewBox').classList.remove('hidden');
+            document.getElementById('memberCroppedPreviewBox').classList.add('flex');
+            lucide.createIcons();
+          });
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function startHeroGaneshaCropInstant(input) {
+      if (input.files && input.files[0]) {
         const reader = new FileReader();
         reader.onload = e => {
           openCropper(e.target.result, 1, cropped => {
             heroGaneshaImg = cropped;
             syncNode('heroGaneshaImg', heroGaneshaImg);
             triggerFlowerRain();
+            alert("Homepage Ganesha photo updated successfully!");
           });
         };
-        reader.readAsDataURL(fileInput.files[0]);
+        reader.readAsDataURL(input.files[0]);
       }
     }
 
-    function startAddMemberWithCrop() {
+    function saveNewMember() {
       const name = document.getElementById('in-mem-name').value.trim() || "Member";
       const role = document.getElementById('in-mem-role').value.trim() || "Committee Volunteer";
       const tag = document.getElementById('in-mem-tag').value.trim() || "CORE";
       const insta = document.getElementById('in-mem-insta').value.trim();
-      const fileInput = document.getElementById('in-mem-file');
 
-      if (fileInput.files && fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = e => {
-          openCropper(e.target.result, 0.85, cropped => {
-            committeeData.unshift({ name, role, tag, insta, img: cropped });
-            syncNode('committeeData', committeeData);
-            triggerFlowerRain();
-          });
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        committeeData.unshift({ name, role, tag, insta, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" });
-        syncNode('committeeData', committeeData);
-      }
+      const memberImg = pendingNewMemberCroppedImg || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80";
+
+      committeeData.unshift({ name, role, tag, insta, img: memberImg });
+      syncNode('committeeData', committeeData);
+      
+      document.getElementById('in-mem-name').value = '';
+      document.getElementById('in-mem-role').value = '';
+      document.getElementById('in-mem-tag').value = '';
+      document.getElementById('in-mem-insta').value = '';
+      document.getElementById('in-mem-file').value = '';
+      pendingNewMemberCroppedImg = '';
+      document.getElementById('memberCroppedPreviewBox').classList.add('hidden');
+      document.getElementById('memberCroppedPreviewBox').classList.remove('flex');
+      
+      triggerFlowerRain();
+      alert("New Committee Member added successfully!");
     }
 
     function renderAdminLists() {
@@ -1305,15 +1673,15 @@
         memList.innerHTML = committeeData.map((m, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${m.img}" class="w-10 h-10 rounded-xl object-cover" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
+              <img src="${m.img}" class="w-10 h-12 rounded-lg object-cover border border-amber-400/40" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
               <div>
                 <p class="text-xs font-bold text-white">${m.name}</p>
                 <p class="text-[10px] text-amber-400">${m.role} ${m.insta ? '• @' + m.insta.replace('@', '') : ''}</p>
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button onclick="triggerCropPhotoReplace('committee', ${i})" class="px-2 py-1 bg-amber-500 text-black text-xs font-bold rounded-lg hover:bg-amber-400 cursor-pointer spring-btn">Crop</button>
-              <button onclick="removeCommitteeMember(${i})" class="px-2 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
+              <button onclick="triggerCropPhotoReplace('committee', ${i})" class="px-2.5 py-1 bg-amber-500 text-black text-xs font-bold rounded-lg hover:bg-amber-400 cursor-pointer spring-btn">Change Photo</button>
+              <button onclick="removeCommitteeMember(${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
             </div>
           </div>
         `).join('');
@@ -1331,7 +1699,7 @@
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button onclick="removeMoment(${i})" class="px-2 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-[11px] rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
+              <button onclick="removeMoment(${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
             </div>
           </div>
         `).join('');
@@ -1349,7 +1717,7 @@
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button onclick="triggerCropPhotoReplace('events', ${i})" class="px-2.5 py-1 bg-amber-500 text-black text-xs font-bold rounded-lg hover:bg-amber-400 cursor-pointer spring-btn">Photo</button>
+              <button onclick="triggerCropPhotoReplace('events', ${i})" class="px-2.5 py-1 bg-amber-500 text-black text-xs font-bold rounded-lg hover:bg-amber-400 cursor-pointer spring-btn">Change Photo</button>
               <button onclick="removeEvent(${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
             </div>
           </div>
@@ -1542,9 +1910,7 @@
 
       doc.setDrawColor(245, 176, 65);
       doc.setLineWidth(0.6);
-      doc.setLineDashPattern([3, 2], 0);
       doc.rect(14, 14, 182, 269);
-      doc.setLineDashPattern([], 0);
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(26);
@@ -1672,6 +2038,7 @@
                 syncNode('eventsData', eventsData);
               }
               triggerFlowerRain();
+              alert("Photo updated successfully!");
             });
           };
           reader.readAsDataURL(e.target.files[0]);
@@ -1834,6 +2201,7 @@
       renderSevas();
       renderDonors();
       renderCommittee();
+      renderDevoteePhotos();
       renderMoments();
       renderChanda();
       lucide.createIcons();
@@ -2091,4 +2459,4 @@
     });
   </script>
 </body>
-   </html>
+</html>

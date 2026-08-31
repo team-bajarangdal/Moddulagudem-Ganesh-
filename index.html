@@ -369,13 +369,12 @@
         Scan the pandal QR code, find your photo & download directly in full HD quality.
       </p>
       
-      <!-- Auto Expiry Notice -->
       <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-[11px] font-semibold mt-2.5">
         <i data-lucide="clock" class="w-3.5 h-3.5"></i> Photos automatically delete after 2 hours
       </div>
     </div>
 
-    <!-- Pandal Xerox QR Code & Photo Leader Upload Action -->
+    <!-- Pandal Display QR Card with Instant Generation -->
     <div class="max-w-xl mx-auto card-glass rounded-3xl p-6 text-center mb-10 border-amber-400/40 relative shadow-2xl">
       <div class="flex flex-col sm:flex-row items-center justify-around gap-6">
         <div>
@@ -859,14 +858,13 @@
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     const firebaseConfig = {
-  apiKey: "AIzaSyDYWkEr1FKAUNcmk2xFnbgC56v5B85pbWA",
+  apiKey: "AIzaSy...",
   authDomain: "moddulagudem-ganesh.firebaseapp.com",
   databaseURL: "https://moddulagudem-ganesh-default-rtdb.firebaseio.com",
   projectId: "moddulagudem-ganesh",
-  storageBucket: "moddulagudem-ganesh.firebasestorage.app",
-  messagingSenderId: "1049615958722",
-  appId: "1:1049615958722:web:833a5c94ebf10f0bc9b15b",
-  measurementId: "G-NEB6TVFRV1"
+  storageBucket: "moddulagudem-ganesh.appspot.com",
+  messagingSenderId: "...",
+  appId: "..."
 };
 
     const defaultHeroGanesha = "https://images.unsplash.com/photo-1567591370504-20b1e42ba93d?auto=format&fit=crop&w=1000&q=85";
@@ -970,6 +968,15 @@
       renderAll();
     }
 
+    // --- INSTANT PERMANENT DEFAULT QR CODE GENERATOR ---
+    function initDefaultPandalQr() {
+      const pandalQrImg = document.getElementById('pandalSectionQr');
+      const directUrl = window.location.origin + window.location.pathname + '#baktula-photos';
+      if (pandalQrImg) {
+        pandalQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(directUrl)}`;
+      }
+    }
+
     // --- 2-HOUR AUTO EXPIRY ENGINE ---
     const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
 
@@ -995,13 +1002,15 @@
       const countEl = document.getElementById('devoteePhotoCount');
       if (countEl) countEl.innerText = devoteePhotosData.length;
 
+      initDefaultPandalQr();
+
       if (!container) return;
 
       if (!devoteePhotosData || devoteePhotosData.length === 0) {
         container.innerHTML = `
           <div class="col-span-full text-center py-12 card-glass rounded-3xl p-6">
             <i data-lucide="camera" class="w-10 h-10 text-amber-400 mx-auto mb-2 opacity-60"></i>
-            <h4 class="font-cinzel text-base font-bold text-slate-100">ప్రస్తుతానికి భక్తుల ఫోటోలు లేవు</h4>
+            <h4 class="font-cinzel text-base font-bold text-slate-100">ప్రస్తుతానికి భక్తుల ఫోటోలు అందుబాటులో లేవు</h4>
             <p class="text-xs text-slate-400 mt-1">Visit our pandal & ask our volunteers to snap your Darshan photo!</p>
           </div>
         `;
@@ -1029,11 +1038,6 @@
           </div>
         `;
       }).join('');
-
-      // Update Pandal Section QR Code
-      const directUrl = window.location.origin + window.location.pathname + '#baktula-photos';
-      const pandalQr = document.getElementById('pandalSectionQr');
-      if (pandalQr) pandalQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(directUrl)}`;
 
       // Update Admin List
       const adminList = document.getElementById('adminDevoteePhotoList');
@@ -1072,7 +1076,7 @@
       selectedDevoteeItem = null;
     }
 
-    // Safe Base64 to Blob HD Photo Downloader
+    // Safe Base64 to Blob HD Photo Downloader (Prevents Mobile corrupted .bin files)
     function downloadDevoteeLosslessJpg() {
       if (!selectedDevoteeItem || !selectedDevoteeItem.img) return;
 
@@ -2453,10 +2457,11 @@
     }, 1000);
 
     window.addEventListener('DOMContentLoaded', () => {
+      initDefaultPandalQr();
       filterMomentsGallery('all');
       renderAll();
       initScrollSpringAnimations();
     });
   </script>
 </body>
-</html>
+  </html>

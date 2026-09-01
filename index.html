@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Team Bajarangdal | Ganesh Utsav 2026</title>
 
+  <!-- Complete Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' 'unsafe-inline' https: data: blob:;
+    script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
+    connect-src 'self' https://*.firebaseio.com wss://*.firebaseio.com https://api.qrserver.com;
+    img-src 'self' data: blob: https: https://images.unsplash.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    frame-src https://www.youtube.com;
+  ">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
@@ -19,6 +32,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <!-- Cropper.js -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
@@ -129,10 +145,18 @@
       scrollbar-width: none;
     }
 
-    .reveal-left { opacity: 0; transform: translateX(-35px); will-change: transform, opacity; }
-    .reveal-right { opacity: 0; transform: translateX(35px); will-change: transform, opacity; }
-    .reveal-up { opacity: 0; transform: translateY(30px) scale(0.96); will-change: transform, opacity; }
-    .reveal-scale { opacity: 0; transform: scale(0.92); will-change: transform, opacity; }
+    .reveal-left, .reveal-right, .reveal-up, .reveal-scale {
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    #devotee-photos-grid,
+    #baktula-photos,
+    #committee,
+    #events,
+    #chanda {
+      scroll-margin-top: 100px;
+    }
   </style>
 </head>
 
@@ -184,9 +208,9 @@
       <a href="#chanda" class="hover:text-amber-400 transition">Chanda / విరాళాలు</a>
       <a href="#history" class="hover:text-amber-400 transition">Donors Board</a>
       <a href="#committee" class="hover:text-amber-400 transition">Committee</a>
-      <a href="#baktula-photos" class="hover:text-amber-400 transition text-amber-300">📸 భక్తుల ఫోటోలు</a>
+      <a href="#devotee-photos-grid" class="hover:text-amber-400 transition text-amber-300">📸 భక్తుల ఫోటోలు</a>
       <a href="#journey" class="hover:text-amber-400 transition">Journey</a>
-      <a href="#moments" class="hover:text-amber-400 transition">Moments</a>
+      <a href="#moments" class="hover:text-amber-400 transition">Moments & BTS</a>
     </div>
 
     <div class="flex items-center gap-2">
@@ -215,19 +239,26 @@
       </h1>
       <p class="reveal-right font-cinzel text-slate-300 text-xs sm:text-base mt-1.5 font-semibold tracking-wider">11 DAYS OF SACRED RITUALS & DIVINE CELEBRATIONS</p>
 
-      <div class="reveal-up flex flex-col sm:flex-row items-center gap-3 mt-4 mb-2 w-full justify-center">
-        <a href="#baktula-photos" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-cinzel text-xs font-black tracking-widest uppercase spring-btn flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25">
+      <!-- Side-by-Side Hero Actions -->
+      <div class="reveal-up flex flex-col items-center gap-2.5 mt-4 mb-2 w-full max-w-lg mx-auto">
+        <a href="#devotee-photos-grid" class="w-full py-2.5 px-6 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-cinzel text-xs font-black tracking-widest uppercase spring-btn flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25">
           <i data-lucide="camera" class="w-4 h-4"></i> DEVOTEE DARSHAN PHOTOS
         </a>
-        <a href="#events" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-amber-500/20 border border-amber-400/60 text-amber-300 font-cinzel text-xs font-bold tracking-widest uppercase spring-btn flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10">
-          <i data-lucide="calendar" class="w-4 h-4"></i> EXPLORE EVENTS
-        </a>
+        <div class="grid grid-cols-2 gap-2.5 w-full">
+          <a href="#events" class="py-2.5 px-3 rounded-full bg-amber-500/20 border border-amber-400/60 text-amber-300 font-cinzel text-[11px] sm:text-xs font-bold tracking-wider uppercase spring-btn flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10 truncate">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 flex-shrink-0"></i> <span>EXPLORE EVENTS</span>
+          </a>
+          <a href="#committee" class="py-2.5 px-3 rounded-full bg-amber-500/20 border border-amber-400/60 text-amber-300 font-cinzel text-[11px] sm:text-xs font-bold tracking-wider uppercase spring-btn flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10 truncate">
+            <i data-lucide="users" class="w-3.5 h-3.5 flex-shrink-0"></i> <span>COMMITTEE MEMBERS</span>
+          </a>
+        </div>
       </div>
 
       <div class="reveal-scale flex flex-col items-center my-6 relative">
         <div class="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full p-2 border-2 border-amber-400/90 divine-halo bg-gradient-to-b from-amber-500/30 via-purple-950/70 to-[#05010B] overflow-hidden float-anim shadow-2xl flex items-center justify-center">
           <img 
             id="heroGaneshaImg" 
+            src="https://images.unsplash.com/photo-1567591370504-20b1e42ba93d?auto=format&fit=crop&w=1000&q=85"
             class="w-full h-full object-cover rounded-full filter brightness-105 contrast-105 group-hover:scale-105 transition duration-700"
             alt="Lord Ganesha - Team Bajarangdal"
             onerror="this.src='https://images.unsplash.com/photo-1567591370504-20b1e42ba93d?auto=format&fit=crop&w=1000&q=80'"
@@ -288,7 +319,7 @@
           <img id="displayQrCode" class="w-44 h-44 sm:w-52 sm:h-52 object-contain" alt="UPI QR Code" />
         </div>
         <h4 id="displayHeadName" class="font-cinzel text-base font-bold text-slate-100">Ganesh (President)</h4>
-        <p id="displayUpiId" class="text-xs font-mono text-amber-400 mt-0.5">UPI: team-bajarangdal@upi</p>
+        <p id="displayUpiId" class="text-xs font-mono text-amber-400 mt-0.5 select-all">UPI: team-bajarangdal@upi</p>
         <p class="text-[11px] text-slate-400 mt-1">Scan or tap QR with Google Pay, PhonePe, Paytm or BHIM</p>
       </div>
 
@@ -306,7 +337,7 @@
             <label class="block text-[11px] text-slate-400 mb-1">Or enter custom amount (₹)</label>
             <div class="relative">
               <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-amber-400 font-bold text-sm">₹</span>
-              <input id="customAmountInput" type="number" placeholder="Enter your offering amount" oninput="handleCustomAmountInput(this.value)" class="w-full bg-[#1c0c38] border border-white/15 focus:border-amber-400 rounded-xl pl-8 pr-4 py-2 text-xs text-white outline-none">
+              <input id="customAmountInput" type="number" min="1" max="100000" placeholder="Enter your offering amount" oninput="handleCustomAmountInput(this.value)" class="w-full bg-[#1c0c38] border border-white/15 focus:border-amber-400 rounded-xl pl-8 pr-4 py-2 text-xs text-white outline-none">
             </div>
           </div>
 
@@ -358,7 +389,7 @@
     </div>
   </section>
 
-  <!-- ================= 05. BAKTULA - DEVOTEES PHOTOS (LOCATED DIRECTLY AFTER COMMITTEE) ================= -->
+  <!-- ================= 05. BAKTULA - DEVOTEES PHOTOS (DIRECT TARGET VIA QR) ================= -->
   <section id="baktula-photos" class="py-20 px-4 max-w-7xl mx-auto border-t border-amber-500/20 z-10 relative">
     <div class="text-center mb-8">
       <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest mb-2">
@@ -374,14 +405,14 @@
       </div>
     </div>
 
-    <!-- Pandal Display QR Card with Instant Generation -->
+    <!-- Pandal Display QR Card -->
     <div class="max-w-xl mx-auto card-glass rounded-3xl p-6 text-center mb-10 border-amber-400/40 relative shadow-2xl">
       <div class="flex flex-col sm:flex-row items-center justify-around gap-6">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-amber-300 block mb-1">Pandal Display QR Code</span>
           <p class="text-[11px] text-slate-400 max-w-[200px]">Print & display this QR code at the pandal for visitors.</p>
-          <div class="inline-block p-2 bg-white rounded-2xl shadow-inner mt-2">
-            <img id="pandalSectionQr" class="w-32 h-32 object-contain" alt="Pandal Devotees QR">
+          <div class="inline-block p-2.5 bg-white rounded-2xl shadow-inner mt-2">
+            <div id="pandalSectionQr" class="w-32 h-32 flex items-center justify-center"></div>
           </div>
         </div>
 
@@ -396,7 +427,9 @@
     </div>
 
     <!-- Live Devotee Photos Grid -->
-    <div id="devoteePhotosContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"></div>
+    <div id="devotee-photos-grid">
+      <div id="devoteePhotosContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"></div>
+    </div>
   </section>
 
   <!-- ================= 06. JOURNEY: FROM STHAPANA TO VISARJAN ================= -->
@@ -438,23 +471,40 @@
     </div>
   </section>
 
-  <!-- ================= 07. BEHIND THE SCENES & BEST MOMENTS ================= -->
+  <!-- ================= 07. ALBUMS / BTS ================= -->
   <section id="moments" class="py-16 px-4 max-w-7xl mx-auto border-t border-amber-500/10 z-10 relative">
-    <div class="text-center mb-6">
+    <div class="text-center mb-10">
       <span class="reveal-left text-[11px] font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">07 • Gallery & Memories</span>
-      <h2 class="reveal-right font-decorative text-2xl sm:text-5xl font-black text-slate-100 mt-1">Behind The Scenes & Moments</h2>
-      <p class="reveal-up text-xs sm:text-sm text-slate-400 mt-1">పందిరి అలంకరణ, పూజలు, సంబరాలు & మన జ్ఞాపకాలు</p>
+      <h2 class="reveal-right font-decorative text-2xl sm:text-5xl font-black text-slate-100 mt-1">Festival Albums & Folders</h2>
+      <p class="reveal-up text-xs sm:text-sm text-slate-400 mt-1">పందిరి అలంకరణ, పూజలు, సంబరాలు & మన జ్ఞాపకాల ఫోల్డర్లు</p>
     </div>
 
-    <div class="reveal-scale flex items-center justify-center gap-2 mb-8 flex-wrap">
-      <button onclick="filterMomentsGallery('all')" id="filter-all" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-black spring-btn cursor-pointer">All Moments</button>
-      <button onclick="filterMomentsGallery('photos')" id="filter-photos" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10 spring-btn cursor-pointer">Photos</button>
-      <button onclick="filterMomentsGallery('videos')" id="filter-videos" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10 spring-btn cursor-pointer">Videos</button>
-      <button onclick="filterMomentsGallery('bts')" id="filter-bts" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10 spring-btn cursor-pointer">Behind The Scenes</button>
-    </div>
-
-    <div id="momentsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+    <!-- Album Folders Grid -->
+    <div id="albumFoldersContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </section>
+
+  <!-- ================= ALBUM MEDIA EXPLORER MODAL ================= -->
+  <div id="albumViewModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-4xl w-full p-5 sm:p-7 max-h-[90vh] flex flex-col shadow-2xl relative my-auto">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <div>
+          <span id="albumModalCountBadge" class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20"></span>
+          <h3 id="albumModalTitle" class="font-cinzel text-lg sm:text-2xl font-bold text-slate-100 mt-1"></h3>
+        </div>
+        <button onclick="closeAlbumModal()" class="p-2 rounded-full bg-white/10 text-slate-300 hover:text-white spring-btn cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="albumMediaGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5 sm:gap-4 overflow-y-auto py-4 pr-1 flex-1"></div>
+
+      <div class="pt-3 border-t border-white/10 text-center">
+        <button onclick="closeAlbumModal()" class="px-6 py-2 bg-white/10 text-white font-bold text-xs rounded-xl hover:bg-white/20 spring-btn cursor-pointer">
+          Back to All Folders
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= FOOTER ================= -->
   <footer class="pt-16 pb-12 border-t border-amber-500/20 text-center bg-gradient-to-b from-[#05010B] via-[#090217] to-[#020005] relative z-10 px-4">
@@ -479,7 +529,7 @@
       <div class="font-decorative text-gold-gradient text-lg sm:text-xl font-black">టీమ్ బజరంగ్ దళ్</div>
       <p class="text-slate-400 font-cinzel text-[11px] tracking-widest">Ganapati Bappa Morya • Ganesh Utsav 2026</p>
       
-      <!-- DEVELOPER BADGE WITH EMBEDDED PHOTO -->
+      <!-- DEVELOPER BADGE -->
       <div class="pt-4 flex justify-center">
         <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-amber-400/30 text-xs shadow-md spring-btn">
           <img src="IMG_20260509_093915.jpg" alt="Bhukya Abhiram" class="w-7 h-7 rounded-full object-cover object-top border border-amber-400/80 shadow" onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'">
@@ -498,7 +548,7 @@
     
     <div class="max-w-md w-full flex flex-col items-center">
       <div class="w-full max-h-[65vh] flex items-center justify-center overflow-hidden rounded-2xl bg-black/70 border border-amber-500/40 p-1">
-        <img id="devoteeModalDisplayImg" src="" class="max-w-full max-h-[62vh] object-contain rounded-xl">
+        <img id="devoteeModalDisplayImg" src="" class="max-w-full max-h-[62vh] object-contain rounded-xl" alt="Devotee Darshan">
       </div>
       
       <div class="w-full mt-3 text-center">
@@ -516,7 +566,74 @@
     </div>
   </div>
 
-  <!-- ================= IMAGE LEADER LOGIN MODAL (ID: Image | Pass: 1111) ================= -->
+  <!-- ================= DEVOTEE CHANDA INPUT MODAL ================= -->
+  <div id="devoteeConfirmModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-sm w-full p-5 text-center shadow-2xl relative">
+      <button onclick="toggleDevoteeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h3 class="font-cinzel text-base font-bold text-slate-100">Devotee Receipt Details</h3>
+      <p class="text-xs text-slate-400 mt-0.5">Enter details to generate your verified PDF receipt</p>
+
+      <div class="mt-4 space-y-2.5 text-left">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5 font-semibold">Surname</label>
+            <input id="user-donor-surname" type="text" placeholder="Surname" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] text-slate-400 mb-0.5 font-semibold">Name *</label>
+            <input id="user-donor-name" type="text" placeholder="Full Name" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-0.5 font-semibold">Gothram / Family Tag</label>
+          <input id="user-donor-gothram" type="text" placeholder="e.g. Shiva Gothram" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-amber-400 outline-none">
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-0.5 font-semibold">Seva Type</label>
+          <select id="user-donor-seva" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-amber-400 outline-none"></select>
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 mb-0.5 font-semibold">Amount Paid (₹) *</label>
+          <input id="user-donor-amount" type="number" min="1" max="100000" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:border-amber-400 outline-none font-bold text-amber-400">
+        </div>
+      </div>
+
+      <button onclick="submitDevoteePayment()" class="mt-4 w-full py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl spring-btn cursor-pointer">
+        Confirm & Get Official PDF ✦
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= RECEIPT SUCCESS MODAL ================= -->
+  <div id="receiptSuccessModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-[#120626] border border-emerald-400/50 rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl relative">
+      <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 mx-auto mb-3">
+        <i data-lucide="check-circle-2" class="w-7 h-7"></i>
+      </div>
+      <h3 class="font-cinzel text-lg font-bold text-slate-100">Offering Recorded!</h3>
+      <p class="text-xs text-slate-300 mt-1">May Lord Ganesha bless your home with prosperity.</p>
+
+      <div class="bg-black/40 p-3.5 rounded-2xl border border-white/10 my-4 text-left space-y-1.5 text-xs">
+        <div class="flex justify-between"><span class="text-slate-400">Devotee:</span> <strong id="r-modal-name" class="text-white"></strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Amount:</span> <strong id="r-modal-amt" class="text-amber-400"></strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Seva:</span> <strong id="r-modal-seva" class="text-white"></strong></div>
+        <div class="flex justify-between"><span class="text-slate-400">Time:</span> <span id="r-modal-time" class="text-slate-300"></span></div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="downloadCurrentReceiptPdf()" class="flex-1 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase rounded-xl spring-btn flex items-center justify-center gap-1.5 cursor-pointer">
+          <i data-lucide="file-text" class="w-4 h-4"></i> Download PDF
+        </button>
+        <button onclick="toggleReceiptSuccessModal()" class="px-4 py-2.5 bg-white/10 text-white font-bold text-xs rounded-xl hover:bg-white/20 spring-btn cursor-pointer">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= IMAGE LEADER LOGIN MODAL ================= -->
   <div id="imageLeaderLoginModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-sm w-full p-5 text-center shadow-2xl relative">
       <button onclick="toggleImageLeaderLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
@@ -572,7 +689,6 @@
           </button>
         </div>
 
-        <!-- Devotee Photos in Admin -->
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Live Devotee Photos (<span id="devoteePhotoCount">0</span> active)</h4>
           <div id="adminDevoteePhotoList" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
@@ -585,7 +701,7 @@
     </div>
   </div>
 
-  <!-- ================= PRESIDENT LEADER LOGIN MODAL (Ganesh | 0000) ================= -->
+  <!-- ================= PRESIDENT LEADER LOGIN MODAL ================= -->
   <div id="loginModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-sm w-full p-5 text-center shadow-2xl relative">
       <button onclick="toggleLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white cursor-pointer">
@@ -621,7 +737,7 @@
       
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-3 border-b border-white/10 gap-2">
         <div>
-          <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-0.5">⚡ Cloud Realtime Sync</span>
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-0.5">⚡ Realtime Sync</span>
           <h3 class="font-cinzel text-base sm:text-lg font-bold text-amber-400">LEADER CONTROL PANEL</h3>
         </div>
         <button onclick="logoutAdmin()" class="px-3.5 py-1 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white text-xs font-bold transition flex items-center gap-1 self-end sm:self-auto cursor-pointer spring-btn">
@@ -659,7 +775,7 @@
           <h4 id="sevaFormTitle" class="text-xs font-bold uppercase tracking-wider text-amber-400">Add New Seva / Pooja Type</h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <input id="in-seva-title" type="text" placeholder="Seva Name (e.g. Special Aarti)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
-            <input id="in-seva-amount" type="number" placeholder="Amount ₹" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+            <input id="in-seva-amount" type="number" min="1" placeholder="Amount ₹" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
           </div>
           <div class="flex gap-2">
             <button id="saveSevaBtn" onclick="saveNewSeva()" class="flex-1 py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 spring-btn cursor-pointer">Add Seva</button>
@@ -679,7 +795,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <input id="in-donor-surname" type="text" placeholder="Surname" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
             <input id="in-donor-name" type="text" placeholder="First Name" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
-            <input id="in-donor-amount" type="number" placeholder="Amount in ₹" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+            <input id="in-donor-amount" type="number" min="1" placeholder="Amount in ₹" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <input id="in-donor-gothram" type="text" placeholder="Gothram / Tag" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
@@ -711,7 +827,7 @@
           </div>
 
           <div id="memberCroppedPreviewBox" class="hidden items-center gap-3 p-2.5 bg-white/5 rounded-xl border border-amber-400/40">
-            <img id="memberCroppedPreviewImg" src="" class="w-12 h-14 object-cover rounded-lg border border-amber-400">
+            <img id="memberCroppedPreviewImg" src="" class="w-12 h-14 object-cover rounded-lg border border-amber-400" alt="Preview">
             <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
               <i data-lucide="check" class="w-4 h-4"></i> Photo cropped & ready!
             </span>
@@ -720,7 +836,7 @@
           <button onclick="saveNewMember()" class="w-full py-2 bg-amber-500 text-black font-bold text-xs rounded-xl hover:bg-amber-400 spring-btn cursor-pointer">Save Member</button>
         </div>
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Members (Change Photo or Delete)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Members</h4>
           <div id="adminMemberList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
         </div>
       </div>
@@ -728,33 +844,42 @@
       <!-- Tab 4: Moments & BTS -->
       <div id="tab-moments-edit" class="space-y-4 hidden">
         <div class="bg-black/30 p-3.5 rounded-2xl border border-white/5 space-y-2.5">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Add Photos & Videos</h4>
-          <input id="in-moment-title" type="text" placeholder="Album / Title" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
-          
-          <select id="in-moment-tag" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
-            <option value="Best Moments">Best Moments</option>
-            <option value="Behind The Scenes">Behind The Scenes</option>
-            <option value="Aarti & Pooja">Aarti & Pooja</option>
-            <option value="Celebration & Dance">Celebration & Dance</option>
-            <option value="Visarjan">Visarjan</option>
-          </select>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Add Media to Selective Folder</h4>
           
           <div>
-            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Upload Multiple Photos</label>
+            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Select Existing Folder OR Custom Category</label>
+            <select id="sel-folder-target" onchange="handleFolderSelectChange(this.value)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+              <option value="Pandal Decoration & Lighting">Pandal Decoration & Lighting</option>
+              <option value="Deeparadhana & Maha Aarti">Deeparadhana & Maha Aarti</option>
+              <option value="Laddu Auction & Celebrations">Laddu Auction & Celebrations</option>
+              <option value="Maha Annadanam Seva">Maha Annadanam Seva</option>
+              <option value="Visarjan Shobha Yatra">Visarjan Shobha Yatra</option>
+              <option value="__NEW_FOLDER__">+ Create New Custom Folder...</option>
+            </select>
+          </div>
+
+          <div id="customFolderInputGroup" class="hidden">
+            <label class="block text-[11px] text-slate-400 mb-1 font-medium">New Custom Folder Name</label>
+            <input id="in-custom-folder-name" type="text" placeholder="e.g. Cultural Dance Sandhya" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Upload Photos (Batch Select)</label>
             <input id="in-moment-files" type="file" accept="image/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
           </div>
 
           <div>
-            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Or Paste Video Link</label>
-            <input id="in-moment-video" type="text" placeholder="https://www.youtube.com/watch?v=..." class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Or Paste YouTube / Video Link (Optional)</label>
+            <input id="in-moment-video" type="text" placeholder="https://www.youtube.com/watch?v=..." class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
           </div>
 
           <button onclick="saveBatchMoments()" class="w-full py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl hover:brightness-110 shadow-lg spring-btn transition cursor-pointer">
-            Save Media to Stack
+            Save Media to Folder ✦
           </button>
         </div>
+
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Moments (<span id="momentCount">0</span> items)</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Albums (<span id="momentCount">0</span> folders)</h4>
           <div id="adminMomentsList" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
         </div>
       </div>
@@ -846,7 +971,7 @@
       <h3 class="font-cinzel text-base font-bold text-amber-300 mb-1">Adjust & Crop Photo</h3>
       <p class="text-[11px] text-slate-400 mb-3">Drag, pinch, or zoom to adjust portrait frame</p>
       <div class="h-60 sm:h-72 w-full bg-black/60 overflow-hidden rounded-2xl border border-white/10 flex items-center justify-center">
-        <img id="cropperImageTarget" src="" class="max-w-full max-h-full">
+        <img id="cropperImageTarget" src="" class="max-w-full max-h-full" alt="Crop Target">
       </div>
       <div class="grid grid-cols-2 gap-3 mt-4">
         <button onclick="closeCropperModal()" class="py-2.5 bg-white/10 text-white font-bold text-xs rounded-xl hover:bg-white/20 spring-btn cursor-pointer">Cancel</button>
@@ -857,15 +982,29 @@
 
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
+    // --- SANITIZATION HELPER ---
+    function sanitizeInput(str) {
+      if (typeof str !== 'string') return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .trim();
+    }
+
+    // --- 01. FIREBASE & CORE DATA ---
     const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "moddulagudem-ganesh.firebaseapp.com",
-  databaseURL: "https://moddulagudem-ganesh-default-rtdb.firebaseio.com",
-  projectId: "moddulagudem-ganesh",
-  storageBucket: "moddulagudem-ganesh.appspot.com",
-  messagingSenderId: "...",
-  appId: "..."
-};
+      apiKey: "AIzaSyDYWkEr1FKAUNcmk2xFnbgC56v5B85pbWA",
+      authDomain: "moddulagudem-ganesh.firebaseapp.com",
+      databaseURL: "https://moddulagudem-ganesh-default-rtdb.firebaseio.com",
+      projectId: "moddulagudem-ganesh",
+      storageBucket: "moddulagudem-ganesh.firebasestorage.app",
+      messagingSenderId: "1049615958722",
+      appId: "1:1049615958722:web:833a5c94ebf10f0bc9b15b",
+      measurementId: "G-NEB6TVFRV1"
+    };
 
     const defaultHeroGanesha = "https://images.unsplash.com/photo-1567591370504-20b1e42ba93d?auto=format&fit=crop&w=1000&q=85";
     
@@ -883,11 +1022,33 @@
       { name: "Sai Charan", role: "Youth Lead", tag: "CULTURAL", insta: "", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80" }
     ];
 
-    const defaultMoments = [
-      { title: "Pandal Decoration & Midnight Lighting", tag: "Behind The Scenes", img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80", video: "" },
-      { title: "Deeparadhana & Maha Mangala Aarti", tag: "Best Moments", img: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80", video: "" },
-      { title: "Laddu Auction & Youth Celebrations", tag: "Celebration & Dance", img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80", video: "" },
-      { title: "Maha Annadanam & Prasadam Cooking", tag: "Behind The Scenes", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80", video: "" }
+    const defaultAlbums = [
+      {
+        id: "alb_1",
+        title: "Pandal Decoration & Lighting",
+        coverImg: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80",
+        items: [
+          { type: "image", url: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80", title: "Pandal Lighting Setup" },
+          { type: "image", url: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80", title: "Stage Preparation" }
+        ]
+      },
+      {
+        id: "alb_2",
+        title: "Deeparadhana & Maha Aarti",
+        coverImg: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+        items: [
+          { type: "image", url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80", title: "108 Deeparadhana" },
+          { type: "image", url: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80", title: "Maha Aarti Ritual" }
+        ]
+      },
+      {
+        id: "alb_3",
+        title: "Laddu Auction & Celebrations",
+        coverImg: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80",
+        items: [
+          { type: "image", url: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80", title: "Youth Laddu Auction" }
+        ]
+      }
     ];
 
     const defaultSevas = [
@@ -906,12 +1067,12 @@
     let heroGaneshaImg = defaultHeroGanesha;
     let eventsData = defaultEvents;
     let committeeData = defaultCommittee;
-    let momentsData = defaultMoments;
+    let albumsData = defaultAlbums;
     let devoteePhotosData = [];
-    let filteredMoments = [...defaultMoments];
-    let activeMomentsFilter = 'all';
     let currentLightboxIndex = 0;
     let selectedDevoteeItem = null;
+    let activeOpenAlbum = null;
+    let activeLightboxMedia = [];
 
     let sevasData = defaultSevas;
     let donorsData = []; 
@@ -924,6 +1085,8 @@
     let cropper = null;
     let pendingCropCallback = null;
     let pendingNewMemberCroppedImg = "";
+    let pendingReplaceTarget = null;
+    let pendingReplaceIndex = null;
 
     let db = null;
     try {
@@ -936,12 +1099,11 @@
             heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
             eventsData = val.eventsData || defaultEvents;
             committeeData = val.committeeData || defaultCommittee;
-            momentsData = Array.isArray(val.momentsData) ? val.momentsData : defaultMoments;
+            albumsData = Array.isArray(val.albumsData) ? val.albumsData : defaultAlbums;
             sevasData = Array.isArray(val.sevasData) ? val.sevasData : defaultSevas;
             donorsData = Array.isArray(val.donorsData) ? val.donorsData : [];
             chandaData = val.chandaData || defaultChanda;
             
-            filterMomentsGallery(activeMomentsFilter);
             renderAll();
           }
         });
@@ -958,7 +1120,7 @@
         });
       }
     } catch(e) {
-      console.warn("Firebase offline. Running local mode.");
+      console.warn("Firebase running in local state mode.");
     }
 
     function syncNode(nodePath, nodeData) {
@@ -968,12 +1130,27 @@
       renderAll();
     }
 
-    // --- INSTANT PERMANENT DEFAULT QR CODE GENERATOR ---
+    // --- CLIENT-SIDE INSTANT QR CODE ENGINE ---
     function initDefaultPandalQr() {
-      const pandalQrImg = document.getElementById('pandalSectionQr');
-      const directUrl = window.location.origin + window.location.pathname + '#baktula-photos';
-      if (pandalQrImg) {
-        pandalQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(directUrl)}`;
+      const qrContainer = document.getElementById('pandalSectionQr');
+      if (!qrContainer) return;
+      
+      qrContainer.innerHTML = '';
+      let targetUrl = window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith('file:')
+        ? (window.location.origin + window.location.pathname + '#devotee-photos-grid')
+        : 'https://bajarangdal.github.io/#devotee-photos-grid';
+
+      try {
+        new QRCode(qrContainer, {
+          text: targetUrl,
+          width: 128,
+          height: 128,
+          colorDark : "#05010B",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+      } catch(e) {
+        qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(targetUrl)}" class="w-32 h-32 object-contain" alt="QR Code" />`;
       }
     }
 
@@ -997,12 +1174,11 @@
       renderDevoteePhotos();
     }, 60000);
 
+    // --- RENDER DEVOTEE PHOTOS ---
     function renderDevoteePhotos() {
       const container = document.getElementById('devoteePhotosContainer');
       const countEl = document.getElementById('devoteePhotoCount');
       if (countEl) countEl.innerText = devoteePhotosData.length;
-
-      initDefaultPandalQr();
 
       if (!container) return;
 
@@ -1019,14 +1195,18 @@
       }
 
       container.innerHTML = devoteePhotosData.map((p, index) => {
-        const remainingMinutes = Math.max(0, Math.round((TWO_HOURS_MS - (Date.now() - p.timestamp)) / 60000));
+        const totalMinsLeft = Math.max(0, Math.floor((TWO_HOURS_MS - (Date.now() - p.timestamp)) / 60000));
+        const hrs = Math.floor(totalMinsLeft / 60);
+        const mins = totalMinsLeft % 60;
+        const formattedTime = hrs > 0 ? `${hrs}h ${mins}m left` : `${mins}m left`;
+
         return `
-          <div onclick="openDevoteeDownloadModal(${index})" class="card-glass rounded-2xl overflow-hidden cursor-pointer relative group shadow-xl border border-amber-400/30">
+          <div onclick="openDevoteeDownloadModal(${index})" class="card-glass rounded-2xl overflow-hidden cursor-pointer relative group shadow-xl border border-amber-400/30 spring-btn">
             <div class="relative h-52 sm:h-64 w-full overflow-hidden bg-black/60">
-              <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+              <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" alt="Darshan">
               
               <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-amber-400/50 text-amber-300 text-[9px] font-bold flex items-center gap-1">
-                <i data-lucide="clock" class="w-3 h-3 text-rose-400"></i> ${remainingMinutes}m left
+                <i data-lucide="clock" class="w-3.5 h-3.5 text-rose-400"></i> ${formattedTime}
               </span>
 
               <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex items-end p-2.5">
@@ -1039,13 +1219,12 @@
         `;
       }).join('');
 
-      // Update Admin List
       const adminList = document.getElementById('adminDevoteePhotoList');
       if (adminList) {
         adminList.innerHTML = devoteePhotosData.map((p, i) => `
           <div class="flex items-center justify-between p-2 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover">
+              <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover" alt="Upload">
               <span class="text-[11px] text-slate-300">${p.timeStr || 'Uploaded'}</span>
             </div>
             <button onclick="removeDevoteePhoto('${p.firebaseKey}', ${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
@@ -1076,7 +1255,6 @@
       selectedDevoteeItem = null;
     }
 
-    // Safe Base64 to Blob HD Photo Downloader (Prevents Mobile corrupted .bin files)
     function downloadDevoteeLosslessJpg() {
       if (!selectedDevoteeItem || !selectedDevoteeItem.img) return;
 
@@ -1100,7 +1278,7 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
       triggerFlowerRain();
     }
 
@@ -1150,7 +1328,6 @@
       triggerFlowerRain();
     }
 
-    // --- PHOTO LEADER ACTIONS (ID: Image | Pass: 1111) ---
     function openImageLeaderLogin() {
       const isAuth = sessionStorage.getItem('img_leader_auth') === 'true';
       if (isAuth) {
@@ -1170,8 +1347,8 @@
     }
 
     function verifyImageLeaderLogin() {
-      const id = document.getElementById('img-login-id').value.trim();
-      const pass = document.getElementById('img-login-pass').value.trim();
+      const id = sanitizeInput(document.getElementById('img-login-id').value);
+      const pass = sanitizeInput(document.getElementById('img-login-pass').value);
 
       if (id === 'Image' && pass === '1111') {
         sessionStorage.setItem('img_leader_auth', 'true');
@@ -1210,7 +1387,7 @@
 
       for (let i = 0; i < fileInput.files.length; i++) {
         const file = fileInput.files[i];
-        const highRes = await compressFileToJpeg(file, 1400, 0.82);
+        const highRes = await compressFileToJpeg(file, 1000, 0.75);
         const timeNow = new Date();
         const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
 
@@ -1244,15 +1421,16 @@
     }
 
     function renderHero() {
-      document.getElementById('heroGaneshaImg').src = heroGaneshaImg;
+      const heroImg = document.getElementById('heroGaneshaImg');
+      if (heroImg) heroImg.src = heroGaneshaImg;
     }
 
     function renderEvents() {
       const container = document.getElementById('eventsContainer');
       container.innerHTML = eventsData.map((ev, i) => `
-        <div class="${i % 2 === 0 ? 'reveal-left' : 'reveal-right'} card-glass rounded-3xl overflow-hidden flex flex-col justify-between relative group">
+        <div class="card-glass rounded-3xl overflow-hidden flex flex-col justify-between relative group">
           <div class="relative h-56 overflow-hidden bg-black/40">
-            <img src="${ev.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
+            <img src="${ev.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${ev.title}" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
             <span class="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-lg">
               ${ev.day}
             </span>
@@ -1269,7 +1447,6 @@
           </div>
         </div>
       `).join('');
-      initScrollSpringAnimations();
     }
 
     function renderSevas() {
@@ -1351,75 +1528,124 @@
             ${mem.insta ? `
               <div class="mt-2.5 pt-2 border-t border-white/10 flex justify-center">
                 <a href="https://instagram.com/${mem.insta.replace('@', '')}" target="_blank" class="px-3 py-1 rounded-full bg-gradient-to-r from-rose-600 to-amber-500 text-white text-[10px] font-semibold hover:opacity-90 transition shadow-md flex items-center gap-1.5 spring-btn">
-                  <i data-lucide="instagram" class="w-3 h-3"></i> @${mem.insta.replace('@', '')}
+                  <i data-lucide="instagram" class="w-3.5 h-3.5"></i> @${mem.insta.replace('@', '')}
                 </a>
               </div>
             ` : ''}
           </div>
         </div>
       `).join('');
-      initScrollSpringAnimations();
-    }
-
-    function filterMomentsGallery(type) {
-      activeMomentsFilter = type;
-      ['filter-all', 'filter-photos', 'filter-videos', 'filter-bts'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/5 text-slate-300 border border-white/10 spring-btn cursor-pointer";
-      });
-
-      const activeBtn = document.getElementById(`filter-${type}`);
-      if (activeBtn) activeBtn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-black spring-btn cursor-pointer";
-
-      if (type === 'photos') {
-        filteredMoments = momentsData.filter(m => !m.video);
-      } else if (type === 'videos') {
-        filteredMoments = momentsData.filter(m => Boolean(m.video));
-      } else if (type === 'bts') {
-        filteredMoments = momentsData.filter(m => m.tag && m.tag.toLowerCase().includes('behind'));
-      } else {
-        filteredMoments = [...momentsData];
-      }
-
-      renderMoments();
     }
 
     function renderMoments() {
-      const container = document.getElementById('momentsContainer');
+      const container = document.getElementById('albumFoldersContainer');
       const countEl = document.getElementById('momentCount');
-      if (countEl) countEl.innerText = momentsData.length;
+      if (countEl) countEl.innerText = albumsData.length;
 
-      if (!filteredMoments || filteredMoments.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-xs text-slate-400">No moments added in this category yet.</p></div>`;
+      const folderSelect = document.getElementById('sel-folder-target');
+      if (folderSelect) {
+        const customOption = `<option value="__NEW_FOLDER__">+ Create New Custom Folder...</option>`;
+        folderSelect.innerHTML = albumsData.map(a => `<option value="${a.title}">${a.title}</option>`).join('') + customOption;
+      }
+
+      if (!container) return;
+
+      if (!albumsData || albumsData.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-10"><p class="text-xs text-slate-400">No album folders added yet.</p></div>`;
         return;
       }
 
-      container.innerHTML = filteredMoments.map((m, index) => `
-        <div onclick="openGalleryLightbox(${index})" class="${index % 2 === 0 ? 'reveal-left' : 'reveal-right'} stack-card card-glass rounded-3xl overflow-hidden flex flex-col justify-between cursor-pointer relative group shadow-xl border border-amber-400/20">
-          <div class="relative h-60 w-full overflow-hidden bg-black/40">
-            ${m.video ? `
-              <div class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-tr from-purple-950/60 to-black/80">
-                <i data-lucide="play-circle" class="w-14 h-14 text-amber-400 group-hover:scale-110 transition duration-300"></i>
-                <span class="text-[10px] text-amber-300 font-bold uppercase tracking-wider mt-1.5">Watch Video Clip</span>
+      container.innerHTML = albumsData.map((album, index) => {
+        const items = album.items || [];
+        const photoCount = items.filter(i => i.type === 'image').length;
+        const videoCount = items.filter(i => i.type === 'video').length;
+
+        return `
+          <div onclick="openAlbumModal(${index})" class="card-glass rounded-3xl overflow-hidden cursor-pointer group shadow-xl border border-amber-400/25 spring-btn flex flex-col justify-between">
+            <div class="relative h-56 w-full overflow-hidden bg-black/40">
+              <img src="${album.coverImg}" alt="${album.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0b0318] via-transparent to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-amber-500 text-black font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
+                <i data-lucide="folder" class="w-3.5 h-3.5 fill-black"></i> ALBUM FOLDER
+              </span>
+            </div>
+            <div class="p-4 bg-gradient-to-t from-[#0e041e] to-transparent">
+              <h4 class="font-cinzel font-bold text-base text-slate-100">${album.title}</h4>
+              <div class="mt-2 pt-2 border-t border-white/10 flex items-center justify-between text-xs text-amber-400">
+                <span class="font-medium">${photoCount} Photos • ${videoCount} Videos</span>
+                <span class="font-bold flex items-center gap-1 group-hover:translate-x-1 transition">
+                  Open <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function handleFolderSelectChange(val) {
+      const customInputGroup = document.getElementById('customFolderInputGroup');
+      if (val === '__NEW_FOLDER__') {
+        customInputGroup.classList.remove('hidden');
+      } else {
+        customInputGroup.classList.add('hidden');
+      }
+    }
+
+    function openAlbumModal(index) {
+      activeOpenAlbum = albumsData[index];
+      if (!activeOpenAlbum) return;
+
+      document.getElementById('albumModalTitle').innerText = activeOpenAlbum.title;
+      const items = activeOpenAlbum.items || [];
+      const photoCount = items.filter(i => i.type === 'image').length;
+      const videoCount = items.filter(i => i.type === 'video').length;
+      document.getElementById('albumModalCountBadge').innerText = `${photoCount} Photos • ${videoCount} Videos Inside`;
+
+      const mediaGrid = document.getElementById('albumMediaGrid');
+      mediaGrid.innerHTML = items.map((item, itemIdx) => `
+        <div onclick="openAlbumMediaLightbox(${itemIdx})" class="card-glass rounded-2xl overflow-hidden cursor-pointer relative group border border-white/10 shadow-lg spring-btn">
+          <div class="relative h-36 sm:h-44 w-full bg-black/60 overflow-hidden flex items-center justify-center">
+            ${item.type === 'video' ? `
+              <div class="w-full h-full flex flex-col items-center justify-center bg-purple-950/40">
+                <i data-lucide="play-circle" class="w-10 h-10 text-amber-400 group-hover:scale-110 transition duration-300"></i>
+                <span class="text-[9px] text-amber-300 font-bold uppercase mt-1">Watch Video</span>
               </div>
             ` : `
-              <img src="${m.img}" alt="${m.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
+              <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             `}
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0b0318] via-transparent to-transparent"></div>
-            <span class="absolute top-3 left-3 bg-amber-500 text-black font-extrabold text-[10px] uppercase px-2.5 py-0.5 rounded-full shadow-lg">
-              ${m.tag || 'Moments'}
-            </span>
-          </div>
-          <div class="p-3.5 text-center">
-            <h4 class="font-cinzel font-bold text-sm sm:text-base text-slate-100">${m.title}</h4>
-            <span class="text-[10px] text-amber-400/80 mt-0.5 inline-flex items-center gap-1 font-semibold">
-              <i data-lucide="maximize-2" class="w-3 h-3"></i> Tap to View Full Screen
-            </span>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+              <span class="text-[10px] text-white font-semibold truncate">${item.title || 'Media'}</span>
+            </div>
           </div>
         </div>
       `).join('');
+
+      const modal = document.getElementById('albumViewModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
       lucide.createIcons();
-      initScrollSpringAnimations();
+    }
+
+    function closeAlbumModal() {
+      const modal = document.getElementById('albumViewModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      activeOpenAlbum = null;
+    }
+
+    function openAlbumMediaLightbox(itemIndex) {
+      if (!activeOpenAlbum || !activeOpenAlbum.items || !activeOpenAlbum.items[itemIndex]) return;
+      activeLightboxMedia = activeOpenAlbum.items.map(i => ({
+        title: i.title,
+        tag: activeOpenAlbum.title,
+        img: i.type === 'image' ? i.url : '',
+        video: i.type === 'video' ? i.url : ''
+      }));
+
+      openGalleryLightbox(itemIndex);
     }
 
     function formatVideoEmbedUrl(url) {
@@ -1433,7 +1659,7 @@
 
     function openGalleryLightbox(index) {
       currentLightboxIndex = index;
-      const m = filteredMoments[index];
+      const m = activeLightboxMedia[index];
       if (!m) return;
 
       const mediaContainer = document.getElementById('lightboxMediaContainer');
@@ -1445,7 +1671,7 @@
           mediaContainer.innerHTML = `<video src="${m.video}" controls autoplay class="max-w-full max-h-[70vh] object-contain rounded-xl"></video>`;
         }
       } else {
-        mediaContainer.innerHTML = `<img src="${m.img}" class="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl">`;
+        mediaContainer.innerHTML = `<img src="${m.img}" class="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl" alt="Media Lightbox">`;
       }
 
       document.getElementById('lightboxTag').innerText = m.tag || 'Moment';
@@ -1458,8 +1684,8 @@
     }
 
     function navigateLightbox(direction) {
-      if (!filteredMoments || filteredMoments.length === 0) return;
-      currentLightboxIndex = (currentLightboxIndex + direction + filteredMoments.length) % filteredMoments.length;
+      if (!activeLightboxMedia || activeLightboxMedia.length === 0) return;
+      currentLightboxIndex = (currentLightboxIndex + direction + activeLightboxMedia.length) % activeLightboxMedia.length;
       openGalleryLightbox(currentLightboxIndex);
     }
 
@@ -1471,46 +1697,66 @@
     }
 
     async function saveBatchMoments() {
-      const title = document.getElementById('in-moment-title').value.trim() || "Festive Moment";
-      const tag = document.getElementById('in-moment-tag').value || "Best Moments";
-      const video = document.getElementById('in-moment-video').value.trim();
+      const folderSelect = document.getElementById('sel-folder-target').value;
+      let targetFolderName = folderSelect;
+      if (folderSelect === '__NEW_FOLDER__') {
+        targetFolderName = sanitizeInput(document.getElementById('in-custom-folder-name').value);
+        if (!targetFolderName) {
+          alert("Please enter a custom folder name!");
+          return;
+        }
+      }
+
+      const video = sanitizeInput(document.getElementById('in-moment-video').value);
       const filesInput = document.getElementById('in-moment-files');
 
+      let newItems = [];
+      let defaultCover = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80";
+
       if (video) {
-        momentsData.unshift({
-          title,
-          tag,
-          img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80",
-          video
-        });
+        newItems.push({ type: "video", url: video, title: `${targetFolderName} Clip` });
       }
 
       if (filesInput.files && filesInput.files.length > 0) {
         for (let i = 0; i < filesInput.files.length; i++) {
           const file = filesInput.files[i];
-          if (file.size > 10 * 1024 * 1024) {
-            alert(`File "${file.name}" exceeds 10MB limit.`);
-            continue;
-          }
-          const compressed = await compressFileToJpeg(file, 650, 0.6);
-          momentsData.unshift({
-            title: filesInput.files.length > 1 ? `${title} (${i+1})` : title,
-            tag,
-            img: compressed,
-            video: ""
+          const compressed = await compressFileToJpeg(file, 600, 0.65);
+          if (i === 0) defaultCover = compressed;
+          newItems.push({
+            type: "image",
+            url: compressed,
+            title: `${targetFolderName} #${i + 1}`
           });
         }
       }
 
-      syncNode('momentsData', momentsData);
-      document.getElementById('in-moment-title').value = '';
+      if (newItems.length === 0) {
+        alert("Please select photos or enter a video URL to upload!");
+        return;
+      }
+
+      let existingFolder = albumsData.find(a => a.title.toLowerCase() === targetFolderName.toLowerCase());
+      if (existingFolder) {
+        existingFolder.items.unshift(...newItems);
+      } else {
+        albumsData.unshift({
+          id: "alb_" + Date.now(),
+          title: targetFolderName,
+          coverImg: defaultCover,
+          items: newItems
+        });
+      }
+
+      syncNode('albumsData', albumsData);
       document.getElementById('in-moment-video').value = '';
+      document.getElementById('in-custom-folder-name').value = '';
       filesInput.value = '';
+      document.getElementById('customFolderInputGroup').classList.add('hidden');
       triggerFlowerRain();
-      alert("Moments saved successfully!");
+      alert(`Media successfully saved into "${targetFolderName}" folder!`);
     }
 
-    function compressFileToJpeg(file, maxWidth = 650, quality = 0.6) {
+    function compressFileToJpeg(file, maxWidth = 600, quality = 0.65) {
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = e => {
@@ -1528,7 +1774,10 @@
             canvas.height = height;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, width, height);
-            resolve(canvas.toDataURL('image/jpeg', quality));
+            const dataUrl = canvas.toDataURL('image/jpeg', quality);
+            canvas.width = 0;
+            canvas.height = 0;
+            resolve(dataUrl);
           };
         };
         reader.readAsDataURL(file);
@@ -1571,8 +1820,8 @@
 
     function applyCroppedImage() {
       if (!cropper || !pendingCropCallback) return;
-      const canvas = cropper.getCroppedCanvas({ width: 650, height: 750, imageSmoothingQuality: 'high' });
-      const croppedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+      const canvas = cropper.getCroppedCanvas({ width: 600, height: 700, imageSmoothingQuality: 'medium' });
+      const croppedBase64 = canvas.toDataURL('image/jpeg', 0.65);
       pendingCropCallback(croppedBase64);
       closeCropperModal();
     }
@@ -1609,10 +1858,10 @@
     }
 
     function saveNewMember() {
-      const name = document.getElementById('in-mem-name').value.trim() || "Member";
-      const role = document.getElementById('in-mem-role').value.trim() || "Committee Volunteer";
-      const tag = document.getElementById('in-mem-tag').value.trim() || "CORE";
-      const insta = document.getElementById('in-mem-insta').value.trim();
+      const name = sanitizeInput(document.getElementById('in-mem-name').value) || "Member";
+      const role = sanitizeInput(document.getElementById('in-mem-role').value) || "Committee Volunteer";
+      const tag = sanitizeInput(document.getElementById('in-mem-tag').value) || "CORE";
+      const insta = sanitizeInput(document.getElementById('in-mem-insta').value);
 
       const memberImg = pendingNewMemberCroppedImg || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80";
 
@@ -1677,7 +1926,7 @@
         memList.innerHTML = committeeData.map((m, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${m.img}" class="w-10 h-12 rounded-lg object-cover border border-amber-400/40" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
+              <img src="${m.img}" class="w-10 h-12 rounded-lg object-cover border border-amber-400/40" alt="${m.name}" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
               <div>
                 <p class="text-xs font-bold text-white">${m.name}</p>
                 <p class="text-[10px] text-amber-400">${m.role} ${m.insta ? '• @' + m.insta.replace('@', '') : ''}</p>
@@ -1693,17 +1942,17 @@
 
       const mList = document.getElementById('adminMomentsList');
       if (mList) {
-        mList.innerHTML = momentsData.map((m, i) => `
+        mList.innerHTML = albumsData.map((alb, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${m.img}" class="w-10 h-10 rounded-xl object-cover" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
+              <img src="${alb.coverImg}" class="w-10 h-10 rounded-xl object-cover" alt="${alb.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
               <div>
-                <p class="text-xs font-bold text-white">${m.title}</p>
-                <p class="text-[10px] text-amber-400">${m.tag} ${m.video ? '• (Video)' : ''}</p>
+                <p class="text-xs font-bold text-white">${alb.title}</p>
+                <p class="text-[10px] text-amber-400">${alb.items ? alb.items.length : 0} items inside</p>
               </div>
             </div>
             <div class="flex items-center gap-1.5">
-              <button onclick="removeMoment(${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
+              <button onclick="removeAlbum(${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
             </div>
           </div>
         `).join('');
@@ -1714,7 +1963,7 @@
         evList.innerHTML = eventsData.map((e, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${e.img}" class="w-10 h-10 rounded-xl object-cover" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
+              <img src="${e.img}" class="w-10 h-10 rounded-xl object-cover" alt="${e.title}" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
               <div>
                 <p class="text-xs font-bold text-white">${e.title}</p>
                 <p class="text-[10px] text-amber-400">${e.day}</p>
@@ -1737,8 +1986,8 @@
     }
 
     function updateUpiPaymentLink(amt) {
-      currentSelectedAmount = amt;
-      document.getElementById('selectedAmountBadge').innerText = `Selected: ₹${Number(amt).toLocaleString('en-IN')}`;
+      currentSelectedAmount = Math.max(1, Math.min(100000, Number(amt) || 501));
+      document.getElementById('selectedAmountBadge').innerText = `Selected: ₹${currentSelectedAmount.toLocaleString('en-IN')}`;
     }
 
     function selectChandaSeva(index) {
@@ -1756,7 +2005,7 @@
     function handleCustomAmountInput(val) {
       const amt = Number(val);
       document.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('amount-btn-selected'));
-      if (amt && amt > 0) {
+      if (amt && amt > 0 && amt <= 100000) {
         updateUpiPaymentLink(amt);
       } else {
         updateUpiPaymentLink(501);
@@ -1764,11 +2013,11 @@
     }
 
     function saveNewSeva() {
-      const title = document.getElementById('in-seva-title').value.trim();
+      const title = sanitizeInput(document.getElementById('in-seva-title').value);
       const amount = Number(document.getElementById('in-seva-amount').value.trim());
 
-      if (!title || !amount || amount <= 0) {
-        alert("Please enter valid Pooja Title and Amount!");
+      if (!title || isNaN(amount) || amount <= 0 || amount > 100000) {
+        alert("Please enter a valid Pooja Title and positive amount (Max ₹1,00,000)!");
         return;
       }
 
@@ -1776,7 +2025,7 @@
         sevasData[editingSevaIndex] = { title, amount };
         editingSevaIndex = null;
         document.getElementById('sevaFormTitle').innerText = "Add New Seva / Pooja Type";
-        document.getElementById('saveSevaBtn').innerText = "Add Seva Button";
+        document.getElementById('saveSevaBtn').innerText = "Add Seva";
         document.getElementById('cancelEditSevaBtn').classList.add('hidden');
       } else {
         sevasData.push({ title, amount });
@@ -1804,7 +2053,7 @@
       document.getElementById('in-seva-title').value = '';
       document.getElementById('in-seva-amount').value = '';
       document.getElementById('sevaFormTitle').innerText = "Add New Seva / Pooja Type";
-      document.getElementById('saveSevaBtn').innerText = "Add Seva Button";
+      document.getElementById('saveSevaBtn').innerText = "Add Seva";
       document.getElementById('cancelEditSevaBtn').classList.add('hidden');
     }
 
@@ -1816,21 +2065,20 @@
     }
 
     function openPaymentAndDevoteePopup() {
-      const cleanUpi = (chandaData.upiId || 'team-bajarangdal@upi').trim();
-      const cleanName = (chandaData.headName || 'Team Bajarangdal').trim();
-      const note = 'Team Bajarangdal Ganesh Chanda';
+      const cleanUpi = encodeURIComponent((chandaData.upiId || 'team-bajarangdal@upi').trim());
+      const cleanName = encodeURIComponent((chandaData.headName || 'Team Bajarangdal').trim());
+      const note = encodeURIComponent('Team Bajarangdal Ganesh Chanda');
+      const safeAmount = Math.max(1, Math.min(100000, Number(currentSelectedAmount) || 501));
 
-      const upiUrl = `upi://pay?pa=${cleanUpi}&pn=${encodeURIComponent(cleanName)}&am=${currentSelectedAmount}&cu=INR&tn=${encodeURIComponent(note)}`;
+      const upiUrl = `upi://pay?pa=${cleanUpi}&pn=${cleanName}&am=${safeAmount}&cu=INR&tn=${note}`;
       
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-      const isAndroid = /Android/.test(navigator.userAgent);
-
-      if (isIOS || isAndroid) {
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
         window.location.href = upiUrl;
       }
 
       setTimeout(() => {
-        document.getElementById('user-donor-amount').value = currentSelectedAmount;
+        document.getElementById('user-donor-amount').value = safeAmount;
         toggleDevoteeModal();
       }, 800);
     }
@@ -1853,14 +2101,14 @@
     }
 
     function submitDevoteePayment() {
-      const surname = document.getElementById('user-donor-surname').value.trim();
-      const name = document.getElementById('user-donor-name').value.trim();
-      const amount = document.getElementById('user-donor-amount').value.trim();
+      const surname = sanitizeInput(document.getElementById('user-donor-surname').value);
+      const name = sanitizeInput(document.getElementById('user-donor-name').value);
+      const amountVal = Number(document.getElementById('user-donor-amount').value.trim());
       const seva = document.getElementById('user-donor-seva').value;
-      const gothram = document.getElementById('user-donor-gothram').value.trim() || "Team Bajarangdal Devotee";
+      const gothram = sanitizeInput(document.getElementById('user-donor-gothram').value) || "Team Bajarangdal Devotee";
 
-      if (!name || !amount) {
-        alert("Please enter your Name and Amount!");
+      if (!name || isNaN(amountVal) || amountVal <= 0 || amountVal > 100000) {
+        alert("Please enter a valid Name and positive donation amount!");
         return;
       }
 
@@ -1871,7 +2119,7 @@
         receiptId,
         surname,
         name,
-        amount: Number(amount),
+        amount: amountVal,
         seva,
         gothram,
         date: timestamp
@@ -1886,9 +2134,14 @@
       latestGeneratedDonorReceipt = newDonorObj;
       const fullName = surname ? `${surname} ${name}` : name;
       document.getElementById('r-modal-name').innerText = fullName;
-      document.getElementById('r-modal-amt').innerText = `₹${Number(amount).toLocaleString('en-IN')}`;
+      document.getElementById('r-modal-amt').innerText = `₹${Number(amountVal).toLocaleString('en-IN')}`;
       document.getElementById('r-modal-seva').innerText = seva;
       document.getElementById('r-modal-time').innerText = timestamp;
+
+      // Reset form
+      document.getElementById('user-donor-surname').value = '';
+      document.getElementById('user-donor-name').value = '';
+      document.getElementById('user-donor-gothram').value = '';
 
       toggleReceiptSuccessModal();
     }
@@ -2033,7 +2286,8 @@
         if (e.target.files && e.target.files[0]) {
           const reader = new FileReader();
           reader.onload = ev => {
-            openCropper(ev.target.result, 0.85, cropped => {
+            const ratio = target === 'events' ? 1.77 : 0.85;
+            openCropper(ev.target.result, ratio, cropped => {
               if (pendingReplaceTarget === 'committee') {
                 committeeData[pendingReplaceIndex].img = cropped;
                 syncNode('committeeData', committeeData);
@@ -2052,14 +2306,14 @@
     }
 
     function saveNewDonorDirect() {
-      const surname = document.getElementById('in-donor-surname').value.trim();
-      const name = document.getElementById('in-donor-name').value.trim();
-      const amount = document.getElementById('in-donor-amount').value.trim();
-      const gothram = document.getElementById('in-donor-gothram').value.trim() || "Team Bajarangdal";
-      const seva = document.getElementById('in-donor-seva').value.trim() || "Utsav Chanda";
+      const surname = sanitizeInput(document.getElementById('in-donor-surname').value);
+      const name = sanitizeInput(document.getElementById('in-donor-name').value);
+      const amountVal = Number(document.getElementById('in-donor-amount').value.trim());
+      const gothram = sanitizeInput(document.getElementById('in-donor-gothram').value) || "Team Bajarangdal";
+      const seva = sanitizeInput(document.getElementById('in-donor-seva').value) || "Utsav Chanda";
 
-      if (!name || !amount) {
-        alert("Please enter First Name and Amount!");
+      if (!name || isNaN(amountVal) || amountVal <= 0 || amountVal > 100000) {
+        alert("Please enter a valid First Name and positive donation amount!");
         return;
       }
 
@@ -2068,7 +2322,7 @@
           ...donorsData[editingDonorIndex],
           surname,
           name,
-          amount: Number(amount),
+          amount: amountVal,
           gothram,
           seva
         };
@@ -2081,7 +2335,7 @@
           receiptId: 'TB-' + Math.floor(100000 + Math.random() * 900000),
           surname,
           name,
-          amount: Number(amount),
+          amount: amountVal,
           gothram,
           seva,
           date: getFormattedTimestamp()
@@ -2124,11 +2378,11 @@
     }
 
     function saveNewEvent() {
-      const day = document.getElementById('in-ev-day').value.trim() || "Special Pooja";
-      const title = document.getElementById('in-ev-title').value.trim() || "Devotional Event";
-      const desc = document.getElementById('in-ev-desc').value.trim() || "Join for sacred celebrations.";
-      const time = document.getElementById('in-ev-time').value.trim() || "06:00 PM";
-      const date = document.getElementById('in-ev-date').value.trim() || "September 2026";
+      const day = sanitizeInput(document.getElementById('in-ev-day').value) || "Special Pooja";
+      const title = sanitizeInput(document.getElementById('in-ev-title').value) || "Devotional Event";
+      const desc = sanitizeInput(document.getElementById('in-ev-desc').value) || "Join for sacred celebrations.";
+      const time = sanitizeInput(document.getElementById('in-ev-time').value) || "06:00 PM";
+      const date = sanitizeInput(document.getElementById('in-ev-date').value) || "September 2026";
       const fileInput = document.getElementById('in-ev-file');
 
       if (fileInput.files && fileInput.files[0]) {
@@ -2140,15 +2394,15 @@
             const canvas = document.createElement('canvas');
             let width = img.width;
             let height = img.height;
-            if (width > 650) {
-              height = Math.round((height * 650) / width);
-              width = 650;
+            if (width > 600) {
+              height = Math.round((height * 600) / width);
+              width = 600;
             }
             canvas.width = width;
             canvas.height = height;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0, width, height);
-            const compressed = canvas.toDataURL('image/jpeg', 0.6);
+            const compressed = canvas.toDataURL('image/jpeg', 0.65);
 
             eventsData.unshift({ day, title, desc, time, date, img: compressed });
             syncNode('eventsData', eventsData);
@@ -2162,9 +2416,16 @@
       }
     }
 
+    function removeAlbum(index) {
+      if (confirm(`Delete album folder "${albumsData[index].title}"?`)) {
+        albumsData.splice(index, 1);
+        syncNode('albumsData', albumsData);
+      }
+    }
+
     function saveChandaConfig() {
-      const headName = document.getElementById('cfg-head-name').value.trim() || chandaData.headName;
-      const upiId = document.getElementById('cfg-upi-id').value.trim() || chandaData.upiId;
+      const headName = sanitizeInput(document.getElementById('cfg-head-name').value) || chandaData.headName;
+      const upiId = sanitizeInput(document.getElementById('cfg-upi-id').value) || chandaData.upiId;
       const fileInput = document.getElementById('cfg-qr-file');
       
       let qrImg = chandaData.qrImg;
@@ -2233,8 +2494,8 @@
     }
 
     function verifyLeaderLogin() {
-      const leaderId = document.getElementById('login-id').value.trim();
-      const leaderPass = document.getElementById('login-pass').value.trim();
+      const leaderId = sanitizeInput(document.getElementById('login-id').value);
+      const leaderPass = sanitizeInput(document.getElementById('login-pass').value);
 
       if (leaderId === 'Ganesh' && leaderPass === '0000') {
         sessionStorage.setItem('leader_auth', 'true');
@@ -2295,13 +2556,6 @@
       }
     }
 
-    function removeMoment(index) {
-      if (confirm(`Remove moment "${momentsData[index].title}"?`)) {
-        momentsData.splice(index, 1);
-        syncNode('momentsData', momentsData);
-      }
-    }
-
     function removeEvent(index) {
       if (confirm(`Remove event "${eventsData[index].title}"?`)) {
         eventsData.splice(index, 1);
@@ -2347,10 +2601,8 @@
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
-      ScrollTrigger.getAll().forEach(t => t.kill());
-
       gsap.utils.toArray('.reveal-left').forEach((el) => {
-        gsap.to(el, {
+        gsap.fromTo(el, { opacity: 0, x: -35 }, {
           scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
           opacity: 1,
           x: 0,
@@ -2360,7 +2612,7 @@
       });
 
       gsap.utils.toArray('.reveal-right').forEach((el) => {
-        gsap.to(el, {
+        gsap.fromTo(el, { opacity: 0, x: 35 }, {
           scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
           opacity: 1,
           x: 0,
@@ -2370,18 +2622,18 @@
       });
 
       gsap.utils.toArray('.reveal-up').forEach((el) => {
-        gsap.to(el, {
+        gsap.fromTo(el, { opacity: 0, y: 30, scale: 0.96 }, {
           scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
           opacity: 1,
           y: 0,
           scale: 1,
           duration: 0.95,
-          ease: "back.out(1.7)"
+          ease: "back.out(1.8)"
         });
       });
 
       gsap.utils.toArray('.reveal-scale').forEach((el) => {
-        gsap.to(el, {
+        gsap.fromTo(el, { opacity: 0, scale: 0.92 }, {
           scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
           opacity: 1,
           scale: 1,
@@ -2458,9 +2710,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       initDefaultPandalQr();
-      filterMomentsGallery('all');
       renderAll();
-      initScrollSpringAnimations();
     });
   </script>
 </body>

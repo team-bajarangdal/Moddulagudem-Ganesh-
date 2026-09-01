@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Team Bajarangdal | Ganesh Utsav 2026</title>
 
-  <!-- Complete Content Security Policy -->
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' 'unsafe-inline' https: data: blob:;
     script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
@@ -28,7 +28,7 @@
   <!-- GSAP Core & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   
@@ -239,7 +239,6 @@
       </h1>
       <p class="reveal-right font-cinzel text-slate-300 text-xs sm:text-base mt-1.5 font-semibold tracking-wider">11 DAYS OF SACRED RITUALS & DIVINE CELEBRATIONS</p>
 
-      <!-- Side-by-Side Hero Actions -->
       <div class="reveal-up flex flex-col items-center gap-2.5 mt-4 mb-2 w-full max-w-lg mx-auto">
         <a href="#devotee-photos-grid" class="w-full py-2.5 px-6 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-cinzel text-xs font-black tracking-widest uppercase spring-btn flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25">
           <i data-lucide="camera" class="w-4 h-4"></i> DEVOTEE DARSHAN PHOTOS
@@ -271,22 +270,22 @@
       </div>
 
       <div class="reveal-up card-glass rounded-2xl p-4 sm:p-6 max-w-lg w-full mx-auto shadow-2xl mt-2">
-        <p class="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-amber-400 font-bold mb-2.5 font-cinzel">Utsav Sthapana Countdown</p>
+        <p id="countdown-status" class="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-amber-400 font-bold mb-2.5 font-cinzel">Utsav Sthapana Countdown</p>
         <div class="grid grid-cols-4 gap-2 sm:gap-3 text-center">
           <div class="bg-[#05010B]/70 border border-amber-500/20 rounded-xl py-2.5 shadow-inner spring-btn">
-            <span id="cd-days" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">14</span>
+            <span id="cd-days" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">00</span>
             <span class="block text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Days</span>
           </div>
           <div class="bg-[#05010B]/70 border border-amber-500/20 rounded-xl py-2.5 shadow-inner spring-btn">
-            <span id="cd-hours" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">02</span>
+            <span id="cd-hours" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">00</span>
             <span class="block text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Hours</span>
           </div>
           <div class="bg-[#05010B]/70 border border-amber-500/20 rounded-xl py-2.5 shadow-inner spring-btn">
-            <span id="cd-minutes" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">33</span>
+            <span id="cd-minutes" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">00</span>
             <span class="block text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Mins</span>
           </div>
           <div class="bg-[#05010B]/70 border border-amber-500/20 rounded-xl py-2.5 shadow-inner spring-btn">
-            <span id="cd-seconds" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">57</span>
+            <span id="cd-seconds" class="font-cinzel text-xl sm:text-3xl font-black text-amber-400">00</span>
             <span class="block text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">Secs</span>
           </div>
         </div>
@@ -389,7 +388,7 @@
     </div>
   </section>
 
-  <!-- ================= 05. BAKTULA - DEVOTEES PHOTOS (DIRECT TARGET VIA QR) ================= -->
+  <!-- ================= 05. BAKTULA - DEVOTEES PHOTOS ================= -->
   <section id="baktula-photos" class="py-20 px-4 max-w-7xl mx-auto border-t border-amber-500/20 z-10 relative">
     <div class="text-center mb-8">
       <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest mb-2">
@@ -418,7 +417,7 @@
 
         <div class="space-y-3 text-center sm:text-left">
           <h4 class="font-cinzel text-base font-bold text-slate-100">Photo Leader Portal</h4>
-          <p class="text-xs text-slate-300">Assigned volunteers can log in (ID: <code>Image</code>) to upload devotees' photos.</p>
+          <p class="text-xs text-slate-300">Assigned volunteers can log in to upload devotees' photos.</p>
           <button onclick="openImageLeaderLogin()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider spring-btn flex items-center justify-center gap-2 shadow-lg cursor-pointer">
             <i data-lucide="camera" class="w-4 h-4"></i> Upload Devotee Clicks
           </button>
@@ -648,7 +647,7 @@
       <div class="mt-4 space-y-3 text-left">
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Photo Leader ID</label>
-          <input id="img-login-id" type="text" placeholder="Enter ID (Image)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="img-login-id" type="text" placeholder="Enter ID" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Password</label>
@@ -982,7 +981,21 @@
 
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
-    // --- SANITIZATION HELPER ---
+    // --- CRYPTO & SANITIZATION ENGINE ---
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    const AUTH_HASHES = {
+      PRESIDENT_ID: "Ganesh",
+      PRESIDENT_PASS: "90fe66f12feccadbeaa08dc3196f7c70c184c8a8e312b9a7ea64a27577558aa4",
+      PHOTO_ID: "Image",
+      PHOTO_PASS: "011c945f30ce2cbafc452f39840f025693339c42e73d6826b134e4484b34b2ee"
+    };
+
     function sanitizeInput(str) {
       if (typeof str !== 'string') return '';
       return str
@@ -991,6 +1004,7 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#x27;')
+        .replace(/javascript:/gi, '')
         .trim();
     }
 
@@ -1087,6 +1101,7 @@
     let pendingNewMemberCroppedImg = "";
     let pendingReplaceTarget = null;
     let pendingReplaceIndex = null;
+    let renderDebounceTimer = null;
 
     let db = null;
     try {
@@ -1104,7 +1119,7 @@
             donorsData = Array.isArray(val.donorsData) ? val.donorsData : [];
             chandaData = val.chandaData || defaultChanda;
             
-            renderAll();
+            debouncedRender();
           }
         });
 
@@ -1123,17 +1138,28 @@
       console.warn("Firebase running in local state mode.");
     }
 
+    function debouncedRender() {
+      if (renderDebounceTimer) cancelAnimationFrame(renderDebounceTimer);
+      renderDebounceTimer = requestAnimationFrame(() => {
+        renderAll();
+      });
+    }
+
     function syncNode(nodePath, nodeData) {
       if (db) {
         db.ref('ganeshUtsavData/' + nodePath).set(nodeData);
       }
+      try {
+        localStorage.setItem('tb_' + nodePath, JSON.stringify(nodeData));
+      } catch(e) {}
       renderAll();
     }
 
-    // --- CLIENT-SIDE INSTANT QR CODE ENGINE ---
+    // --- QR CODE GENERATOR ---
+    let isQrGenerated = false;
     function initDefaultPandalQr() {
       const qrContainer = document.getElementById('pandalSectionQr');
-      if (!qrContainer) return;
+      if (!qrContainer || isQrGenerated) return;
       
       qrContainer.innerHTML = '';
       let targetUrl = window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith('file:')
@@ -1149,12 +1175,14 @@
           colorLight : "#ffffff",
           correctLevel : QRCode.CorrectLevel.H
         });
+        isQrGenerated = true;
       } catch(e) {
         qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(targetUrl)}" class="w-32 h-32 object-contain" alt="QR Code" />`;
+        isQrGenerated = true;
       }
     }
 
-    // --- 2-HOUR AUTO EXPIRY ENGINE ---
+    // --- 2-HOUR PHOTO EXPIRY ENGINE ---
     const TWO_HOURS_MS = 2 * 60 * 60 * 1000;
 
     function cleanExpiredDevoteePhotos() {
@@ -1169,7 +1197,7 @@
       devoteePhotosData = devoteePhotosData.filter(p => (now - p.timestamp) < TWO_HOURS_MS);
     }
 
-    setInterval(() => {
+    const expiryInterval = setInterval(() => {
       cleanExpiredDevoteePhotos();
       renderDevoteePhotos();
     }, 60000);
@@ -1227,7 +1255,7 @@
               <img src="${p.img}" class="w-10 h-10 rounded-lg object-cover" alt="Upload">
               <span class="text-[11px] text-slate-300">${p.timeStr || 'Uploaded'}</span>
             </div>
-            <button onclick="removeDevoteePhoto('${p.firebaseKey}', ${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
+            <button onclick="removeDevoteePhoto('${p.firebaseKey || ''}', ${i})" class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white text-xs rounded-lg font-semibold cursor-pointer spring-btn">Delete</button>
           </div>
         `).join('');
       }
@@ -1329,7 +1357,7 @@
     }
 
     function openImageLeaderLogin() {
-      const isAuth = sessionStorage.getItem('img_leader_auth') === 'true';
+      const isAuth = sessionStorage.getItem('img_leader_token');
       if (isAuth) {
         openImageLeaderDashboard();
       } else {
@@ -1346,12 +1374,13 @@
       document.getElementById('img-login-pass').value = '';
     }
 
-    function verifyImageLeaderLogin() {
+    async function verifyImageLeaderLogin() {
       const id = sanitizeInput(document.getElementById('img-login-id').value);
-      const pass = sanitizeInput(document.getElementById('img-login-pass').value);
+      const pass = document.getElementById('img-login-pass').value;
+      const passHash = await sha256(pass);
 
-      if (id === 'Image' && pass === '1111') {
-        sessionStorage.setItem('img_leader_auth', 'true');
+      if (id === AUTH_HASHES.PHOTO_ID && passHash === AUTH_HASHES.PHOTO_PASS) {
+        sessionStorage.setItem('img_leader_token', 'tb_auth_' + Date.now());
         toggleImageLeaderLoginModal();
         openImageLeaderDashboard();
         triggerFlowerRain();
@@ -1374,7 +1403,7 @@
     }
 
     function logoutImageLeader() {
-      sessionStorage.removeItem('img_leader_auth');
+      sessionStorage.removeItem('img_leader_token');
       closeImageLeaderDashboard();
     }
 
@@ -1387,7 +1416,7 @@
 
       for (let i = 0; i < fileInput.files.length; i++) {
         const file = fileInput.files[i];
-        const highRes = await compressFileToJpeg(file, 1000, 0.75);
+        const highRes = await compressFileToJpeg(file, 900, 0.75);
         const timeNow = new Date();
         const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
 
@@ -1412,7 +1441,7 @@
 
     function removeDevoteePhoto(key, index) {
       if (confirm("Delete this photo?")) {
-        if (db && key && key !== 'undefined') {
+        if (db && key && key !== 'undefined' && key !== '') {
           db.ref('devoteePandalPhotos/' + key).remove();
         }
         devoteePhotosData.splice(index, 1);
@@ -1430,19 +1459,19 @@
       container.innerHTML = eventsData.map((ev, i) => `
         <div class="card-glass rounded-3xl overflow-hidden flex flex-col justify-between relative group">
           <div class="relative h-56 overflow-hidden bg-black/40">
-            <img src="${ev.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${ev.title}" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
+            <img src="${ev.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${sanitizeInput(ev.title)}" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
             <span class="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-lg">
-              ${ev.day}
+              ${sanitizeInput(ev.day)}
             </span>
           </div>
           <div class="p-5 flex-1 flex flex-col justify-between">
             <div>
-              <h3 class="font-cinzel text-lg font-bold text-slate-100">${ev.title}</h3>
-              <p class="text-xs text-slate-300 mt-1.5 leading-relaxed font-light">${ev.desc}</p>
+              <h3 class="font-cinzel text-lg font-bold text-slate-100">${sanitizeInput(ev.title)}</h3>
+              <p class="text-xs text-slate-300 mt-1.5 leading-relaxed font-light">${sanitizeInput(ev.desc)}</p>
             </div>
             <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-amber-400 font-semibold">
-              <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ${ev.time}</span>
-              <span class="text-slate-400 font-normal">${ev.date}</span>
+              <span class="flex items-center gap-1.5"><i data-lucide="clock" class="w-3.5 h-3.5"></i> ${sanitizeInput(ev.time)}</span>
+              <span class="text-slate-400 font-normal">${sanitizeInput(ev.date)}</span>
             </div>
           </div>
         </div>
@@ -1455,14 +1484,14 @@
 
       container.innerHTML = sevasData.map((s, index) => `
         <button id="btn-seva-${index}" onclick="selectChandaSeva(${index})" class="amt-btn p-2.5 bg-white/5 border border-white/10 hover:border-amber-400 rounded-xl text-center transition spring-btn ${s.amount === currentSelectedAmount ? 'amount-btn-selected' : ''}">
-          <span class="block text-[11px] text-slate-400">${s.title}</span>
+          <span class="block text-[11px] text-slate-400">${sanitizeInput(s.title)}</span>
           <span class="text-sm sm:text-base font-bold text-amber-400">₹${Number(s.amount).toLocaleString('en-IN')}</span>
         </button>
       `).join('');
 
       if (selectDropdown) {
         selectDropdown.innerHTML = sevasData.map(s => `
-          <option value="${s.title}">${s.title} (₹${s.amount})</option>
+          <option value="${sanitizeInput(s.title)}">${sanitizeInput(s.title)} (₹${s.amount})</option>
         `).join('') + `<option value="Custom Offering">Custom Offering</option>`;
       }
     }
@@ -1480,7 +1509,7 @@
 
       container.innerHTML = donorsData.map((d, index) => {
         total += Number(d.amount) || 0;
-        const displayName = d.surname ? `${d.surname} ${d.name}` : d.name;
+        const displayName = sanitizeInput(d.surname ? `${d.surname} ${d.name}` : d.name);
         return `
           <div class="p-3 bg-white/5 border border-white/10 hover:border-amber-400/50 rounded-2xl flex items-center justify-between transition spring-btn">
             <div class="flex items-center gap-2.5">
@@ -1489,7 +1518,7 @@
               </div>
               <div>
                 <h4 class="font-cinzel font-bold text-xs sm:text-sm text-slate-100">${displayName}</h4>
-                <p class="text-[10px] text-amber-300/80">${d.seva || 'Pooja Seva'} • ${d.gothram || 'Team Bajarangdal'}</p>
+                <p class="text-[10px] text-amber-300/80">${sanitizeInput(d.seva || 'Pooja Seva')} • ${sanitizeInput(d.gothram || 'Team Bajarangdal')}</p>
               </div>
             </div>
             <div class="flex items-center gap-2.5">
@@ -1514,21 +1543,21 @@
       container.innerHTML = committeeData.map((mem) => `
         <div class="flex-shrink-0 w-[68vw] max-w-[240px] sm:w-64 snap-center card-glass rounded-3xl overflow-hidden text-center flex flex-col justify-between relative group shadow-2xl border border-amber-400/30">
           <div class="relative h-64 sm:h-72 w-full overflow-hidden bg-[#100520]">
-            <img src="${mem.img}" alt="${mem.name}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
+            <img src="${mem.img}" alt="${sanitizeInput(mem.name)}" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
             <div class="absolute inset-0 bg-gradient-to-t from-[#0e041e] via-[#0e041e]/30 to-transparent"></div>
             <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-amber-500/90 text-black text-[9px] font-extrabold uppercase tracking-widest shadow">
-              ${mem.tag || 'TEAM'}
+              ${sanitizeInput(mem.tag || 'TEAM')}
             </span>
           </div>
 
           <div class="p-4 relative z-10 -mt-8 bg-gradient-to-t from-[#0b0318] to-transparent">
-            <h4 class="font-cinzel font-bold text-lg sm:text-xl text-slate-100">${mem.name}</h4>
-            <p class="text-xs text-amber-400 font-semibold mt-0.5">${mem.role}</p>
+            <h4 class="font-cinzel font-bold text-lg sm:text-xl text-slate-100">${sanitizeInput(mem.name)}</h4>
+            <p class="text-xs text-amber-400 font-semibold mt-0.5">${sanitizeInput(mem.role)}</p>
 
             ${mem.insta ? `
               <div class="mt-2.5 pt-2 border-t border-white/10 flex justify-center">
-                <a href="https://instagram.com/${mem.insta.replace('@', '')}" target="_blank" class="px-3 py-1 rounded-full bg-gradient-to-r from-rose-600 to-amber-500 text-white text-[10px] font-semibold hover:opacity-90 transition shadow-md flex items-center gap-1.5 spring-btn">
-                  <i data-lucide="instagram" class="w-3.5 h-3.5"></i> @${mem.insta.replace('@', '')}
+                <a href="https://instagram.com/${sanitizeInput(mem.insta.replace('@', ''))}" target="_blank" class="px-3 py-1 rounded-full bg-gradient-to-r from-rose-600 to-amber-500 text-white text-[10px] font-semibold hover:opacity-90 transition shadow-md flex items-center gap-1.5 spring-btn">
+                  <i data-lucide="instagram" class="w-3.5 h-3.5"></i> @${sanitizeInput(mem.insta.replace('@', ''))}
                 </a>
               </div>
             ` : ''}
@@ -1545,7 +1574,7 @@
       const folderSelect = document.getElementById('sel-folder-target');
       if (folderSelect) {
         const customOption = `<option value="__NEW_FOLDER__">+ Create New Custom Folder...</option>`;
-        folderSelect.innerHTML = albumsData.map(a => `<option value="${a.title}">${a.title}</option>`).join('') + customOption;
+        folderSelect.innerHTML = albumsData.map(a => `<option value="${sanitizeInput(a.title)}">${sanitizeInput(a.title)}</option>`).join('') + customOption;
       }
 
       if (!container) return;
@@ -1563,14 +1592,14 @@
         return `
           <div onclick="openAlbumModal(${index})" class="card-glass rounded-3xl overflow-hidden cursor-pointer group shadow-xl border border-amber-400/25 spring-btn flex flex-col justify-between">
             <div class="relative h-56 w-full overflow-hidden bg-black/40">
-              <img src="${album.coverImg}" alt="${album.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
+              <img src="${album.coverImg}" alt="${sanitizeInput(album.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
               <div class="absolute inset-0 bg-gradient-to-t from-[#0b0318] via-transparent to-transparent"></div>
               <span class="absolute top-3 left-3 bg-amber-500 text-black font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
                 <i data-lucide="folder" class="w-3.5 h-3.5 fill-black"></i> ALBUM FOLDER
               </span>
             </div>
             <div class="p-4 bg-gradient-to-t from-[#0e041e] to-transparent">
-              <h4 class="font-cinzel font-bold text-base text-slate-100">${album.title}</h4>
+              <h4 class="font-cinzel font-bold text-base text-slate-100">${sanitizeInput(album.title)}</h4>
               <div class="mt-2 pt-2 border-t border-white/10 flex items-center justify-between text-xs text-amber-400">
                 <span class="font-medium">${photoCount} Photos • ${videoCount} Videos</span>
                 <span class="font-bold flex items-center gap-1 group-hover:translate-x-1 transition">
@@ -1614,10 +1643,10 @@
                 <span class="text-[9px] text-amber-300 font-bold uppercase mt-1">Watch Video</span>
               </div>
             ` : `
-              <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <img src="${item.url}" alt="${sanitizeInput(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             `}
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
-              <span class="text-[10px] text-white font-semibold truncate">${item.title || 'Media'}</span>
+              <span class="text-[10px] text-white font-semibold truncate">${sanitizeInput(item.title || 'Media')}</span>
             </div>
           </div>
         </div>
@@ -1777,6 +1806,7 @@
             const dataUrl = canvas.toDataURL('image/jpeg', quality);
             canvas.width = 0;
             canvas.height = 0;
+            img.src = '';
             resolve(dataUrl);
           };
         };
@@ -1887,7 +1917,7 @@
         sList.innerHTML = sevasData.map((s, i) => `
           <div class="p-2 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
             <div>
-              <p class="text-xs font-bold text-white">${s.title} — <span class="text-amber-400">₹${s.amount}</span></p>
+              <p class="text-xs font-bold text-white">${sanitizeInput(s.title)} — <span class="text-amber-400">₹${s.amount}</span></p>
             </div>
             <div class="flex items-center gap-1.5">
               <button onclick="startEditSeva(${i})" class="px-2 py-1 bg-amber-500 hover:bg-amber-400 text-black text-[11px] rounded-lg font-bold cursor-pointer spring-btn">Edit</button>
@@ -1903,12 +1933,12 @@
           dList.innerHTML = `<p class="text-[11px] text-slate-400 text-center py-3">No donor records found.</p>`;
         } else {
           dList.innerHTML = donorsData.map((d, i) => {
-            const displayName = d.surname ? `${d.surname} ${d.name}` : d.name;
+            const displayName = sanitizeInput(d.surname ? `${d.surname} ${d.name}` : d.name);
             return `
               <div class="p-2 bg-white/5 rounded-xl border border-white/10 flex items-center justify-between">
                 <div>
                   <p class="text-xs font-bold text-white">${displayName} — <span class="text-amber-400">₹${d.amount}</span></p>
-                  <p class="text-[10px] text-slate-400">${d.seva || 'Seva'} • ${d.gothram || ''}</p>
+                  <p class="text-[10px] text-slate-400">${sanitizeInput(d.seva || 'Seva')} • ${sanitizeInput(d.gothram || '')}</p>
                 </div>
                 <div class="flex items-center gap-1">
                   <button onclick="downloadSpecificDonorPdf(${i})" title="Receipt PDF" class="px-2 py-1 bg-amber-500/20 text-amber-300 text-[11px] rounded-lg font-bold border border-amber-500/30 cursor-pointer spring-btn">PDF</button>
@@ -1926,10 +1956,10 @@
         memList.innerHTML = committeeData.map((m, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${m.img}" class="w-10 h-12 rounded-lg object-cover border border-amber-400/40" alt="${m.name}" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
+              <img src="${m.img}" class="w-10 h-12 rounded-lg object-cover border border-amber-400/40" alt="${sanitizeInput(m.name)}" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'">
               <div>
-                <p class="text-xs font-bold text-white">${m.name}</p>
-                <p class="text-[10px] text-amber-400">${m.role} ${m.insta ? '• @' + m.insta.replace('@', '') : ''}</p>
+                <p class="text-xs font-bold text-white">${sanitizeInput(m.name)}</p>
+                <p class="text-[10px] text-amber-400">${sanitizeInput(m.role)} ${m.insta ? '• @' + sanitizeInput(m.insta.replace('@', '')) : ''}</p>
               </div>
             </div>
             <div class="flex items-center gap-1.5">
@@ -1945,9 +1975,9 @@
         mList.innerHTML = albumsData.map((alb, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${alb.coverImg}" class="w-10 h-10 rounded-xl object-cover" alt="${alb.title}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
+              <img src="${alb.coverImg}" class="w-10 h-10 rounded-xl object-cover" alt="${sanitizeInput(alb.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
               <div>
-                <p class="text-xs font-bold text-white">${alb.title}</p>
+                <p class="text-xs font-bold text-white">${sanitizeInput(alb.title)}</p>
                 <p class="text-[10px] text-amber-400">${alb.items ? alb.items.length : 0} items inside</p>
               </div>
             </div>
@@ -1963,10 +1993,10 @@
         evList.innerHTML = eventsData.map((e, i) => `
           <div class="flex items-center justify-between p-2.5 bg-white/5 rounded-xl border border-white/10">
             <div class="flex items-center gap-2.5">
-              <img src="${e.img}" class="w-10 h-10 rounded-xl object-cover" alt="${e.title}" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
+              <img src="${e.img}" class="w-10 h-10 rounded-xl object-cover" alt="${sanitizeInput(e.title)}" onerror="this.src='https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80'">
               <div>
-                <p class="text-xs font-bold text-white">${e.title}</p>
-                <p class="text-[10px] text-amber-400">${e.day}</p>
+                <p class="text-xs font-bold text-white">${sanitizeInput(e.title)}</p>
+                <p class="text-[10px] text-amber-400">${sanitizeInput(e.day)}</p>
               </div>
             </div>
             <div class="flex items-center gap-1.5">
@@ -1999,7 +2029,7 @@
 
       document.getElementById('customAmountInput').value = '';
       updateUpiPaymentLink(s.amount);
-      triggerFlowerRain();
+      triggerMoneyRain();
     }
 
     function handleCustomAmountInput(val) {
@@ -2129,7 +2159,7 @@
       syncNode('donorsData', donorsData);
 
       toggleDevoteeModal();
-      triggerFlowerRain();
+      triggerMoneyRain();
 
       latestGeneratedDonorReceipt = newDonorObj;
       const fullName = surname ? `${surname} ${name}` : name;
@@ -2278,6 +2308,9 @@
     }
 
     function triggerCropPhotoReplace(target, index) {
+      if (target === 'committee' && (!committeeData[index])) return;
+      if (target === 'events' && (!eventsData[index])) return;
+
       pendingReplaceTarget = target;
       pendingReplaceIndex = index;
       const fileInput = document.getElementById('replaceFileInput');
@@ -2288,10 +2321,10 @@
           reader.onload = ev => {
             const ratio = target === 'events' ? 1.77 : 0.85;
             openCropper(ev.target.result, ratio, cropped => {
-              if (pendingReplaceTarget === 'committee') {
+              if (pendingReplaceTarget === 'committee' && committeeData[pendingReplaceIndex]) {
                 committeeData[pendingReplaceIndex].img = cropped;
                 syncNode('committeeData', committeeData);
-              } else if (pendingReplaceTarget === 'events') {
+              } else if (pendingReplaceTarget === 'events' && eventsData[pendingReplaceIndex]) {
                 eventsData[pendingReplaceIndex].img = cropped;
                 syncNode('eventsData', eventsData);
               }
@@ -2348,7 +2381,7 @@
       document.getElementById('in-donor-amount').value = '';
       document.getElementById('in-donor-gothram').value = '';
       document.getElementById('in-donor-seva').value = '';
-      triggerFlowerRain();
+      triggerMoneyRain();
     }
 
     function startEditDonor(index) {
@@ -2476,7 +2509,7 @@
     }
 
     function openLeaderAccess() {
-      const isAuth = sessionStorage.getItem('leader_auth') === 'true';
+      const isAuth = sessionStorage.getItem('leader_token');
       if (isAuth) {
         openAdminModal();
       } else {
@@ -2493,12 +2526,13 @@
       document.getElementById('login-pass').value = '';
     }
 
-    function verifyLeaderLogin() {
+    async function verifyLeaderLogin() {
       const leaderId = sanitizeInput(document.getElementById('login-id').value);
-      const leaderPass = sanitizeInput(document.getElementById('login-pass').value);
+      const leaderPass = document.getElementById('login-pass').value;
+      const passHash = await sha256(leaderPass);
 
-      if (leaderId === 'Ganesh' && leaderPass === '0000') {
-        sessionStorage.setItem('leader_auth', 'true');
+      if (leaderId === AUTH_HASHES.PRESIDENT_ID && passHash === AUTH_HASHES.PRESIDENT_PASS) {
+        sessionStorage.setItem('leader_token', 'tb_admin_' + Date.now());
         toggleLoginModal();
         openAdminModal();
         triggerFlowerRain();
@@ -2508,7 +2542,7 @@
     }
 
     function logoutAdmin() {
-      sessionStorage.removeItem('leader_auth');
+      sessionStorage.removeItem('leader_token');
       closeAdminPanel();
     }
 
@@ -2643,13 +2677,66 @@
       });
     }
 
+    // --- REVOLUTIONARY EMOJI PARTICLES (FLOWER & MONEY ENGINE) ---
     function triggerFlowerRain() {
-      confetti({
-        particleCount: 80,
-        spread: 100,
-        origin: { y: 0.6 },
-        colors: ['#F7C35F', '#B81D24', '#FFF4CF']
-      });
+      spawnUniversalShower(['🌸', '🌺', '🌼', '🏵️', '✨', '💐', '💮']);
+    }
+
+    function triggerMoneyRain() {
+      spawnUniversalShower(['💰', '🪙', '💵', '✨', '💎', '₹']);
+    }
+
+    function spawnUniversalShower(emojis) {
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.inset = '0';
+      container.style.pointerEvents = 'none';
+      container.style.zIndex = '99999';
+      container.style.overflow = 'hidden';
+      document.body.appendChild(container);
+
+      const count = 45;
+      for (let i = 0; i < count; i++) {
+        const item = document.createElement('span');
+        item.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        item.style.position = 'absolute';
+        item.style.left = `${Math.random() * 94 + 3}vw`;
+        item.style.top = '-50px';
+        item.style.fontSize = `${Math.random() * 16 + 20}px`;
+        item.style.opacity = '1';
+        item.style.userSelect = 'none';
+        item.style.willChange = 'transform, opacity';
+        container.appendChild(item);
+
+        const duration = Math.random() * 1.6 + 2.2;
+        const drift = Math.random() * 140 - 70;
+        const rotate = Math.random() * 720 - 360;
+
+        if (typeof gsap !== 'undefined') {
+          gsap.to(item, {
+            y: window.innerHeight + 80,
+            x: drift,
+            rotation: rotate,
+            opacity: 0,
+            duration: duration,
+            ease: "power1.in",
+            delay: Math.random() * 0.25
+          });
+        } else {
+          item.animate([
+            { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+            { transform: `translate(${drift}px, ${window.innerHeight + 80}px) rotate(${rotate}deg)`, opacity: 0 }
+          ], {
+            duration: duration * 1000,
+            easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+            fill: 'forwards'
+          });
+        }
+      }
+
+      setTimeout(() => {
+        container.remove();
+      }, 4500);
     }
 
     const canvas = document.getElementById('particleCanvas');
@@ -2696,8 +2783,9 @@
     }
     animateParticles();
 
+    // --- ACCURATE COUNTDOWN ENGINE ---
     const targetDate = new Date("September 14, 2026 07:00:00").getTime();
-    setInterval(() => {
+    const countdownInterval = setInterval(() => {
       const now = new Date().getTime();
       const diff = targetDate - now;
       if (diff > 0) {
@@ -2705,6 +2793,12 @@
         document.getElementById("cd-hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
         document.getElementById("cd-minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
         document.getElementById("cd-seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      } else {
+        document.getElementById("countdown-status").innerText = "Utsav In Full Celebration! ✦";
+        document.getElementById("cd-days").innerText = "00";
+        document.getElementById("cd-hours").innerText = "00";
+        document.getElementById("cd-minutes").innerText = "00";
+        document.getElementById("cd-seconds").innerText = "00";
       }
     }, 1000);
 

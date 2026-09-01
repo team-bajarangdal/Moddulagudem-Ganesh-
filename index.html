@@ -145,6 +145,14 @@
       opacity: 0;
       will-change: transform, opacity;
     }
+
+    .photo-fade-in {
+      animation: fadeInPhoto 0.4s ease-out forwards;
+    }
+    @keyframes fadeInPhoto {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 
@@ -297,7 +305,7 @@
     <div class="text-center mb-12">
       <span class="spring-left text-xs font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">02 • Devotion & Seva</span>
       <h2 class="spring-right font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-1">గణేష్ చందా & అన్నదానం</h2>
-      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">Direct UPI Pay on Mobile & Instant Official Verified PDF Receipt[cite: 1]</p>
+      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">Direct UPI Pay on Mobile & Instant Official Verified PDF Receipt</p>
     </div>
 
     <div class="grid md:grid-cols-12 gap-7 items-center">
@@ -307,16 +315,16 @@
         </div>
         <h4 id="displayHeadName" class="font-cinzel text-lg font-bold text-slate-100">Ganesh (President)</h4>
         <p id="displayUpiId" class="text-xs font-mono text-amber-400 mt-1 select-all">UPI: team-bajarangdal@upi</p>
-        <p class="text-[11px] text-slate-400 mt-1.5">Scan with Google Pay, PhonePe, Paytm or BHIM[cite: 1]</p>
+        <p class="text-[11px] text-slate-400 mt-1.5">Scan with Google Pay, PhonePe, Paytm or BHIM</p>
       </div>
 
       <div class="spring-right md:col-span-7 space-y-4">
         <div class="lux-glass rounded-3xl p-6 sm:p-8">
           <div class="flex items-center justify-between">
             <h3 class="font-cinzel font-bold text-base sm:text-lg text-amber-300">Choose Chanda Offering</h3>
-            <span id="selectedAmountBadge" class="text-xs font-bold text-amber-400 bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/20">Selected: ₹501[cite: 1]</span>
+            <span id="selectedAmountBadge" class="text-xs font-bold text-amber-400 bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/20">Selected: ₹501</span>
           </div>
-          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Dedicated to sacred poojas, laddu auctions, and grand community Annadanam by <strong class="text-amber-400">Team Bajarangdal</strong>[cite: 1].</p>
+          <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Dedicated to sacred poojas, laddu auctions, and grand community Annadanam by <strong class="text-amber-400">Team Bajarangdal</strong>.</p>
 
           <div id="sevaButtonsContainer" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5"></div>
 
@@ -341,7 +349,7 @@
     <div class="text-center mb-12">
       <span class="spring-right text-xs font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">03 • Devotee Contributions</span>
       <h2 class="spring-left font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-1">భక్తుల విరాళాల జాబితా</h2>
-      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">Honoring donors contributing to Team Bajarangdal Ganesh Utsav[cite: 1]</p>
+      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">Honoring donors contributing to Team Bajarangdal Ganesh Utsav</p>
     </div>
 
     <div class="spring-scale lux-glass rounded-3xl p-6 sm:p-8 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-amber-400/40">
@@ -388,7 +396,7 @@
       </p>
       
       <div class="spring-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold mt-3">
-        <i data-lucide="clock" class="w-3.5 h-3.5"></i> Photos automatically auto-delete after 2 hours[cite: 1]
+        <i data-lucide="clock" class="w-3.5 h-3.5"></i> Photos automatically auto-delete after 2 hours
       </div>
     </div>
 
@@ -422,7 +430,7 @@
     <div class="text-center mb-12">
       <span class="spring-left text-xs font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">06 • Gallery & Memories</span>
       <h2 class="spring-right font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-1">Festival Albums & Folders</h2>
-      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">పందిరి అలంకరణ, పూజలు, సంబరాలు & మన జ్ఞాపకాల ఫోల్డర్లు[cite: 1]</p>
+      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">పందిరి అలంకరణ, పూజలు, సంబరాలు & మన జ్ఞాపకాల ఫోల్డర్లు</p>
     </div>
 
     <!-- Album Folders Grid -->
@@ -596,7 +604,7 @@
           
           <input id="devoteeMultiFileInput" type="file" accept="image/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
           
-          <button onclick="uploadDevoteePhotosBatch()" class="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg spring-btn cursor-pointer">
+          <button id="uploadDevoteeBtn" onclick="uploadDevoteePhotosBatch()" class="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg spring-btn cursor-pointer">
             Publish Devotee Photos ✦
           </button>
         </div>
@@ -1102,7 +1110,9 @@
     let isQrGenerated = false;
     function initDefaultPandalQr() {
       const qrContainer = document.getElementById('pandalSectionQr');
-      if (!qrContainer || isQrGenerated) return;
+      if (!qrContainer) return;
+      if (isQrGenerated && qrContainer.children.length > 0) return;
+      
       qrContainer.innerHTML = '';
       let targetUrl = window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith('file:')
         ? (window.location.origin + window.location.pathname + '#baktula-photos')
@@ -1115,7 +1125,7 @@
           height: 128,
           colorDark : "#040008",
           colorLight : "#ffffff",
-          correctLevel : QRCode.CorrectLevel.H
+          correctLevel : QRCode.CorrectLevel.M
         });
         isQrGenerated = true;
       } catch(e) {
@@ -1148,13 +1158,11 @@
         const hrs = Math.floor(totalMinsLeft / 60);
         const mins = totalMinsLeft % 60;
         const formattedTime = hrs > 0 ? `${hrs}h ${mins}m left` : `${mins}m left`;
-        
-        const animClass = index % 3 === 0 ? 'spring-left' : (index % 3 === 1 ? 'spring-up' : 'spring-right');
 
         return `
-          <div onclick="openDevoteeDownloadModal(${index})" class="${animClass} lux-glass rounded-2xl overflow-hidden cursor-pointer relative group shadow-xl border border-amber-400/30 spring-btn">
+          <div onclick="openDevoteeDownloadModal(${index})" class="photo-fade-in lux-glass rounded-2xl overflow-hidden cursor-pointer relative group shadow-xl border border-amber-400/30 spring-btn">
             <div class="relative h-56 sm:h-64 w-full overflow-hidden bg-black/60">
-              <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" alt="Darshan">
+              <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-100" loading="eager" alt="Darshan">
               
               <span class="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-md border border-amber-400/50 text-amber-300 text-[10px] font-bold flex items-center gap-1">
                 <i data-lucide="clock" class="w-3 h-3 text-rose-400"></i> ${formattedTime}
@@ -1331,34 +1339,46 @@
 
     async function uploadDevoteePhotosBatch() {
       const fileInput = document.getElementById('devoteeMultiFileInput');
+      const uploadBtn = document.getElementById('uploadDevoteeBtn');
       if (!fileInput.files || fileInput.files.length === 0) {
         alert("Please select at least 1 photo!");
         return;
       }
 
-      for (let i = 0; i < fileInput.files.length; i++) {
-        const file = fileInput.files[i];
-        const highRes = await compressFileToJpeg(file, 900, 0.72);
-        const timeNow = new Date();
-        const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+      uploadBtn.disabled = true;
+      uploadBtn.innerText = "Publishing Photos...";
 
-        const photoObj = {
-          img: highRes,
-          timestamp: Date.now(),
-          timeStr: timeStr
-        };
+      try {
+        for (let i = 0; i < fileInput.files.length; i++) {
+          const file = fileInput.files[i];
+          const highRes = await compressFileToJpeg(file, 800, 0.60);
+          const timeNow = new Date();
+          const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-        if (db) {
-          db.ref('devoteePandalPhotos').push(photoObj);
-        } else {
-          devoteePhotosData.unshift(photoObj);
+          const photoObj = {
+            img: highRes,
+            timestamp: Date.now(),
+            timeStr: timeStr
+          };
+
+          if (db) {
+            await db.ref('devoteePandalPhotos').push(photoObj);
+          } else {
+            devoteePhotosData.unshift(photoObj);
+          }
         }
-      }
 
-      fileInput.value = '';
-      renderDevoteePhotos();
-      triggerFlowerRain();
-      alert("Photos published in High Quality! They will automatically delete in 2 hours.");
+        fileInput.value = '';
+        renderDevoteePhotos();
+        triggerFlowerRain();
+        alert("Photos published in High Quality! They will automatically delete in 2 hours.");
+      } catch(err) {
+        console.error("Upload error:", err);
+        alert("Could not upload photos. Please verify your connection.");
+      } finally {
+        uploadBtn.disabled = false;
+        uploadBtn.innerText = "Publish Devotee Photos ✦";
+      }
     }
 
     function removeDevoteePhoto(key, index) {
@@ -1651,7 +1671,7 @@
 
       for (let i = 0; i < filesInput.files.length; i++) {
         const file = filesInput.files[i];
-        const compressed = await compressFileToJpeg(file, 900, 0.72);
+        const compressed = await compressFileToJpeg(file, 800, 0.65);
         if (i === 0) defaultCover = compressed;
         newItems.push({
           type: "image",
@@ -1684,7 +1704,7 @@
       alert(`Photos successfully saved into "${targetFolderName}" folder!`);
     }
 
-    function compressFileToJpeg(file, maxWidth = 900, quality = 0.72) {
+    function compressFileToJpeg(file, maxWidth = 800, quality = 0.60) {
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = e => {
@@ -1751,11 +1771,11 @@
 
     function applyCroppedImage() {
       if (!cropper || !pendingCropCallback) return;
-      const outputWidth = currentCropperRatio > 1 ? 900 : 600;
-      const outputHeight = currentCropperRatio > 1 ? Math.round(900 / currentCropperRatio) : 700;
+      const outputWidth = currentCropperRatio > 1 ? 800 : 500;
+      const outputHeight = currentCropperRatio > 1 ? Math.round(800 / currentCropperRatio) : 600;
 
       const canvas = cropper.getCroppedCanvas({ width: outputWidth, height: outputHeight, imageSmoothingQuality: 'medium' });
-      const croppedBase64 = canvas.toDataURL('image/jpeg', 0.72);
+      const croppedBase64 = canvas.toDataURL('image/jpeg', 0.65);
       pendingCropCallback(croppedBase64);
       closeCropperModal();
     }
@@ -2667,11 +2687,11 @@
     }
 
     function triggerFlowerRain() {
-      spawnUniversalShower(['🌸', '🌺', '🌼', '🏵️', '✨', '💐', '💮']);
+      spawnUniversalShower(['🌺', '💐', '🌺', '🏵️', '🌺', '💐', '🌺']);
     }
 
     function triggerMoneyRain() {
-      spawnUniversalShower(['💰', '🪙', '💵', '✨', '💎', '₹']);
+      spawnUniversalShower(['🌸', '🌼', '🌸', '🌼', '🌸', '🌼']);
     }
 
     function spawnUniversalShower(emojis) {
@@ -2726,7 +2746,6 @@
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      initDefaultPandalQr();
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
@@ -2789,4 +2808,4 @@
     });
   </script>
 </body>
-   </html>
+  </html>

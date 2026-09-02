@@ -23,6 +23,9 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  
   <!-- Premium Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2725,55 +2728,54 @@
     }
 
     function triggerFlowerRain() {
-      spawnUniversalShower(['🌺', '💐', '🌺', '🏵️', '🌺', '💐', '🌺']);
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 70,
+          angle: 60,
+          origin: { x: 0.1, y: 0.9 },
+          colors: ['#F7C35F', '#FFE79A', '#C9182B', '#E53E3E', '#FFB703', '#FFFFFF'],
+          scalar: 1.1
+        });
+
+        confetti({
+          particleCount: 90,
+          spread: 70,
+          angle: 120,
+          origin: { x: 0.9, y: 0.9 },
+          colors: ['#F7C35F', '#FFE79A', '#C9182B', '#E53E3E', '#FFB703', '#FFFFFF'],
+          scalar: 1.1
+        });
+
+        setTimeout(() => {
+          confetti({
+            particleCount: 80,
+            spread: 100,
+            origin: { x: 0.5, y: 0.75 },
+            colors: ['#F7C35F', '#FFE79A', '#C9182B', '#FFD700', '#FFB703']
+          });
+        }, 150);
+      }
     }
 
     function triggerMoneyRain() {
-      spawnUniversalShower(['🌸', '🌼', '🌸', '🌼', '🌸', '🌼']);
-    }
-
-    function spawnUniversalShower(emojis) {
-      const container = document.createElement('div');
-      container.style.position = 'fixed';
-      container.style.inset = '0';
-      container.style.pointerEvents = 'none';
-      container.style.zIndex = '99999';
-      container.style.overflow = 'hidden';
-      document.body.appendChild(container);
-
-      const count = 45;
-      for (let i = 0; i < count; i++) {
-        const item = document.createElement('span');
-        item.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        item.style.position = 'absolute';
-        item.style.left = `${Math.random() * 94 + 3}vw`;
-        item.style.top = '-50px';
-        item.style.fontSize = `${Math.random() * 16 + 20}px`;
-        item.style.opacity = '1';
-        item.style.userSelect = 'none';
-        item.style.willChange = 'transform, opacity';
-        container.appendChild(item);
-
-        const duration = Math.random() * 1.6 + 2.2;
-        const drift = Math.random() * 140 - 70;
-        const rotate = Math.random() * 720 - 360;
-
-        if (typeof gsap !== 'undefined') {
-          gsap.to(item, {
-            y: window.innerHeight + 80,
-            x: drift,
-            rotation: rotate,
-            opacity: 0,
-            duration: duration,
-            ease: "power1.in",
-            delay: Math.random() * 0.25
-          });
-        }
+      // Golden, ruby red, and marigold paper ribbons when selecting Chanda
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          angle: 60,
+          spread: 75,
+          origin: { x: 0.05, y: 0.85 },
+          colors: ['#F7C35F', '#FFD700', '#C9182B', '#FFB703']
+        });
+        confetti({
+          particleCount: 80,
+          angle: 120,
+          spread: 75,
+          origin: { x: 0.95, y: 0.85 },
+          colors: ['#F7C35F', '#FFD700', '#C9182B', '#FFB703']
+        });
       }
-
-      setTimeout(() => {
-        container.remove();
-      }, 4500);
     }
 
     // Background Canvas

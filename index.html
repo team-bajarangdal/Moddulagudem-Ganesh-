@@ -1037,9 +1037,12 @@
         firebase.initializeApp(firebaseConfig);
         db = firebase.database();
         
+        let isInitialLoad = true;
+
         db.ref('ganeshUtsavData').on('value', (snapshot) => {
           const val = snapshot.val();
-          if (val) {
+          
+          if (val && Object.keys(val).length > 0) {
             heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
             eventsData = val.eventsData ? (Array.isArray(val.eventsData) ? val.eventsData : Object.values(val.eventsData)) : defaultEvents;
             committeeData = val.committeeData ? (Array.isArray(val.committeeData) ? val.committeeData : Object.values(val.committeeData)) : defaultCommittee;
@@ -1047,20 +1050,27 @@
             sevasData = val.sevasData ? (Array.isArray(val.sevasData) ? val.sevasData : Object.values(val.sevasData)) : defaultSevas;
             donorsData = val.donorsData ? (Array.isArray(val.donorsData) ? val.donorsData : Object.values(val.donorsData)) : [];
             chandaData = val.chandaData || defaultChanda;
-          } else {
-            db.ref('ganeshUtsavData').set({
-              heroGaneshaImg: defaultHeroGanesha,
-              eventsData: defaultEvents,
-              committeeData: defaultCommittee,
-              albumsData: defaultAlbums,
-              sevasData: defaultSevas,
-              donorsData: [],
-              chandaData: defaultChanda
+            isInitialLoad = false;
+            debouncedRender();
+          } else if (isInitialLoad) {
+            // Use transaction so it NEVER overwrites existing data if already saved in Firebase
+            db.ref('ganeshUtsavData').transaction((currentData) => {
+              if (currentData === null) {
+                return {
+                  heroGaneshaImg: defaultHeroGanesha,
+                  eventsData: defaultEvents,
+                  committeeData: defaultCommittee,
+                  albumsData: defaultAlbums,
+                  sevasData: defaultSevas,
+                  donorsData: [],
+                  chandaData: defaultChanda
+                };
+              }
+              return currentData; // If data exists, keep it intact
             });
+            isInitialLoad = false;
           }
-          debouncedRender();
         });
-
         db.ref('devoteePandalPhotos').on('value', (snapshot) => {
           const val = snapshot.val();
           if (val) {

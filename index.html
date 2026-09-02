@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Team Bajarangdal | Grand Ganesh Utsav 2026</title>
 
-  <!-- Content Security Policy -->
+  <!-- Content Security Policy: Added blob: to script-src and defined worker-src to prevent confetti worker blocks -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' 'unsafe-inline' https: data: blob:;
-    script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
+    script-src 'self' 'unsafe-inline' blob: https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
+    worker-src 'self' blob:;
     connect-src 'self' https: wss: data: blob:;
     img-src 'self' data: blob: https: https://images.unsplash.com https://api.qrserver.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
@@ -254,7 +255,7 @@
         </div>
       </div>
 
-      <!-- Hero Ganesha Container: spring-scale removed to guarantee visibility -->
+      <!-- Hero Ganesha Container -->
       <div class="flex flex-col items-center my-6 relative">
         <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 border-2 border-amber-400/90 divine-glow bg-gradient-to-b from-amber-500/30 via-purple-950/70 to-[#040008] overflow-hidden float-hero shadow-2xl flex items-center justify-center">
           <img 
@@ -1037,7 +1038,7 @@
     let pendingReplaceIndex = null;
     let renderDebounceTimer = null;
 
-    // --- FIREBASE SYNC (Permanent Persistence Fix) ---
+    // --- FIREBASE SYNC WITH LOCAL STORAGE RESILIENCE ---
     let db = null;
     try {
       if (typeof firebase !== 'undefined' && firebaseConfig.apiKey) {
@@ -1046,6 +1047,16 @@
         }
         db = firebase.database();
         
+        // Load offline cache first for instant fallback
+        const localCachedData = localStorage.getItem('tb_cached_ganesh_data');
+        if (localCachedData) {
+          try {
+            const parsed = JSON.parse(localCachedData);
+            if (parsed.donorsData) donorsData = parsed.donorsData;
+            if (parsed.sevasData) sevasData = parsed.sevasData;
+          } catch(e) {}
+        }
+
         // 1. Listen for main celebration data
         db.ref('ganeshUtsavData').on('value', (snapshot) => {
           const val = snapshot.val();
@@ -1057,8 +1068,11 @@
             sevasData = val.sevasData ? (Array.isArray(val.sevasData) ? val.sevasData : Object.values(val.sevasData)) : defaultSevas;
             donorsData = val.donorsData ? (Array.isArray(val.donorsData) ? val.donorsData : Object.values(val.donorsData)) : [];
             chandaData = val.chandaData || defaultChanda;
+
+            localStorage.setItem('tb_cached_ganesh_data', JSON.stringify({
+              heroGaneshaImg, eventsData, committeeData, albumsData, sevasData, donorsData, chandaData
+            }));
           } else {
-            // Seed defaults ONLY if Firebase node is completely empty
             db.ref('ganeshUtsavData').update({
               heroGaneshaImg: defaultHeroGanesha,
               eventsData: defaultEvents,
@@ -1067,11 +1081,11 @@
               sevasData: defaultSevas,
               donorsData: [],
               chandaData: defaultChanda
-            });
+            }).catch(() => {});
           }
           debouncedRender();
         }, (error) => {
-          console.error("Firebase read error:", error);
+          console.warn("Firebase offline or permission error. Operating on cached local storage:", error);
           debouncedRender();
         });
 
@@ -1086,11 +1100,12 @@
           cleanExpiredDevoteePhotos();
           renderDevoteePhotos();
         }, (err) => {
-          console.error("Devotee photos error:", err);
+          console.warn("Devotee photos cloud read error:", err);
+          renderDevoteePhotos();
         });
       }
     } catch(e) {
-      console.error("Firebase initialization failed:", e);
+      console.warn("Firebase initialization skipped/failed. Using offline local state:", e);
       debouncedRender();
     }
 
@@ -1102,10 +1117,17 @@
     }
 
     function syncNode(nodePath, nodeData) {
+      // Always store locally first so it never fails
+      try {
+        const cached = JSON.parse(localStorage.getItem('tb_cached_ganesh_data') || '{}');
+        cached[nodePath] = nodeData;
+        localStorage.setItem('tb_cached_ganesh_data', JSON.stringify(cached));
+      } catch(e) {}
+
       if (db) {
         db.ref('ganeshUtsavData/' + nodePath).set(nodeData)
-          .then(() => console.log("Saved " + nodePath + " to Firebase cloud!"))
-          .catch((err) => console.error("Firebase write error on " + nodePath + ":", err));
+          .then(() => console.log("Synced " + nodePath + " to cloud"))
+          .catch((err) => console.warn("Cloud write pending or failed:", err));
       }
       debouncedRender();
     }
@@ -1122,7 +1144,7 @@
           if (diff >= TWO_HOURS_MS && diff > 0) {
             changed = true;
             if (db && p.firebaseKey) {
-              db.ref('devoteePandalPhotos/' + p.firebaseKey).remove();
+              db.ref('devoteePandalPhotos/' + p.firebaseKey).remove().catch(() => {});
             }
           }
         }
@@ -1415,7 +1437,7 @@
     function removeDevoteePhoto(key, index) {
       if (confirm("Delete this photo?")) {
         if (db && key && key !== 'undefined' && key !== '') {
-          db.ref('devoteePandalPhotos/' + key).remove();
+          db.ref('devoteePandalPhotos/' + key).remove().catch(() => {});
         }
         devoteePhotosData.splice(index, 1);
         renderDevoteePhotos();
@@ -2727,55 +2749,72 @@
       ScrollTrigger.refresh();
     }
 
-    function triggerFlowerRain() {
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 90,
-          spread: 70,
-          angle: 60,
-          origin: { x: 0.1, y: 0.9 },
-          colors: ['#F7C35F', '#FFE79A', '#C9182B', '#E53E3E', '#FFB703', '#FFFFFF'],
-          scalar: 1.1
-        });
+    // --- CONTINUOUS FALLING PAPER-CUT CONFETTI ENGINE (FIXED) ---
+    let myConfetti = null;
 
-        confetti({
-          particleCount: 90,
-          spread: 70,
-          angle: 120,
-          origin: { x: 0.9, y: 0.9 },
-          colors: ['#F7C35F', '#FFE79A', '#C9182B', '#E53E3E', '#FFB703', '#FFFFFF'],
-          scalar: 1.1
-        });
-
-        setTimeout(() => {
-          confetti({
-            particleCount: 80,
-            spread: 100,
-            origin: { x: 0.5, y: 0.75 },
-            colors: ['#F7C35F', '#FFE79A', '#C9182B', '#FFD700', '#FFB703']
+    function getConfettiEngine() {
+      if (!myConfetti && typeof confetti === 'function') {
+        const myCanvas = document.getElementById('confettiCanvas');
+        if (myCanvas) {
+          myConfetti = confetti.create(myCanvas, {
+            resize: true,
+            useWorker: false // Eliminates CSP worker blocks completely
           });
-        }, 150);
+        } else {
+          myConfetti = confetti;
+        }
       }
+      return myConfetti;
+    }
+
+    function startContinuousPaperShower(durationMs = 3500) {
+      const blast = getConfettiEngine();
+      if (typeof blast !== 'function') return;
+
+      const festiveColors = ['#FFD700', '#F7C35F', '#C9182B', '#E53E3E', '#FFFFFF', '#FF8C00'];
+      const end = Date.now() + durationMs;
+
+      function frame() {
+        blast({
+          particleCount: 4,
+          angle: 270,
+          spread: 55,
+          origin: { x: Math.random() * 0.5, y: -0.05 },
+          colors: festiveColors,
+          shapes: ['square'],
+          scalar: 1.15,
+          drift: (Math.random() - 0.5) * 1.5,
+          gravity: 0.85,
+          ticks: 350
+        });
+
+        blast({
+          particleCount: 4,
+          angle: 270,
+          spread: 55,
+          origin: { x: 0.5 + Math.random() * 0.5, y: -0.05 },
+          colors: festiveColors,
+          shapes: ['square'],
+          scalar: 1.15,
+          drift: (Math.random() - 0.5) * 1.5,
+          gravity: 0.85,
+          ticks: 350
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }
+
+      frame();
+    }
+
+    function triggerFlowerRain() {
+      startContinuousPaperShower(4000);
     }
 
     function triggerMoneyRain() {
-      // Golden, ruby red, and marigold paper ribbons when selecting Chanda
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 80,
-          angle: 60,
-          spread: 75,
-          origin: { x: 0.05, y: 0.85 },
-          colors: ['#F7C35F', '#FFD700', '#C9182B', '#FFB703']
-        });
-        confetti({
-          particleCount: 80,
-          angle: 120,
-          spread: 75,
-          origin: { x: 0.95, y: 0.85 },
-          colors: ['#F7C35F', '#FFD700', '#C9182B', '#FFB703']
-        });
-      }
+      startContinuousPaperShower(3000);
     }
 
     // Background Canvas
@@ -2843,15 +2882,13 @@
     }, 1000);
 
     window.addEventListener('DOMContentLoaded', () => {
-      try {
-        Object.keys(localStorage).forEach(k => {
-          if (k.startsWith('tb_')) localStorage.removeItem(k);
-        });
-      } catch(e) {}
-
       initDefaultPandalQr();
       renderAll();
     });
   </script>
+
+  <!-- High-priority canvas layer explicitly mounted on top -->
+  <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9999] w-full h-full"></canvas>
+
 </body>
-                                                                                </html>
+        </html>

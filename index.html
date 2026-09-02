@@ -1038,29 +1038,28 @@
         db = firebase.database();
         
         db.ref('ganeshUtsavData').on('value', (snapshot) => {
-  const val = snapshot.val();
-  if (val) {
-    heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
-    eventsData = Array.isArray(val.eventsData) ? val.eventsData : defaultEvents;
-    committeeData = Array.isArray(val.committeeData) ? val.committeeData : defaultCommittee;
-    albumsData = Array.isArray(val.albumsData) ? val.albumsData : defaultAlbums;
-    sevasData = Array.isArray(val.sevasData) ? val.sevasData : defaultSevas;
-    donorsData = Array.isArray(val.donorsData) ? val.donorsData : [];
-    chandaData = val.chandaData || defaultChanda;
-  } else {
-    // Automatically seeds default data into Firebase if the database is blank
-    db.ref('ganeshUtsavData').set({
-      heroGaneshaImg: defaultHeroGanesha,
-      eventsData: defaultEvents,
-      committeeData: defaultCommittee,
-      albumsData: defaultAlbums,
-      sevasData: defaultSevas,
-      donorsData: [],
-      chandaData: defaultChanda
-    });
-  }
-  debouncedRender();
-});
+          const val = snapshot.val();
+          if (val) {
+            heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
+            eventsData = val.eventsData ? (Array.isArray(val.eventsData) ? val.eventsData : Object.values(val.eventsData)) : defaultEvents;
+            committeeData = val.committeeData ? (Array.isArray(val.committeeData) ? val.committeeData : Object.values(val.committeeData)) : defaultCommittee;
+            albumsData = val.albumsData ? (Array.isArray(val.albumsData) ? val.albumsData : Object.values(val.albumsData)) : defaultAlbums;
+            sevasData = val.sevasData ? (Array.isArray(val.sevasData) ? val.sevasData : Object.values(val.sevasData)) : defaultSevas;
+            donorsData = val.donorsData ? (Array.isArray(val.donorsData) ? val.donorsData : Object.values(val.donorsData)) : [];
+            chandaData = val.chandaData || defaultChanda;
+          } else {
+            db.ref('ganeshUtsavData').set({
+              heroGaneshaImg: defaultHeroGanesha,
+              eventsData: defaultEvents,
+              committeeData: defaultCommittee,
+              albumsData: defaultAlbums,
+              sevasData: defaultSevas,
+              donorsData: [],
+              chandaData: defaultChanda
+            });
+          }
+          debouncedRender();
+        });
 
         db.ref('devoteePandalPhotos').on('value', (snapshot) => {
           const val = snapshot.val();
@@ -1086,12 +1085,14 @@
 
     function syncNode(nodePath, nodeData) {
       if (db) {
-        db.ref('ganeshUtsavData/' + nodePath).set(nodeData);
+        db.ref('ganeshUtsavData/' + nodePath).set(nodeData)
+          .then(() => console.log("Saved " + nodePath + " to Firebase!"))
+          .catch((err) => console.error("Error saving " + nodePath + ":", err));
       }
       try {
         localStorage.setItem('tb_' + nodePath, JSON.stringify(nodeData));
       } catch(e) {}
-      renderAll();
+      debouncedRender();
     }
 
     // --- 2-HOUR PHOTO EXPIRY ENGINE ---
@@ -1101,15 +1102,18 @@
       const now = Date.now();
       let changed = false;
       devoteePhotosData.forEach(p => {
-        if ((now - p.timestamp) >= TWO_HOURS_MS) {
-          changed = true;
-          if (db && p.firebaseKey) {
-            db.ref('devoteePandalPhotos/' + p.firebaseKey).remove();
+        if (p.timestamp && typeof p.timestamp === 'number') {
+          const diff = now - p.timestamp;
+          if (diff >= TWO_HOURS_MS && diff > 0) {
+            changed = true;
+            if (db && p.firebaseKey) {
+              db.ref('devoteePandalPhotos/' + p.firebaseKey).remove();
+            }
           }
         }
       });
       if (changed) {
-        devoteePhotosData = devoteePhotosData.filter(p => (now - p.timestamp) < TWO_HOURS_MS);
+        devoteePhotosData = devoteePhotosData.filter(p => p.timestamp && (now - p.timestamp) < TWO_HOURS_MS);
       }
     }
 

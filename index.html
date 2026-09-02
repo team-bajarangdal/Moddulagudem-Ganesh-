@@ -14,6 +14,9 @@
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
   ">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
@@ -1037,12 +1040,9 @@
         firebase.initializeApp(firebaseConfig);
         db = firebase.database();
         
-        let isInitialLoad = true;
-
         db.ref('ganeshUtsavData').on('value', (snapshot) => {
           const val = snapshot.val();
-          
-          if (val && Object.keys(val).length > 0) {
+          if (val && typeof val === 'object') {
             heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
             eventsData = val.eventsData ? (Array.isArray(val.eventsData) ? val.eventsData : Object.values(val.eventsData)) : defaultEvents;
             committeeData = val.committeeData ? (Array.isArray(val.committeeData) ? val.committeeData : Object.values(val.committeeData)) : defaultCommittee;
@@ -1050,25 +1050,7 @@
             sevasData = val.sevasData ? (Array.isArray(val.sevasData) ? val.sevasData : Object.values(val.sevasData)) : defaultSevas;
             donorsData = val.donorsData ? (Array.isArray(val.donorsData) ? val.donorsData : Object.values(val.donorsData)) : [];
             chandaData = val.chandaData || defaultChanda;
-            isInitialLoad = false;
             debouncedRender();
-          } else if (isInitialLoad) {
-            // Use transaction so it NEVER overwrites existing data if already saved in Firebase
-            db.ref('ganeshUtsavData').transaction((currentData) => {
-              if (currentData === null) {
-                return {
-                  heroGaneshaImg: defaultHeroGanesha,
-                  eventsData: defaultEvents,
-                  committeeData: defaultCommittee,
-                  albumsData: defaultAlbums,
-                  sevasData: defaultSevas,
-                  donorsData: [],
-                  chandaData: defaultChanda
-                };
-              }
-              return currentData; // If data exists, keep it intact
-            });
-            isInitialLoad = false;
           }
         });
         db.ref('devoteePandalPhotos').on('value', (snapshot) => {
@@ -1096,12 +1078,9 @@
     function syncNode(nodePath, nodeData) {
       if (db) {
         db.ref('ganeshUtsavData/' + nodePath).set(nodeData)
-          .then(() => console.log("Saved " + nodePath + " to Firebase!"))
-          .catch((err) => console.error("Error saving " + nodePath + ":", err));
+          .then(() => console.log("Saved " + nodePath + " to Firebase cloud!"))
+          .catch((err) => console.error("Firebase write error on " + nodePath + ":", err));
       }
-      try {
-        localStorage.setItem('tb_' + nodePath, JSON.stringify(nodeData));
-      } catch(e) {}
       debouncedRender();
     }
 

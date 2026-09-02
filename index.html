@@ -1038,18 +1038,29 @@
         db = firebase.database();
         
         db.ref('ganeshUtsavData').on('value', (snapshot) => {
-          const val = snapshot.val();
-          if (val) {
-            heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
-            eventsData = val.eventsData || defaultEvents;
-            committeeData = val.committeeData || defaultCommittee;
-            albumsData = Array.isArray(val.albumsData) ? val.albumsData : defaultAlbums;
-            sevasData = Array.isArray(val.sevasData) ? val.sevasData : defaultSevas;
-            donorsData = Array.isArray(val.donorsData) ? val.donorsData : [];
-            chandaData = val.chandaData || defaultChanda;
-            debouncedRender();
-          }
-        });
+  const val = snapshot.val();
+  if (val) {
+    heroGaneshaImg = val.heroGaneshaImg || defaultHeroGanesha;
+    eventsData = Array.isArray(val.eventsData) ? val.eventsData : defaultEvents;
+    committeeData = Array.isArray(val.committeeData) ? val.committeeData : defaultCommittee;
+    albumsData = Array.isArray(val.albumsData) ? val.albumsData : defaultAlbums;
+    sevasData = Array.isArray(val.sevasData) ? val.sevasData : defaultSevas;
+    donorsData = Array.isArray(val.donorsData) ? val.donorsData : [];
+    chandaData = val.chandaData || defaultChanda;
+  } else {
+    // Automatically seeds default data into Firebase if the database is blank
+    db.ref('ganeshUtsavData').set({
+      heroGaneshaImg: defaultHeroGanesha,
+      eventsData: defaultEvents,
+      committeeData: defaultCommittee,
+      albumsData: defaultAlbums,
+      sevasData: defaultSevas,
+      donorsData: [],
+      chandaData: defaultChanda
+    });
+  }
+  debouncedRender();
+});
 
         db.ref('devoteePandalPhotos').on('value', (snapshot) => {
           const val = snapshot.val();

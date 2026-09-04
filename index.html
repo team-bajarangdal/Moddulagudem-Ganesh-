@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Team Bajarangdal | Grand Ganesh Utsav 2026</title>
 
+  <!-- PWA Metadata -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#F7C35F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ganesh Utsav">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
   <!-- Content Security Policy: Added blob: to script-src and defined worker-src to prevent confetti worker blocks -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' 'unsafe-inline' https: data: blob:;
     script-src 'self' 'unsafe-inline' blob: https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
     worker-src 'self' blob:;
-    connect-src 'self' https: wss: data: blob:;
+    connect-src 'self' https: wss: data: blob: https://*.googleapis.com https://*.firebaseio.com;
     img-src 'self' data: blob: https: https://images.unsplash.com https://api.qrserver.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
     font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
@@ -53,6 +61,7 @@
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
 
   <script>
     tailwind.config = {
@@ -215,11 +224,15 @@
       <a href="#moments" class="hover:text-amber-400 transition">Moments & BTS</a>
     </div>
 
-    <div class="flex items-center gap-2.5">
-      <button onclick="openLeaderAccess()" class="px-3.5 py-1.5 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 text-xs font-bold spring-btn flex items-center gap-1.5 cursor-pointer">
+    <div class="flex items-center gap-2">
+      <!-- Notification Enable Bell -->
+      <button onclick="requestNotificationPermission()" title="Enable Live Darshan & Pooja Alerts" class="p-2 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/15 text-xs font-bold spring-btn flex items-center cursor-pointer">
+        <i data-lucide="bell" class="w-4 h-4"></i>
+      </button>
+      <button onclick="openLeaderAccess()" class="px-3 py-1.5 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 text-xs font-bold spring-btn flex items-center gap-1.5 cursor-pointer">
         <i data-lucide="lock" class="w-3.5 h-3.5"></i> Leader Login
       </button>
-      <a href="#chanda" class="px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs shadow-lg shadow-amber-500/25 spring-btn flex items-center gap-1.5">
+      <a href="#chanda" class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs shadow-lg shadow-amber-500/25 spring-btn flex items-center gap-1.5">
         <i data-lucide="heart" class="w-3.5 h-3.5 fill-black"></i> Chanda
       </a>
     </div>
@@ -673,7 +686,7 @@
         </button>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2 my-5 border-b border-white/10 pb-5">
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2 my-5 border-b border-white/10 pb-5">
         <button onclick="switchAdminTab('tab-sevas-edit')" id="btn-tab-sevas-edit" class="py-2.5 px-2 rounded-xl text-xs font-extrabold bg-amber-500 text-black shadow-md transition text-center cursor-pointer">
           Seva Rates
         </button>
@@ -692,8 +705,11 @@
         <button onclick="switchAdminTab('tab-chanda-edit')" id="btn-tab-chanda-edit" class="py-2.5 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition text-center cursor-pointer">
           QR Settings
         </button>
-        <button onclick="switchAdminTab('tab-event-edit')" id="btn-tab-event-edit" class="py-2.5 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition text-center col-span-2 sm:col-span-1 cursor-pointer">
+        <button onclick="switchAdminTab('tab-event-edit')" id="btn-tab-event-edit" class="py-2.5 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition text-center cursor-pointer">
           Events
+        </button>
+        <button onclick="switchAdminTab('tab-push-broadcast')" id="btn-tab-push-broadcast" class="py-2.5 px-2 rounded-xl text-xs font-semibold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 transition text-center col-span-2 sm:col-span-1 cursor-pointer">
+          📢 Live Alerts
         </button>
       </div>
 
@@ -859,6 +875,37 @@
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2">Active Events</h4>
           <div id="adminEventList" class="space-y-2"></div>
+        </div>
+      </div>
+
+      <!-- Tab 8: Leader Push Alerts Control -->
+      <div id="tab-push-broadcast" class="space-y-4 hidden">
+        <div class="bg-black/30 p-4 sm:p-5 rounded-2xl border border-amber-400/30 space-y-3 text-left">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+            <i data-lucide="bell-ring" class="w-4 h-4 text-amber-400"></i> Broadcast Live Devotee Alert
+          </h4>
+          <p class="text-[11px] text-slate-300">Push instant alert to all devotees who installed the App or allowed notifications.</p>
+
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Alert Title</label>
+            <input id="in-notif-title" type="text" placeholder="e.g. మహా హారతి ప్రారంభం!" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Alert Message</label>
+            <textarea id="in-notif-body" rows="2" placeholder="e.g. Maha Aarti is beginning at pandal in 10 minutes. Join with family!" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none"></textarea>
+          </div>
+
+          <button id="sendAlertBtn" onclick="broadcastLeaderAlert()" class="w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg spring-btn cursor-pointer flex items-center justify-center gap-2">
+            <i data-lucide="send" class="w-4 h-4 fill-black"></i> Send Live Alert to All Devotees
+          </button>
+          
+          <div id="leaderAlertStatus" class="text-xs text-center font-semibold mt-2 hidden"></div>
+        </div>
+
+        <div class="bg-white/5 rounded-2xl p-3 border border-white/10">
+          <h5 class="text-xs font-bold text-slate-300 mb-1">Subscribed Devotees</h5>
+          <p class="text-[11px] text-slate-400">Active device tokens registered: <span id="registeredTokensCount" class="text-amber-400 font-bold">0</span></p>
         </div>
       </div>
 
@@ -1040,6 +1087,8 @@
 
     // --- FIREBASE SYNC WITH LOCAL STORAGE RESILIENCE ---
     let db = null;
+    let fcmMessaging = null;
+
     try {
       if (typeof firebase !== 'undefined' && firebaseConfig.apiKey) {
         if (!firebase.apps.length) {
@@ -1103,6 +1152,27 @@
           console.warn("Devotee photos cloud read error:", err);
           renderDevoteePhotos();
         });
+
+        // 3. Count registered tokens for Leader
+        db.ref('fcmTokens').on('value', (snapshot) => {
+          const val = snapshot.val();
+          const countEl = document.getElementById('registeredTokensCount');
+          if (countEl) {
+            countEl.innerText = val ? Object.keys(val).length : 0;
+          }
+        });
+
+        // 4. Realtime Broadcast Listener (triggers instant in-app notification when Leader sends alert)
+        db.ref('latestLeaderAlert').on('value', (snapshot) => {
+          const alertData = snapshot.val();
+          if (alertData && alertData.timestamp) {
+            const timeDiff = Date.now() - alertData.timestamp;
+            if (timeDiff < 15000 && !alertData.shown) { // Within last 15 seconds
+              triggerFlowerRain();
+              alert(`📢 ${alertData.title}\n\n${alertData.body}`);
+            }
+          }
+        });
       }
     } catch(e) {
       console.warn("Firebase initialization skipped/failed. Using offline local state:", e);
@@ -1117,7 +1187,6 @@
     }
 
     function syncNode(nodePath, nodeData) {
-      // Always store locally first so it never fails
       try {
         const cached = JSON.parse(localStorage.getItem('tb_cached_ganesh_data') || '{}');
         cached[nodePath] = nodeData;
@@ -2599,12 +2668,12 @@
     }
 
     function switchAdminTab(tabId) {
-      ['tab-sevas-edit', 'tab-donors-edit', 'tab-comm-edit', 'tab-moments-edit', 'tab-hero-edit', 'tab-chanda-edit', 'tab-event-edit'].forEach(t => {
+      ['tab-sevas-edit', 'tab-donors-edit', 'tab-comm-edit', 'tab-moments-edit', 'tab-hero-edit', 'tab-chanda-edit', 'tab-event-edit', 'tab-push-broadcast'].forEach(t => {
         const el = document.getElementById(t);
         if (el) el.classList.add('hidden');
       });
 
-      ['btn-tab-sevas-edit', 'btn-tab-donors-edit', 'btn-tab-comm-edit', 'btn-tab-moments-edit', 'btn-tab-hero-edit', 'btn-tab-chanda-edit', 'btn-tab-event-edit'].forEach(b => {
+      ['btn-tab-sevas-edit', 'btn-tab-donors-edit', 'btn-tab-comm-edit', 'btn-tab-moments-edit', 'btn-tab-hero-edit', 'btn-tab-chanda-edit', 'btn-tab-event-edit', 'btn-tab-push-broadcast'].forEach(b => {
         const btn = document.getElementById(b);
         if (btn) btn.className = "py-2.5 px-2 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition text-center cursor-pointer";
       });
@@ -2675,7 +2744,6 @@
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
-      // Force header and hero elements to display immediately without scroll dependency
       gsap.set('#hero .spring-up, #hero .spring-left, #hero .spring-right, #hero .spring-scale', {
         opacity: 1,
         x: 0,
@@ -2683,7 +2751,6 @@
         scale: 1
       });
 
-      // Spring Left
       gsap.utils.toArray('.spring-left:not(.animated-in)').forEach((el) => {
         el.classList.add('animated-in');
         gsap.fromTo(el, 
@@ -2699,7 +2766,6 @@
         );
       });
 
-      // Spring Right
       gsap.utils.toArray('.spring-right:not(.animated-in)').forEach((el) => {
         el.classList.add('animated-in');
         gsap.fromTo(el, 
@@ -2715,7 +2781,6 @@
         );
       });
 
-      // Spring Up
       gsap.utils.toArray('.spring-up:not(.animated-in)').forEach((el) => {
         el.classList.add('animated-in');
         gsap.fromTo(el, 
@@ -2731,7 +2796,6 @@
         );
       });
 
-      // Spring Scale
       gsap.utils.toArray('.spring-scale:not(.animated-in)').forEach((el) => {
         el.classList.add('animated-in');
         gsap.fromTo(el, 
@@ -2758,7 +2822,7 @@
         if (myCanvas) {
           myConfetti = confetti.create(myCanvas, {
             resize: true,
-            useWorker: false // Eliminates CSP worker blocks completely
+            useWorker: false
           });
         } else {
           myConfetti = confetti;
@@ -2881,6 +2945,93 @@
       }
     }, 1000);
 
+    // ================= PWA & FIREBASE PUSH ENGINE =================
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => console.log('PWA Service Worker registered:', reg.scope))
+          .catch((err) => console.warn('PWA Service Worker failed:', err));
+
+        try {
+          if (typeof firebase !== 'undefined' && firebase.messaging && firebase.messaging.isSupported()) {
+            fcmMessaging = firebase.messaging();
+            fcmMessaging.onMessage((payload) => {
+              const title = payload.notification?.title || "శ్రీ గణేష్ ఉత్సవం 2026";
+              const body = payload.notification?.body || "New event update!";
+              triggerFlowerRain();
+              alert(`📢 ${title}\n\n${body}`);
+            });
+          }
+        } catch (e) {
+          console.warn('Firebase Messaging init skipped:', e);
+        }
+      });
+    }
+
+    async function requestNotificationPermission() {
+      if (!('Notification' in window)) {
+        alert("This browser does not support notifications.");
+        return;
+      }
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted' && fcmMessaging) {
+          const fcmWorkerReg = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
+          
+          const currentToken = await fcmMessaging.getToken({
+            vapidKey: "BIspkcSrNoUGNttmoNSgUZD4wJbdKbQPk6AbOc4O_20S4T5w6BGvzPvm4gf2G8LQwKee6-877m0aTSRXEZFGA8g",
+            serviceWorkerRegistration: fcmWorkerReg
+          });
+
+          if (currentToken && db) {
+            const tokenKey = currentToken.substring(0, 20);
+            db.ref('fcmTokens/' + tokenKey).set({
+              token: currentToken,
+              registeredAt: Date.now()
+            }).catch(() => {});
+            alert("✅ Devotee live notifications enabled!");
+          }
+        } else if (permission === 'denied') {
+          alert("Notifications are blocked in site settings. Please unblock them to receive alerts.");
+        }
+      } catch (err) {
+        console.error("Token error:", err);
+      }
+    }
+
+    // Leader Panel Alert Trigger
+    function broadcastLeaderAlert() {
+      const title = sanitizeInput(document.getElementById('in-notif-title').value);
+      const body = sanitizeInput(document.getElementById('in-notif-body').value);
+      const statusEl = document.getElementById('leaderAlertStatus');
+
+      if (!title || !body) {
+        alert("Please enter both an alert title and message.");
+        return;
+      }
+
+      if (db) {
+        statusEl.className = "text-xs text-center font-semibold mt-2 text-amber-400";
+        statusEl.innerText = "Broadcasting to devotees...";
+        statusEl.classList.remove('hidden');
+
+        db.ref('latestLeaderAlert').set({
+          title: title,
+          body: body,
+          timestamp: Date.now()
+        }).then(() => {
+          statusEl.className = "text-xs text-center font-semibold mt-2 text-emerald-400";
+          statusEl.innerText = "✅ Live Alert broadcasted to all active devotees!";
+          document.getElementById('in-notif-title').value = '';
+          document.getElementById('in-notif-body').value = '';
+          triggerFlowerRain();
+        }).catch((err) => {
+          statusEl.className = "text-xs text-center font-semibold mt-2 text-rose-400";
+          statusEl.innerText = "❌ Failed to broadcast. Check connection.";
+        });
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       initDefaultPandalQr();
       renderAll();
@@ -2891,4 +3042,4 @@
   <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9999] w-full h-full"></canvas>
 
 </body>
-        </html>
+         </html>

@@ -1162,14 +1162,36 @@
           }
         });
 
-        // 4. Realtime Broadcast Listener (triggers instant in-app notification when Leader sends alert)
-        db.ref('latestLeaderAlert').on('value', (snapshot) => {
+        // 4. Realtime Broadcast Listener -> Displays System Status-Bar Notification
+        db.ref('latestLeaderAlert').on('value', async (snapshot) => {
           const alertData = snapshot.val();
           if (alertData && alertData.timestamp) {
             const timeDiff = Date.now() - alertData.timestamp;
-            if (timeDiff < 15000 && !alertData.shown) { // Within last 15 seconds
+            if (timeDiff < 25000) {
               triggerFlowerRain();
-              alert(`📢 ${alertData.title}\n\n${alertData.body}`);
+
+              if ('Notification' in window && Notification.permission === 'granted') {
+                if ('serviceWorker' in navigator) {
+                  try {
+                    const reg = await navigator.serviceWorker.ready;
+                    reg.showNotification(alertData.title || "శ్రీ గణేష్ ఉత్సవం 2026", {
+                      body: alertData.body || "New update from Moddulagudem Pandal!",
+                      icon: "./icon-192.png",
+                      badge: "./icon-192.png",
+                      vibrate: [300, 100, 300],
+                      tag: "utsav-alert-" + alertData.timestamp,
+                      renotify: true,
+                      data: { url: "./index.html" }
+                    });
+                  } catch (e) {
+                    new Notification(alertData.title, { body: alertData.body, icon: "./icon-192.png" });
+                  }
+                } else {
+                  new Notification(alertData.title, { body: alertData.body, icon: "./icon-192.png" });
+                }
+              } else {
+                alert(`📢 ${alertData.title}\n\n${alertData.body}`);
+              }
             }
           }
         });

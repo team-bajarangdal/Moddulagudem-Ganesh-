@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Team Bajarangdal | Grand Ganesh Utsav 2026</title>
+  <title>TBY Ganesh | Team Bajarangdal</title>
 
   <!-- PWA Metadata -->
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#F7C35F">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Ganesh Utsav">
+  <meta name="apple-mobile-web-app-title" content="TBY Ganesh">
   <link rel="apple-touch-icon" href="./icon-192.png">
 
   <!-- Content Security Policy: Added blob: to script-src and defined worker-src to prevent confetti worker blocks -->
@@ -679,7 +679,7 @@
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-3 border-b border-white/10 gap-2">
         <div>
           <span class="inline-block px-3 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider mb-1">⚡ Cloud Realtime Sync</span>
-          <h3 class="font-cinzel text-base sm:text-lg font-bold text-amber-400">LEADER CONTROL PANEL</h3>
+          <h3 class="font-cinzel text-base sm:lg font-bold text-amber-400">LEADER CONTROL PANEL</h3>
         </div>
         <button onclick="logoutAdmin()" class="px-4 py-1.5 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white text-xs font-bold transition flex items-center gap-1 self-end sm:self-auto cursor-pointer spring-btn">
           <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
@@ -1162,7 +1162,10 @@
           }
         });
 
-        // 4. Realtime Broadcast Listener -> Displays System Status-Bar Notification
+        // 4. Realtime Broadcast Listener -> Heads-Up Pop-Up Banner with Full Icon URL
+        const APP_BASE_URL = window.location.origin + window.location.pathname.replace(/\/+$/, '') + '/';
+        const FULL_ICON_URL = APP_BASE_URL + 'icon-192.png';
+
         db.ref('latestLeaderAlert').on('value', async (snapshot) => {
           const alertData = snapshot.val();
           if (alertData && alertData.timestamp) {
@@ -1174,20 +1177,22 @@
                 if ('serviceWorker' in navigator) {
                   try {
                     const reg = await navigator.serviceWorker.ready;
-                    reg.showNotification(alertData.title || "శ్రీ గణేష్ ఉత్సవం 2026", {
+                    reg.showNotification(alertData.title || "TBY Ganesh 2026", {
                       body: alertData.body || "New update from Moddulagudem Pandal!",
-                      icon: "./icon-192.png",
-                      badge: "./icon-192.png",
-                      vibrate: [300, 100, 300],
-                      tag: "utsav-alert-" + alertData.timestamp,
+                      icon: FULL_ICON_URL,
+                      badge: FULL_ICON_URL,
+                      image: FULL_ICON_URL,
+                      vibrate: [400, 200, 400],
+                      tag: "tby-alert-" + alertData.timestamp,
                       renotify: true,
+                      requireInteraction: true,
                       data: { url: "./index.html" }
                     });
                   } catch (e) {
-                    new Notification(alertData.title, { body: alertData.body, icon: "./icon-192.png" });
+                    new Notification(alertData.title, { body: alertData.body, icon: FULL_ICON_URL });
                   }
                 } else {
-                  new Notification(alertData.title, { body: alertData.body, icon: "./icon-192.png" });
+                  new Notification(alertData.title, { body: alertData.body, icon: FULL_ICON_URL });
                 }
               } else {
                 alert(`📢 ${alertData.title}\n\n${alertData.body}`);
@@ -2978,7 +2983,7 @@
           if (typeof firebase !== 'undefined' && firebase.messaging && firebase.messaging.isSupported()) {
             fcmMessaging = firebase.messaging();
             fcmMessaging.onMessage((payload) => {
-              const title = payload.notification?.title || "శ్రీ గణేష్ ఉత్సవం 2026";
+              const title = payload.notification?.title || "TBY Ganesh 2026";
               const body = payload.notification?.body || "New event update!";
               triggerFlowerRain();
               alert(`📢 ${title}\n\n${body}`);
@@ -2990,16 +2995,13 @@
       });
     }
 
-    async function requestNotificationPermission() {
-      if (!('Notification' in window)) {
-        alert("This browser does not support notifications.");
-        return;
-      }
-      try {
-        const permission = await Notification.requestPermission();
-        if (permission === 'granted' && fcmMessaging) {
+    // Automatically activates notifications permanently without clicking the bell every time
+    async function autoRegisterNotificationSubscriber() {
+      if (!('Notification' in window)) return;
+
+      if (Notification.permission === 'granted' && fcmMessaging) {
+        try {
           const fcmWorkerReg = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
-          
           const currentToken = await fcmMessaging.getToken({
             vapidKey: "BIspkcSrNoUGNttmoNSgUZD4wJbdKbQPk6AbOc4O_20S4T5w6BGvzPvm4gf2G8LQwKee6-877m0aTSRXEZFGA8g",
             serviceWorkerRegistration: fcmWorkerReg
@@ -3011,8 +3013,23 @@
               token: currentToken,
               registeredAt: Date.now()
             }).catch(() => {});
-            alert("✅ Devotee live notifications enabled!");
           }
+        } catch (err) {
+          console.warn("Silent sync error:", err);
+        }
+      }
+    }
+
+    async function requestNotificationPermission() {
+      if (!('Notification' in window)) {
+        alert("This browser does not support notifications.");
+        return;
+      }
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          await autoRegisterNotificationSubscriber();
+          alert("✅ Devotee live notifications enabled permanently!");
         } else if (permission === 'denied') {
           alert("Notifications are blocked in site settings. Please unblock them to receive alerts.");
         }
@@ -3057,6 +3074,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       initDefaultPandalQr();
       renderAll();
+      setTimeout(autoRegisterNotificationSubscriber, 1000);
     });
   </script>
 
@@ -3064,4 +3082,4 @@
   <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9999] w-full h-full"></canvas>
 
 </body>
-         </html>
+    </html>

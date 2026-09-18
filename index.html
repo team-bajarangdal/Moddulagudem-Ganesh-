@@ -13,15 +13,15 @@
   <meta name="apple-mobile-web-app-title" content="TBY Ganesh">
   <link rel="apple-touch-icon" href="./icon-192.png">
 
-  <!-- Content Security Policy: Added blob: to script-src and defined worker-src to prevent confetti worker blocks -->
+  <!-- Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self' 'unsafe-inline' https: data: blob:;
-    script-src 'self' 'unsafe-inline' blob: https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
+    default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://www.gstatic.com;
     worker-src 'self' blob:;
-    connect-src 'self' https: wss: data: blob: https://*.googleapis.com https://*.firebaseio.com;
+    connect-src 'self' https: wss: data: blob: https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com;
     img-src 'self' data: blob: https: https://images.unsplash.com https://api.qrserver.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
   ">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
@@ -186,7 +186,7 @@
       </svg>
       <svg class="w-44 h-44 sm:w-56 sm:h-56 text-amber-300/30 spin-mandala-rev" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.8">
         <circle cx="50" cy="50" r="36" stroke-dasharray="1 2"></circle>
-        <circle cx="50" cy="50" r="26"></circle>
+        <circle cx="50" cy="26"></circle>
       </svg>
       <div id="introOm" class="absolute text-6xl sm:text-8xl font-decorative text-amber-400 drop-shadow-[0_0_50px_rgba(247,195,95,1)]">ॐ</div>
     </div>
@@ -225,8 +225,7 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <!-- Notification Enable Bell -->
-      <button onclick="requestNotificationPermission()" title="Enable Live Darshan & Pooja Alerts" class="p-2 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/15 text-xs font-bold spring-btn flex items-center cursor-pointer">
+      <button onclick="requestNotificationPermission()" title="Enable Live Darshan & Alerts" class="p-2 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/15 text-xs font-bold spring-btn flex items-center cursor-pointer">
         <i data-lucide="bell" class="w-4 h-4"></i>
       </button>
       <button onclick="openLeaderAccess()" class="px-3 py-1.5 rounded-full border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 text-xs font-bold spring-btn flex items-center gap-1.5 cursor-pointer">
@@ -285,26 +284,31 @@
         </button>
       </div>
 
-      <!-- COUNTDOWN -->
-      <div class="spring-up lux-glass rounded-3xl p-5 sm:p-7 max-w-lg w-full mx-auto shadow-2xl mt-3">
-        <p id="countdown-status" class="text-xs uppercase tracking-[0.25em] text-amber-400 font-bold mb-3 font-cinzel">Utsav Sthapana Countdown</p>
-        <div class="grid grid-cols-4 gap-2.5 sm:gap-3.5 text-center">
-          <div class="spring-left bg-[#040008]/80 border border-amber-500/25 rounded-2xl py-3 shadow-inner spring-btn">
-            <span id="cd-days" class="font-cinzel text-2xl sm:text-4xl font-black text-amber-400">00</span>
-            <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Days</span>
+      <!-- ================= LIVE DEVOTEE ANNOUNCEMENT CARD ================= -->
+      <div class="spring-up lux-glass rounded-3xl p-5 sm:p-7 max-w-lg w-full mx-auto shadow-2xl mt-3 text-left border-amber-400/40 relative">
+        <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <h3 class="text-xs uppercase tracking-widest text-amber-400 font-bold font-cinzel flex items-center gap-1.5">
+              <i data-lucide="volume-2" class="w-4 h-4 text-amber-400"></i> Devotee Announcements
+            </h3>
           </div>
-          <div class="spring-up bg-[#040008]/80 border border-amber-500/25 rounded-2xl py-3 shadow-inner spring-btn">
-            <span id="cd-hours" class="font-cinzel text-2xl sm:text-4xl font-black text-amber-400">00</span>
-            <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Hours</span>
+          <button onclick="requestNotificationPermission()" class="text-[10px] font-bold uppercase tracking-wider text-amber-300 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full hover:bg-amber-500/20 spring-btn flex items-center gap-1 cursor-pointer">
+            <i data-lucide="bell" class="w-3 h-3"></i> Get Alerts
+          </button>
+        </div>
+
+        <div id="liveAnnouncementCard" class="bg-[#120626]/80 rounded-2xl p-4 border border-amber-400/25">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span id="announcementTypeBadge" class="inline-block text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500 text-black shadow">
+              లడ్డూ వేలం పాట
+            </span>
+            <span id="announcementTime" class="text-[10px] text-amber-300 font-mono flex-shrink-0">Live Update</span>
           </div>
-          <div class="spring-up bg-[#040008]/80 border border-amber-500/25 rounded-2xl py-3 shadow-inner spring-btn">
-            <span id="cd-minutes" class="font-cinzel text-2xl sm:text-4xl font-black text-amber-400">00</span>
-            <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Mins</span>
-          </div>
-          <div class="spring-right bg-[#040008]/80 border border-amber-500/25 rounded-2xl py-3 shadow-inner spring-btn">
-            <span id="cd-seconds" class="font-cinzel text-2xl sm:text-4xl font-black text-amber-400">00</span>
-            <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Secs</span>
-          </div>
+          <h4 id="announcementTitle" class="font-cinzel text-sm sm:text-base font-bold text-slate-100 mt-1">శ్రీ గణేష్ లడ్డూ మహా వేలం పాట</h4>
+          <p id="announcementBody" class="text-xs text-slate-300 mt-2 leading-relaxed font-light">
+            భక్తులకు విజ్ఞప్తి! ఈ రోజు సాయంత్రం 7:00 గంటలకు పందిరి వద్ద పవిత్ర గణేష్ ప్రసాదం లడ్డూ వేలం పాట నిర్వహించబడును.
+          </p>
         </div>
       </div>
 
@@ -405,7 +409,7 @@
     </div>
   </section>
 
-  <!-- ================= 05. BAKTULA - DEVOTEES PHOTOS ================= -->
+  <!-- ================= 05. DEVOTEES PHOTOS ================= -->
   <section id="baktula-photos" class="py-20 px-4 max-w-7xl mx-auto border-t border-amber-500/20 z-10 relative">
     <div class="text-center mb-10">
       <div class="spring-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest mb-2.5">
@@ -434,9 +438,9 @@
 
         <div class="space-y-3.5 text-center sm:text-left">
           <h4 class="font-cinzel text-base font-bold text-slate-100">Photo Leader Portal</h4>
-          <p class="text-xs text-slate-300">Volunteers can login to upload live devotee snaps.</p>
+          <p class="text-xs text-slate-300">Volunteers can snap direct camera clicks or upload live snaps.</p>
           <button onclick="openImageLeaderLogin()" class="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider spring-btn flex items-center justify-center gap-2 shadow-lg cursor-pointer">
-            <i data-lucide="camera" class="w-4 h-4"></i> Upload Devotee Clicks
+            <i data-lucide="camera" class="w-4 h-4"></i> Take / Upload Devotee Clicks
           </button>
         </div>
       </div>
@@ -584,16 +588,16 @@
         <i data-lucide="camera" class="w-7 h-7"></i>
       </div>
       <h3 class="font-cinzel text-lg font-bold text-slate-100">Photo Leader Login</h3>
-      <p class="text-xs text-slate-400 mt-1">Upload devotee photos from pandal</p>
+      <p class="text-xs text-slate-400 mt-1">Take or upload devotee photos directly</p>
 
       <div class="mt-4 space-y-3 text-left">
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Photo Leader ID</label>
-          <input id="img-login-id" type="text" placeholder="Enter ID (Image)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="img-login-id" type="text" autocomplete="username" placeholder="Enter ID (Image)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Password</label>
-          <input id="img-login-pass" type="password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="img-login-pass" type="password" autocomplete="current-password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
       </div>
       <div id="imgLoginError" class="text-rose-400 text-xs mt-2.5 hidden font-semibold">Incorrect Photo Leader ID or Password!</div>
@@ -604,7 +608,7 @@
     </div>
   </div>
 
-  <!-- ================= PHOTO LEADER UPLOAD DASHBOARD ================= -->
+  <!-- ================= PHOTO LEADER UPLOAD & LIVE CAMERA DASHBOARD ================= -->
   <div id="imageLeaderDashboardModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden items-center justify-center p-3 sm:p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 max-h-[92vh] overflow-y-auto shadow-2xl">
       
@@ -619,8 +623,31 @@
       </div>
 
       <div class="mt-4 space-y-4">
+        <!-- Live Viewfinder Camera Box -->
+        <div class="bg-black/40 p-4 rounded-2xl border border-amber-400/30 space-y-3 text-left">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <i data-lucide="camera" class="w-4 h-4 text-amber-400"></i> Direct Pandal Camera
+            </h4>
+            <span class="text-[10px] text-slate-400">Live Viewfinder Snap</span>
+          </div>
+
+          <div id="cameraPreviewContainer" class="hidden relative w-full rounded-2xl overflow-hidden bg-black aspect-[3/4] max-h-72 border border-white/10">
+            <video id="leaderCameraVideo" autoplay playsinline class="w-full h-full object-cover"></video>
+            <canvas id="cameraCaptureCanvas" class="hidden"></canvas>
+            <button onclick="captureDevoteePhotoNow()" class="absolute bottom-3 left-1/2 -translate-x-1/2 px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider shadow-xl flex items-center gap-2 spring-btn cursor-pointer">
+              <i data-lucide="aperture" class="w-4 h-4"></i> Snap & Upload
+            </button>
+          </div>
+
+          <button id="toggleCameraBtn" onclick="toggleLeaderCamera()" class="w-full py-2.5 bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs rounded-xl hover:bg-amber-500/30 spring-btn flex items-center justify-center gap-2 cursor-pointer">
+            <i data-lucide="video" class="w-4 h-4"></i> Open Web Camera Viewfinder
+          </button>
+        </div>
+
+        <!-- Gallery Upload Box -->
         <div class="bg-black/30 p-4 rounded-2xl border border-white/5 space-y-3 text-left">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Upload Devotee Camera Clicks</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Or Select from Gallery</h4>
           <p class="text-[11px] text-slate-300">Images are preserved in HD and safely removed after 2 hours.</p>
           
           <input id="devoteeMultiFileInput" type="file" accept="image/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
@@ -657,11 +684,11 @@
       <div class="mt-4 space-y-3 text-left">
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Leader ID</label>
-          <input id="login-id" type="text" placeholder="Enter Leader ID (Ganesh)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="login-id" type="text" autocomplete="username" placeholder="Enter Leader ID (Ganesh)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Password</label>
-          <input id="login-pass" type="password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
       </div>
       <div id="loginError" class="text-rose-400 text-xs mt-2.5 hidden font-semibold">Incorrect ID or Password!</div>
@@ -709,7 +736,7 @@
           Events
         </button>
         <button onclick="switchAdminTab('tab-push-broadcast')" id="btn-tab-push-broadcast" class="py-2.5 px-2 rounded-xl text-xs font-semibold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 transition text-center col-span-2 sm:col-span-1 cursor-pointer">
-          📢 Live Alerts
+          📢 Announcements
         </button>
       </div>
 
@@ -878,34 +905,65 @@
         </div>
       </div>
 
-      <!-- Tab 8: Leader Push Alerts Control -->
+      <!-- Tab 8: Leader Announcements Control -->
       <div id="tab-push-broadcast" class="space-y-4 hidden">
         <div class="bg-black/30 p-4 sm:p-5 rounded-2xl border border-amber-400/30 space-y-3 text-left">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-            <i data-lucide="bell-ring" class="w-4 h-4 text-amber-400"></i> Broadcast Live Devotee Alert
-          </h4>
-          <p class="text-[11px] text-slate-300">Push instant alert to all devotees who installed the App or allowed notifications.</p>
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <i data-lucide="volume-2" class="w-4 h-4 text-amber-400"></i> Manage Announcements & Live Alerts
+            </h4>
+            <span class="text-[10px] text-slate-400">Live Pandal Broadcast</span>
+          </div>
+          <p class="text-[11px] text-slate-300">Set the active announcement category and broadcast notifications to all devotees in real time.</p>
 
           <div>
-            <label class="block text-[11px] text-slate-400 mb-1">Alert Title</label>
-            <input id="in-notif-title" type="text" placeholder="e.g. మహా హారతి ప్రారంభం!" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+            <label class="block text-[11px] text-slate-400 mb-1 font-semibold">Announcement Category</label>
+            <select id="in-notif-type" onchange="autoFillAnnouncementTemplate(this.value)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+              <option value="లడ్డూ వేలం పాట">లడ్డూ వేలం పాట (Laddu Auction)</option>
+              <option value="మహా అన్నదానం">మహా అన్నదానం (Maha Annadanam)</option>
+              <option value="గణేష్ నిమజ్జనం">గణేష్ నిమజ్జనం / శోభాయాత్ర (Visarjan)</option>
+              <option value="మహా హారతి">మహా హారతి & పూజ (Maha Aarti)</option>
+              <option value="ముఖ్య సమాచారం">సాధారణ / ముఖ్య సమాచారం (General Alert)</option>
+            </select>
           </div>
 
           <div>
-            <label class="block text-[11px] text-slate-400 mb-1">Alert Message</label>
-            <textarea id="in-notif-body" rows="2" placeholder="e.g. Maha Aarti is beginning at pandal in 10 minutes. Join with family!" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none"></textarea>
+            <label class="block text-[11px] text-slate-400 mb-1 font-semibold">Announcement Title</label>
+            <input id="in-notif-title" type="text" placeholder="e.g. శ్రీ గణేష్ లడ్డూ మహా వేలం పాట" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1 font-semibold">Detailed Announcement Message</label>
+            <textarea id="in-notif-body" rows="3" placeholder="భక్తులకు విజ్ఞప్తి! ఈ రోజు సాయంత్రం 7:00 గంటలకు పందిరి వద్ద..." class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none"></textarea>
           </div>
 
           <button id="sendAlertBtn" onclick="broadcastLeaderAlert()" class="w-full py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg spring-btn cursor-pointer flex items-center justify-center gap-2">
-            <i data-lucide="send" class="w-4 h-4 fill-black"></i> Send Live Alert to All Devotees
+            <i data-lucide="send" class="w-4 h-4 fill-black"></i> Publish & Broadcast Announcement
           </button>
           
           <div id="leaderAlertStatus" class="text-xs text-center font-semibold mt-2 hidden"></div>
         </div>
 
-        <div class="bg-white/5 rounded-2xl p-3 border border-white/10">
-          <h5 class="text-xs font-bold text-slate-300 mb-1">Subscribed Devotees</h5>
-          <p class="text-[11px] text-slate-400">Active device tokens registered: <span id="registeredTokensCount" class="text-amber-400 font-bold">0</span></p>
+        <div class="bg-white/5 rounded-2xl p-4 border border-white/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <h5 class="text-xs font-bold text-slate-300">Currently Displayed Live Announcement</h5>
+            <span id="adminLiveType" class="px-2 py-0.5 rounded-full text-[9px] bg-amber-500 text-black font-extrabold"></span>
+          </div>
+          <p id="adminLiveTitle" class="text-xs font-bold text-amber-300 font-cinzel"></p>
+          <p id="adminLiveBody" class="text-[11px] text-slate-400"></p>
+          <div class="pt-2 flex gap-2">
+            <button onclick="editCurrentLiveAnnouncement()" class="px-3 py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 text-xs font-bold transition spring-btn">
+              Edit This Announcement
+            </button>
+            <button onclick="resetDefaultAnnouncement()" class="px-3 py-1.5 rounded-xl bg-white/10 text-white hover:bg-white/20 text-xs font-semibold transition spring-btn">
+              Reset to Default
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white/5 rounded-2xl p-3 border border-white/10 flex justify-between items-center text-xs">
+          <span class="text-slate-400">Subscribed Alert Tokens:</span>
+          <span id="registeredTokensCount" class="text-amber-400 font-bold font-mono">0</span>
         </div>
       </div>
 
@@ -974,7 +1032,6 @@
       <div class="font-decorative text-gold-gradient text-xl sm:text-2xl font-black">టీమ్ బజరంగ్ దళ్</div>
       <p class="text-slate-400 font-cinzel text-xs tracking-widest">Ganapati Bappa Morya • Ganesh Utsav 2026</p>
       
-      <!-- Dev / Author Badge -->
       <div class="pt-6 flex justify-center">
         <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-amber-400/40 text-xs shadow-lg spring-btn hover:border-amber-400 transition">
           <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-amber-200 flex items-center justify-center text-black font-black text-xs border border-amber-400/80 shadow">BA</div>
@@ -996,6 +1053,7 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#x27;')
         .replace(/javascript:/gi, '')
+        .replace(/data:/gi, '')
         .trim();
     }
 
@@ -1078,14 +1136,21 @@
     let editingSevaIndex = null;
     let latestGeneratedDonorReceipt = null;
 
+    let currentAnnouncement = {
+      type: "లడ్డూ వేలం పాట",
+      title: "శ్రీ గణేష్ లడ్డూ మహా వేలం పాట",
+      body: "భక్తులకు విజ్ఞప్తి! ఈ రోజు సాయంత్రం 7:00 గంటలకు పందిరి వద్ద పవిత్ర గణేష్ ప్రసాదం లడ్డూ వేలం పాట నిర్వహించబడును. అందరూ పాల్గొని స్వామివారి కృప పొందగలరు.",
+      timestamp: Date.now()
+    };
+
     let cropper = null;
     let pendingCropCallback = null;
     let pendingNewMemberCroppedImg = "";
     let pendingReplaceTarget = null;
     let pendingReplaceIndex = null;
     let renderDebounceTimer = null;
+    let cameraMediaStream = null;
 
-    // --- FIREBASE SYNC WITH LOCAL STORAGE RESILIENCE ---
     let db = null;
     let fcmMessaging = null;
 
@@ -1096,17 +1161,16 @@
         }
         db = firebase.database();
         
-        // Load offline cache first for instant fallback
         const localCachedData = localStorage.getItem('tb_cached_ganesh_data');
         if (localCachedData) {
           try {
             const parsed = JSON.parse(localCachedData);
             if (parsed.donorsData) donorsData = parsed.donorsData;
             if (parsed.sevasData) sevasData = parsed.sevasData;
+            if (parsed.currentAnnouncement) currentAnnouncement = parsed.currentAnnouncement;
           } catch(e) {}
         }
 
-        // 1. Listen for main celebration data
         db.ref('ganeshUtsavData').on('value', (snapshot) => {
           const val = snapshot.val();
           if (val) {
@@ -1119,26 +1183,15 @@
             chandaData = val.chandaData || defaultChanda;
 
             localStorage.setItem('tb_cached_ganesh_data', JSON.stringify({
-              heroGaneshaImg, eventsData, committeeData, albumsData, sevasData, donorsData, chandaData
+              heroGaneshaImg, eventsData, committeeData, albumsData, sevasData, donorsData, chandaData, currentAnnouncement
             }));
-          } else {
-            db.ref('ganeshUtsavData').update({
-              heroGaneshaImg: defaultHeroGanesha,
-              eventsData: defaultEvents,
-              committeeData: defaultCommittee,
-              albumsData: defaultAlbums,
-              sevasData: defaultSevas,
-              donorsData: [],
-              chandaData: defaultChanda
-            }).catch(() => {});
           }
           debouncedRender();
         }, (error) => {
-          console.warn("Firebase offline or permission error. Operating on cached local storage:", error);
+          console.warn("Firebase local fallback:", error);
           debouncedRender();
         });
 
-        // 2. Listen for live devotee photos
         db.ref('devoteePandalPhotos').on('value', (snapshot) => {
           const val = snapshot.val();
           if (val) {
@@ -1149,11 +1202,10 @@
           cleanExpiredDevoteePhotos();
           renderDevoteePhotos();
         }, (err) => {
-          console.warn("Devotee photos cloud read error:", err);
+          console.warn("Photos read error:", err);
           renderDevoteePhotos();
         });
 
-        // 3. Count registered tokens for Leader
         db.ref('fcmTokens').on('value', (snapshot) => {
           const val = snapshot.val();
           const countEl = document.getElementById('registeredTokensCount');
@@ -1162,15 +1214,17 @@
           }
         });
 
-        // 4. Realtime Broadcast Listener -> Heads-Up Pop-Up Banner with Full Icon URL
         const APP_BASE_URL = window.location.origin + window.location.pathname.replace(/\/+$/, '') + '/';
         const FULL_ICON_URL = APP_BASE_URL + 'icon-192.png';
 
         db.ref('latestLeaderAlert').on('value', async (snapshot) => {
           const alertData = snapshot.val();
           if (alertData && alertData.timestamp) {
+            currentAnnouncement = alertData;
+            updateAnnouncementUI(alertData.type, alertData.title, alertData.body, alertData.timestamp);
+
             const timeDiff = Date.now() - alertData.timestamp;
-            if (timeDiff < 25000) {
+            if (timeDiff < 30000) {
               triggerFlowerRain();
 
               if ('Notification' in window && Notification.permission === 'granted') {
@@ -1194,16 +1248,90 @@
                 } else {
                   new Notification(alertData.title, { body: alertData.body, icon: FULL_ICON_URL });
                 }
-              } else {
-                alert(`📢 ${alertData.title}\n\n${alertData.body}`);
               }
             }
           }
         });
       }
     } catch(e) {
-      console.warn("Firebase initialization skipped/failed. Using offline local state:", e);
+      console.warn("Firebase offline mode active:", e);
       debouncedRender();
+    }
+
+    const ANNOUNCEMENT_TEMPLATES = {
+      "లడ్డూ వేలం పాట": {
+        title: "శ్రీ గణేష్ లడ్డూ మహా వేలం పాట",
+        body: "భక్తులకు విజ్ఞప్తి! ఈ రోజు సాయంత్రం 7:00 గంటలకు పందిరి వద్ద పవిత్ర గణేష్ ప్రసాదం లడ్డూ వేలం పాట నిర్వహించబడును. అందరూ పాల్గొని స్వామివారి కృప పొందగలరు."
+      },
+      "మహా అన్నదానం": {
+        title: "భక్తులకు మహా అన్నదాన ప్రసాద వితరణ",
+        body: "టీమ్ బజరంగ్ దళ్ గణేష్ ఉత్సవ కమిటీ ఆధ్వర్యంలో ఈ రోజు మధ్యాహ్నం 12:30 గంటల నుండి పందిరి ప్రాంగణంలో మహా అన్నదానం జరుగును. భక్తులందరూ విచ్చేయగలరు."
+      },
+      "గణేష్ నిమజ్జనం": {
+        title: "శ్రీ గణేష్ శోభాయాత్ర & నిమజ్జన మహోత్సవం",
+        body: "గణపతి బప్పా మోరియా! రేపు మధ్యాహ్నం 3:00 గంటల నుండి పందిరి వద్ద నుండి ఘనంగా నిమజ్జన శోభాయాత్ర ప్రారంభమవును. డప్పు చప్పుళ్ళు, కోలాటాలతో పాల్గొనండి."
+      },
+      "మహా హారతి": {
+        title: "సాయంత్రం 108 దివ్య దీపారాధన & మహా హారతి",
+        body: "ఈ రోజు సాయంత్రం 6:30 గంటలకు భక్తిశ్రద్ధలతో 108 దీపారాధన మరియు మహా మంగళ హారతి సమర్పించబడును. సకుటుంబసమేతంగా పాల్గొనండి."
+      },
+      "ముఖ్య సమాచారం": {
+        title: "టీమ్ బజరంగ్ దళ్ పందిరి ముఖ్య ప్రకటన",
+        body: "గణేష్ భక్తులందరికీ స్వాగతం. పందిరి పరిసరాల్లో క్రమశిక్షణ పాటించి దర్శనం చేసుకోగలరు."
+      }
+    };
+
+    function autoFillAnnouncementTemplate(selectedType) {
+      const templ = ANNOUNCEMENT_TEMPLATES[selectedType];
+      if (templ) {
+        document.getElementById('in-notif-title').value = templ.title;
+        document.getElementById('in-notif-body').value = templ.body;
+      }
+    }
+
+    function updateAnnouncementUI(type, title, body, timestamp) {
+      const typeEl = document.getElementById('announcementTypeBadge');
+      const titleEl = document.getElementById('announcementTitle');
+      const bodyEl = document.getElementById('announcementBody');
+      const timeEl = document.getElementById('announcementTime');
+
+      if (typeEl && type) typeEl.innerText = sanitizeInput(type);
+      if (titleEl && title) titleEl.innerText = sanitizeInput(title);
+      if (bodyEl && body) bodyEl.innerText = sanitizeInput(body);
+      if (timeEl && timestamp) {
+        const d = new Date(timestamp);
+        timeEl.innerText = d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+      }
+
+      const aType = document.getElementById('adminLiveType');
+      const aTitle = document.getElementById('adminLiveTitle');
+      const aBody = document.getElementById('adminLiveBody');
+      if (aType) aType.innerText = type || 'లడ్డూ వేలం పాట';
+      if (aTitle) aTitle.innerText = title || '';
+      if (aBody) aBody.innerText = body || '';
+    }
+
+    function editCurrentLiveAnnouncement() {
+      if (currentAnnouncement) {
+        document.getElementById('in-notif-type').value = currentAnnouncement.type || 'లడ్డూ వేలం పాట';
+        document.getElementById('in-notif-title').value = currentAnnouncement.title || '';
+        document.getElementById('in-notif-body').value = currentAnnouncement.body || '';
+        alert("Announcement details loaded into the editor above. Modify and click 'Publish' to update.");
+      }
+    }
+
+    function resetDefaultAnnouncement() {
+      const def = {
+        type: "లడ్డూ వేలం పాట",
+        title: "శ్రీ గణేష్ లడ్డూ మహా వేలం పాట",
+        body: "భక్తులకు విజ్ఞప్తి! ఈ రోజు సాయంత్రం 7:00 గంటలకు పందిరి వద్ద పవిత్ర గణేష్ ప్రసాదం లడ్డూ వేలం పాట నిర్వహించబడును. అందరూ పాల్గొనగలరు.",
+        timestamp: Date.now()
+      };
+      if (db) {
+        db.ref('latestLeaderAlert').set(def);
+      } else {
+        updateAnnouncementUI(def.type, def.title, def.body, def.timestamp);
+      }
     }
 
     function debouncedRender() {
@@ -1222,8 +1350,7 @@
 
       if (db) {
         db.ref('ganeshUtsavData/' + nodePath).set(nodeData)
-          .then(() => console.log("Synced " + nodePath + " to cloud"))
-          .catch((err) => console.warn("Cloud write pending or failed:", err));
+          .catch((err) => console.warn("Cloud sync pending:", err));
       }
       debouncedRender();
     }
@@ -1419,7 +1546,7 @@
       try {
         doc.addImage(selectedDevoteeItem.img, 'JPEG', 18, 38, 174, 210, undefined, 'FAST');
       } catch (e) {
-        console.warn("Could not append image to souvenir PDF:", e);
+        console.warn("Souvenir PDF image draw skipped:", e);
       }
 
       doc.setFontSize(11);
@@ -1454,6 +1581,7 @@
       document.getElementById('img-login-pass').value = '';
     }
 
+    // Direct String Comparison for Photo Leader (ID: image | Pass: 1111)
     function verifyImageLeaderLogin() {
       const id = document.getElementById('img-login-id').value.trim();
       const pass = document.getElementById('img-login-pass').value.trim();
@@ -1476,14 +1604,97 @@
     }
 
     function closeImageLeaderDashboard() {
+      stopLeaderCamera();
       const modal = document.getElementById('imageLeaderDashboardModal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
     }
 
     function logoutImageLeader() {
+      stopLeaderCamera();
       sessionStorage.removeItem('img_leader_token');
       closeImageLeaderDashboard();
+    }
+
+    // --- WEB BROWSER LIVE CAMERA ENGINE ---
+    async function toggleLeaderCamera() {
+      const container = document.getElementById('cameraPreviewContainer');
+      const toggleBtn = document.getElementById('toggleCameraBtn');
+      const video = document.getElementById('leaderCameraVideo');
+
+      if (cameraMediaStream) {
+        stopLeaderCamera();
+        return;
+      }
+
+      try {
+        cameraMediaStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
+          audio: false
+        });
+        video.srcObject = cameraMediaStream;
+        container.classList.remove('hidden');
+        toggleBtn.innerHTML = `<i data-lucide="video-off" class="w-4 h-4"></i> Close Web Camera`;
+        toggleBtn.classList.replace('bg-amber-500/20', 'bg-rose-500/20');
+        toggleBtn.classList.replace('text-amber-300', 'text-rose-300');
+        lucide.createIcons();
+      } catch (err) {
+        console.error("Camera access failed:", err);
+        alert("Camera permission denied or camera device not supported. Make sure you are on HTTPS (GitHub Pages).");
+      }
+    }
+
+    function stopLeaderCamera() {
+      const container = document.getElementById('cameraPreviewContainer');
+      const toggleBtn = document.getElementById('toggleCameraBtn');
+      const video = document.getElementById('leaderCameraVideo');
+
+      if (cameraMediaStream) {
+        cameraMediaStream.getTracks().forEach(t => t.stop());
+        cameraMediaStream = null;
+      }
+      if (video) video.srcObject = null;
+      if (container) container.classList.add('hidden');
+      if (toggleBtn) {
+        toggleBtn.innerHTML = `<i data-lucide="video" class="w-4 h-4"></i> Open Web Camera Viewfinder`;
+        toggleBtn.classList.replace('bg-rose-500/20', 'bg-amber-500/20');
+        toggleBtn.classList.replace('text-rose-300', 'text-amber-300');
+        lucide.createIcons();
+      }
+    }
+
+    async function captureDevoteePhotoNow() {
+      const video = document.getElementById('leaderCameraVideo');
+      const canvas = document.getElementById('cameraCaptureCanvas');
+      if (!video || !cameraMediaStream) return;
+
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const photoDataUrl = canvas.toDataURL('image/jpeg', 0.65);
+      const timeNow = new Date();
+      const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+      const photoObj = {
+        img: photoDataUrl,
+        timestamp: Date.now(),
+        timeStr: timeStr
+      };
+
+      try {
+        if (db) {
+          await db.ref('devoteePandalPhotos').push(photoObj);
+        } else {
+          devoteePhotosData.unshift(photoObj);
+        }
+        triggerFlowerRain();
+        alert("Photo captured & published! It will automatically expire in 2 hours.");
+      } catch (err) {
+        console.error("Save error:", err);
+        alert("Failed to save capture. Please retry.");
+      }
     }
 
     async function uploadDevoteePhotosBatch() {
@@ -1986,7 +2197,6 @@
       alert("New Committee Member added successfully!");
     }
 
-    // --- GRANULAR ALBUM ITEM DELETION & EDITING CONTROLS ---
     function toggleAlbumAccordion(albumIdx) {
       const itemsList = document.getElementById(`album-items-sublist-${albumIdx}`);
       if (itemsList) {
@@ -2230,7 +2440,6 @@
       }
     }
 
-    // --- REFINED SAFE MOBILE UPI PAYMENT TRIGGER ---
     function openPaymentAndDevoteePopup() {
       const cleanUpi = encodeURIComponent((chandaData.upiId || 'team-bajarangdal@upi').trim());
       const cleanName = encodeURIComponent((chandaData.headName || 'Team Bajarangdal').trim());
@@ -2641,6 +2850,9 @@
       renderDevoteePhotos();
       renderMoments();
       renderChanda();
+      if (currentAnnouncement) {
+        updateAnnouncementUI(currentAnnouncement.type, currentAnnouncement.title, currentAnnouncement.body, currentAnnouncement.timestamp);
+      }
       initScrollSpringAnimations();
       lucide.createIcons();
     }
@@ -2663,6 +2875,7 @@
       document.getElementById('login-pass').value = '';
     }
 
+    // Direct String Comparison for President (ID: ganesh | Pass: 0000)
     function verifyLeaderLogin() {
       const leaderId = document.getElementById('login-id').value.trim();
       const leaderPass = document.getElementById('login-pass').value.trim();
@@ -2766,7 +2979,6 @@
       }, "-=0.2");
     }
 
-    // --- DIRECTIONAL SPRING SCROLLTRIGGER ENGINE ---
     function initScrollSpringAnimations() {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
@@ -2840,7 +3052,6 @@
       ScrollTrigger.refresh();
     }
 
-    // --- CONTINUOUS FALLING PAPER-CUT CONFETTI ENGINE (FIXED) ---
     let myConfetti = null;
 
     function getConfettiEngine() {
@@ -2908,7 +3119,7 @@
       startContinuousPaperShower(3000);
     }
 
-    // Background Canvas
+    // Particle Background
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -2953,49 +3164,31 @@
     }
     animateParticles();
 
-    // Countdown Engine
-    const targetDate = new Date("September 14, 2026 07:00:00").getTime();
-    setInterval(() => {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-      if (diff > 0) {
-        document.getElementById("cd-days").innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-        document.getElementById("cd-hours").innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-        document.getElementById("cd-minutes").innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-        document.getElementById("cd-seconds").innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
-      } else {
-        document.getElementById("countdown-status").innerText = "Utsav In Full Celebration! ✦";
-        document.getElementById("cd-days").innerText = "00";
-        document.getElementById("cd-hours").innerText = "00";
-        document.getElementById("cd-minutes").innerText = "00";
-        document.getElementById("cd-seconds").innerText = "00";
-      }
-    }, 1000);
-
     // ================= PWA & FIREBASE PUSH ENGINE =================
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then((reg) => console.log('PWA Service Worker registered:', reg.scope))
-          .catch((err) => console.warn('PWA Service Worker failed:', err));
+          .then((reg) => console.log('PWA SW active:', reg.scope))
+          .catch((err) => console.warn('PWA SW registration skipped:', err));
 
         try {
           if (typeof firebase !== 'undefined' && firebase.messaging && firebase.messaging.isSupported()) {
             fcmMessaging = firebase.messaging();
             fcmMessaging.onMessage((payload) => {
+              const type = payload.data?.type || payload.notification?.tag || "ముఖ్య సమాచారం";
               const title = payload.notification?.title || "TBY Ganesh 2026";
               const body = payload.notification?.body || "New event update!";
               triggerFlowerRain();
-              alert(`📢 ${title}\n\n${body}`);
+              updateAnnouncementUI(type, title, body, Date.now());
+              alert(`📢 [${type}] ${title}\n\n${body}`);
             });
           }
         } catch (e) {
-          console.warn('Firebase Messaging init skipped:', e);
+          console.warn('Firebase Messaging skipped:', e);
         }
       });
     }
 
-    // Automatically activates notifications permanently without clicking the bell every time
     async function autoRegisterNotificationSubscriber() {
       if (!('Notification' in window)) return;
 
@@ -3015,59 +3208,66 @@
             }).catch(() => {});
           }
         } catch (err) {
-          console.warn("Silent sync error:", err);
+          console.warn("FCM token sync:", err);
         }
       }
     }
 
     async function requestNotificationPermission() {
       if (!('Notification' in window)) {
-        alert("This browser does not support notifications.");
+        alert("This browser does not support web notifications.");
         return;
       }
       try {
         const permission = await Notification.requestPermission();
         if (permission === 'granted') {
           await autoRegisterNotificationSubscriber();
-          alert("✅ Devotee live notifications enabled permanently!");
+          alert("✅ Live notifications enabled successfully!");
         } else if (permission === 'denied') {
-          alert("Notifications are blocked in site settings. Please unblock them to receive alerts.");
+          alert("Notifications are disabled in browser settings. Please enable them to receive live alerts.");
         }
       } catch (err) {
-        console.error("Token error:", err);
+        console.error("Permission error:", err);
       }
     }
 
-    // Leader Panel Alert Trigger
+    // Leader Panel Alert & Announcement Broadcaster
     function broadcastLeaderAlert() {
+      const type = document.getElementById('in-notif-type').value;
       const title = sanitizeInput(document.getElementById('in-notif-title').value);
       const body = sanitizeInput(document.getElementById('in-notif-body').value);
       const statusEl = document.getElementById('leaderAlertStatus');
 
       if (!title || !body) {
-        alert("Please enter both an alert title and message.");
+        alert("Please enter both an announcement title and message.");
         return;
       }
 
+      const announcementPayload = {
+        type: type,
+        title: title,
+        body: body,
+        timestamp: Date.now()
+      };
+
+      currentAnnouncement = announcementPayload;
+      updateAnnouncementUI(type, title, body, announcementPayload.timestamp);
+
       if (db) {
         statusEl.className = "text-xs text-center font-semibold mt-2 text-amber-400";
-        statusEl.innerText = "Broadcasting to devotees...";
+        statusEl.innerText = "Broadcasting announcement to all devotees...";
         statusEl.classList.remove('hidden');
 
-        db.ref('latestLeaderAlert').set({
-          title: title,
-          body: body,
-          timestamp: Date.now()
-        }).then(() => {
+        db.ref('latestLeaderAlert').set(announcementPayload).then(() => {
           statusEl.className = "text-xs text-center font-semibold mt-2 text-emerald-400";
-          statusEl.innerText = "✅ Live Alert broadcasted to all active devotees!";
-          document.getElementById('in-notif-title').value = '';
-          document.getElementById('in-notif-body').value = '';
+          statusEl.innerText = "✅ Live Announcement published and broadcasted successfully!";
           triggerFlowerRain();
         }).catch((err) => {
           statusEl.className = "text-xs text-center font-semibold mt-2 text-rose-400";
-          statusEl.innerText = "❌ Failed to broadcast. Check connection.";
+          statusEl.innerText = "❌ Broadcast failed. Check network connection.";
         });
+      } else {
+        alert("Announcement updated locally (offline mode).");
       }
     }
 
@@ -3078,9 +3278,7 @@
     });
   </script>
 
-  <!-- High-priority canvas layer explicitly mounted on top -->
   <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9999] w-full h-full"></canvas>
 
 </body>
-    </html>
- 
+         </html>

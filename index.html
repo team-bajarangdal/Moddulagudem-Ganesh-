@@ -20,6 +20,7 @@
     worker-src 'self' blob:;
     connect-src 'self' https: wss: data: blob: https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com;
     img-src 'self' data: blob: https: https://images.unsplash.com https://api.qrserver.com;
+    media-src 'self' data: blob: https:;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
     font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
   ">
@@ -438,7 +439,7 @@
 
         <div class="space-y-3.5 text-center sm:text-left">
           <h4 class="font-cinzel text-base font-bold text-slate-100">Photo Leader Portal</h4>
-          <p class="text-xs text-slate-300">Volunteers can snap direct camera clicks or upload live snaps.</p>
+          <p class="text-xs text-slate-300">Take pictures directly with your camera app or upload from gallery.</p>
           <button onclick="openImageLeaderLogin()" class="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider spring-btn flex items-center justify-center gap-2 shadow-lg cursor-pointer">
             <i data-lucide="camera" class="w-4 h-4"></i> Take / Upload Devotee Clicks
           </button>
@@ -454,8 +455,8 @@
   <section id="moments" class="py-20 px-4 max-w-7xl mx-auto border-t border-amber-500/15 z-10 relative">
     <div class="text-center mb-12">
       <span class="spring-left text-xs font-bold tracking-[0.25em] text-amber-400 uppercase inline-block">06 • Gallery & Memories</span>
-      <h2 class="spring-right font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-1">Festival Albums & Folders</h2>
-      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">పందిరి అలంకరణ, పూజలు, సంబరాలు & మన జ్ఞాపకాల ఫోల్డర్లు</p>
+      <h2 class="spring-right font-decorative text-3xl sm:text-5xl font-black text-slate-100 mt-1">Festival Albums, Photos & Videos</h2>
+      <p class="spring-up text-xs sm:text-sm text-slate-400 mt-1.5">పందిరి అలంకరణ, పూజలు, సంబరాలు & వీడియోలు</p>
     </div>
 
     <!-- Album Folders Grid -->
@@ -588,16 +589,16 @@
         <i data-lucide="camera" class="w-7 h-7"></i>
       </div>
       <h3 class="font-cinzel text-lg font-bold text-slate-100">Photo Leader Login</h3>
-      <p class="text-xs text-slate-400 mt-1">Take or upload devotee photos directly</p>
+      <p class="text-xs text-slate-400 mt-1">Take pictures directly or upload to Devotee Photos</p>
 
       <div class="mt-4 space-y-3 text-left">
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Photo Leader ID</label>
-          <input id="img-login-id" type="text" autocomplete="username" placeholder="Enter ID (Image)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="img-login-id" type="text" autocomplete="username" placeholder="Enter ID (image)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Password</label>
-          <input id="img-login-pass" type="password" autocomplete="current-password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="img-login-pass" type="password" autocomplete="current-password" placeholder="•••• (1111)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
       </div>
       <div id="imgLoginError" class="text-rose-400 text-xs mt-2.5 hidden font-semibold">Incorrect Photo Leader ID or Password!</div>
@@ -608,7 +609,7 @@
     </div>
   </div>
 
-  <!-- ================= PHOTO LEADER UPLOAD & LIVE CAMERA DASHBOARD ================= -->
+  <!-- ================= PHOTO LEADER UPLOAD DASHBOARD ================= -->
   <div id="imageLeaderDashboardModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden items-center justify-center p-3 sm:p-4">
     <div class="bg-[#120626] border border-amber-400/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 max-h-[92vh] overflow-y-auto shadow-2xl">
       
@@ -623,32 +624,27 @@
       </div>
 
       <div class="mt-4 space-y-4">
-        <!-- Live Viewfinder Camera Box -->
-        <div class="bg-black/40 p-4 rounded-2xl border border-amber-400/30 space-y-3 text-left">
+        <!-- Direct Native Camera Launch Card -->
+        <div class="bg-black/40 p-4 rounded-2xl border border-amber-400/35 space-y-3 text-left">
           <div class="flex items-center justify-between">
             <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-              <i data-lucide="camera" class="w-4 h-4 text-amber-400"></i> Direct Pandal Camera
+              <i data-lucide="camera" class="w-4 h-4 text-amber-400"></i> Direct Mobile Camera
             </h4>
-            <span class="text-[10px] text-slate-400">Live Viewfinder Snap</span>
+            <span class="text-[10px] text-slate-400">Full Quality & Built-in Edits</span>
           </div>
 
-          <div id="cameraPreviewContainer" class="hidden relative w-full rounded-2xl overflow-hidden bg-black aspect-[3/4] max-h-72 border border-white/10">
-            <video id="leaderCameraVideo" autoplay playsinline class="w-full h-full object-cover"></video>
-            <canvas id="cameraCaptureCanvas" class="hidden"></canvas>
-            <button onclick="captureDevoteePhotoNow()" class="absolute bottom-3 left-1/2 -translate-x-1/2 px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider shadow-xl flex items-center gap-2 spring-btn cursor-pointer">
-              <i data-lucide="aperture" class="w-4 h-4"></i> Snap & Upload
-            </button>
-          </div>
+          <p class="text-[11px] text-slate-300">Opens your device's native camera immediately. Tap the checkmark (✓) after snapping to publish directly.</p>
 
-          <button id="toggleCameraBtn" onclick="toggleLeaderCamera()" class="w-full py-2.5 bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold text-xs rounded-xl hover:bg-amber-500/30 spring-btn flex items-center justify-center gap-2 cursor-pointer">
-            <i data-lucide="video" class="w-4 h-4"></i> Open Web Camera Viewfinder
-          </button>
+          <label for="directNativeCamInput" class="w-full py-3.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg flex items-center justify-center gap-2 cursor-pointer spring-btn text-center">
+            <i data-lucide="aperture" class="w-4 h-4 fill-black"></i> Open Camera & Snap Photo
+          </label>
+          <input id="directNativeCamInput" type="file" accept="image/*" capture="environment" class="hidden" onchange="handleDirectCameraSnap(this)">
         </div>
 
         <!-- Gallery Upload Box -->
         <div class="bg-black/30 p-4 rounded-2xl border border-white/5 space-y-3 text-left">
           <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Or Select from Gallery</h4>
-          <p class="text-[11px] text-slate-300">Images are preserved in HD and safely removed after 2 hours.</p>
+          <p class="text-[11px] text-slate-300">Upload multiple photos from your library. They automatically expire in 2 hours.</p>
           
           <input id="devoteeMultiFileInput" type="file" accept="image/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
           
@@ -688,7 +684,7 @@
         </div>
         <div>
           <label class="block text-[11px] text-slate-400 mb-1 font-semibold uppercase tracking-wider">Password</label>
-          <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
+          <input id="login-pass" type="password" autocomplete="current-password" placeholder="•••• (0000)" class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-400 outline-none">
         </div>
       </div>
       <div id="loginError" class="text-rose-400 text-xs mt-2.5 hidden font-semibold">Incorrect ID or Password!</div>
@@ -812,10 +808,10 @@
         </div>
       </div>
 
-      <!-- Tab 4: Moments & BTS -->
+      <!-- Tab 4: Moments & BTS (PHOTOS & VIDEOS) -->
       <div id="tab-moments-edit" class="space-y-4 hidden">
         <div class="bg-black/30 p-4 rounded-2xl border border-white/5 space-y-3">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Add Photos to Selective Folder</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Add Photos or Videos to Selected Folder</h4>
           
           <div>
             <label class="block text-[11px] text-slate-400 mb-1 font-medium">Select Target Folder</label>
@@ -833,19 +829,19 @@
           </div>
 
           <div>
-            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Upload Festival Photos (Multiple Select)</label>
-            <input id="in-moment-files" type="file" accept="image/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
+            <label class="block text-[11px] text-slate-400 mb-1 font-medium">Upload Media (Photos or Videos - Max 7MB per video)</label>
+            <input id="in-moment-files" type="file" accept="image/*,video/*" multiple class="w-full bg-[#1c0c38] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:bg-amber-500 file:text-black">
           </div>
 
-          <button onclick="saveBatchMoments()" class="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg spring-btn cursor-pointer">
-            Save Photos to Folder ✦
+          <button id="saveMomentsBtn" onclick="saveBatchMoments()" class="w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg spring-btn cursor-pointer">
+            Save Media to Folder ✦
           </button>
         </div>
 
         <div>
           <div class="flex items-center justify-between mb-2">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Active Albums & Inside Files (<span id="momentCount">0</span> folders)</h4>
-            <span class="text-[10px] text-slate-400">Manage individual photos inside</span>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400">Active Albums (<span id="momentCount">0</span> folders)</h4>
+            <span class="text-[10px] text-slate-400">Photos & Videos</span>
           </div>
           <div id="adminMomentsList" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
         </div>
@@ -1149,7 +1145,6 @@
     let pendingReplaceTarget = null;
     let pendingReplaceIndex = null;
     let renderDebounceTimer = null;
-    let cameraMediaStream = null;
 
     let db = null;
     let fcmMessaging = null;
@@ -1316,7 +1311,7 @@
         document.getElementById('in-notif-type').value = currentAnnouncement.type || 'లడ్డూ వేలం పాట';
         document.getElementById('in-notif-title').value = currentAnnouncement.title || '';
         document.getElementById('in-notif-body').value = currentAnnouncement.body || '';
-        alert("Announcement details loaded into the editor above. Modify and click 'Publish' to update.");
+        alert("Announcement loaded into editor above. Edit and click 'Publish' to broadcast.");
       }
     }
 
@@ -1581,7 +1576,6 @@
       document.getElementById('img-login-pass').value = '';
     }
 
-    // Direct String Comparison for Photo Leader (ID: image | Pass: 1111)
     function verifyImageLeaderLogin() {
       const id = document.getElementById('img-login-id').value.trim();
       const pass = document.getElementById('img-login-pass').value.trim();
@@ -1604,96 +1598,45 @@
     }
 
     function closeImageLeaderDashboard() {
-      stopLeaderCamera();
       const modal = document.getElementById('imageLeaderDashboardModal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
     }
 
     function logoutImageLeader() {
-      stopLeaderCamera();
       sessionStorage.removeItem('img_leader_token');
       closeImageLeaderDashboard();
     }
 
-    // --- WEB BROWSER LIVE CAMERA ENGINE ---
-    async function toggleLeaderCamera() {
-      const container = document.getElementById('cameraPreviewContainer');
-      const toggleBtn = document.getElementById('toggleCameraBtn');
-      const video = document.getElementById('leaderCameraVideo');
+    // --- DIRECT NATIVE DEVICE CAMERA HANDLER ---
+    async function handleDirectCameraSnap(input) {
+      if (!input.files || input.files.length === 0) return;
 
-      if (cameraMediaStream) {
-        stopLeaderCamera();
-        return;
-      }
-
+      const file = input.files[0];
       try {
-        cameraMediaStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
-          audio: false
-        });
-        video.srcObject = cameraMediaStream;
-        container.classList.remove('hidden');
-        toggleBtn.innerHTML = `<i data-lucide="video-off" class="w-4 h-4"></i> Close Web Camera`;
-        toggleBtn.classList.replace('bg-amber-500/20', 'bg-rose-500/20');
-        toggleBtn.classList.replace('text-amber-300', 'text-rose-300');
-        lucide.createIcons();
-      } catch (err) {
-        console.error("Camera access failed:", err);
-        alert("Camera permission denied or camera device not supported. Make sure you are on HTTPS (GitHub Pages).");
-      }
-    }
+        const highRes = await compressFileToJpeg(file, 1000, 0.72);
+        const timeNow = new Date();
+        const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-    function stopLeaderCamera() {
-      const container = document.getElementById('cameraPreviewContainer');
-      const toggleBtn = document.getElementById('toggleCameraBtn');
-      const video = document.getElementById('leaderCameraVideo');
+        const photoObj = {
+          img: highRes,
+          timestamp: Date.now(),
+          timeStr: timeStr
+        };
 
-      if (cameraMediaStream) {
-        cameraMediaStream.getTracks().forEach(t => t.stop());
-        cameraMediaStream = null;
-      }
-      if (video) video.srcObject = null;
-      if (container) container.classList.add('hidden');
-      if (toggleBtn) {
-        toggleBtn.innerHTML = `<i data-lucide="video" class="w-4 h-4"></i> Open Web Camera Viewfinder`;
-        toggleBtn.classList.replace('bg-rose-500/20', 'bg-amber-500/20');
-        toggleBtn.classList.replace('text-rose-300', 'text-amber-300');
-        lucide.createIcons();
-      }
-    }
-
-    async function captureDevoteePhotoNow() {
-      const video = document.getElementById('leaderCameraVideo');
-      const canvas = document.getElementById('cameraCaptureCanvas');
-      if (!video || !cameraMediaStream) return;
-
-      canvas.width = video.videoWidth || 640;
-      canvas.height = video.videoHeight || 480;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-      const photoDataUrl = canvas.toDataURL('image/jpeg', 0.65);
-      const timeNow = new Date();
-      const timeStr = timeNow.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-      const photoObj = {
-        img: photoDataUrl,
-        timestamp: Date.now(),
-        timeStr: timeStr
-      };
-
-      try {
         if (db) {
           await db.ref('devoteePandalPhotos').push(photoObj);
         } else {
           devoteePhotosData.unshift(photoObj);
         }
+
+        input.value = '';
+        renderDevoteePhotos();
         triggerFlowerRain();
         alert("Photo captured & published! It will automatically expire in 2 hours.");
       } catch (err) {
-        console.error("Save error:", err);
-        alert("Failed to save capture. Please retry.");
+        console.error("Camera snap failed:", err);
+        alert("Could not process picture. Please retry.");
       }
     }
 
@@ -1915,7 +1858,7 @@
             <div class="p-5 bg-gradient-to-t from-[#0e041e] to-transparent">
               <h4 class="font-cinzel font-bold text-base text-slate-100">${sanitizeInput(album.title)}</h4>
               <div class="mt-2.5 pt-2.5 border-t border-white/10 flex items-center justify-between text-xs text-amber-400">
-                <span class="font-medium">${photoCount} Photos Inside</span>
+                <span class="font-medium">${photoCount} Items (Photos & Videos)</span>
                 <span class="font-bold flex items-center gap-1 group-hover:translate-x-1.5 transition">
                   Open <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                 </span>
@@ -1943,19 +1886,31 @@
 
       document.getElementById('albumModalTitle').innerText = activeOpenAlbum.title;
       const items = activeOpenAlbum.items || [];
-      document.getElementById('albumModalCountBadge').innerText = `${items.length} Photos Inside`;
+      document.getElementById('albumModalCountBadge').innerText = `${items.length} Items Inside`;
 
       const mediaGrid = document.getElementById('albumMediaGrid');
-      mediaGrid.innerHTML = items.map((item, itemIdx) => `
-        <div onclick="openAlbumMediaLightbox(${itemIdx})" class="lux-glass rounded-2xl overflow-hidden cursor-pointer relative group border border-white/10 shadow-lg spring-btn">
-          <div class="relative h-36 sm:h-44 w-full bg-black/60 overflow-hidden flex items-center justify-center">
-            <img src="${item.url}" alt="${sanitizeInput(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
-              <span class="text-[10px] text-white font-semibold truncate">${sanitizeInput(item.title || 'Photo')}</span>
+      mediaGrid.innerHTML = items.map((item, itemIdx) => {
+        const isVideo = item.type === 'video';
+        return `
+          <div onclick="openAlbumMediaLightbox(${itemIdx})" class="lux-glass rounded-2xl overflow-hidden cursor-pointer relative group border border-white/10 shadow-lg spring-btn">
+            <div class="relative h-36 sm:h-44 w-full bg-black/60 overflow-hidden flex items-center justify-center">
+              ${isVideo ? `
+                <video src="${item.url}" class="w-full h-full object-cover pointer-events-none" preload="metadata"></video>
+                <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <div class="w-9 h-9 rounded-full bg-amber-500/90 text-black flex items-center justify-center shadow-lg">
+                    <i data-lucide="play" class="w-4 h-4 fill-black ml-0.5"></i>
+                  </div>
+                </div>
+              ` : `
+                <img src="${item.url}" alt="${sanitizeInput(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              `}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                <span class="text-[10px] text-white font-semibold truncate">${sanitizeInput(item.title || (isVideo ? 'Video' : 'Photo'))}</span>
+              </div>
             </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
 
       const modal = document.getElementById('albumViewModal');
       modal.classList.remove('hidden');
@@ -1973,9 +1928,10 @@
     function openAlbumMediaLightbox(itemIndex) {
       if (!activeOpenAlbum || !activeOpenAlbum.items || !activeOpenAlbum.items[itemIndex]) return;
       activeLightboxMedia = activeOpenAlbum.items.map(i => ({
+        type: i.type || 'image',
         title: i.title,
         tag: activeOpenAlbum.title,
-        img: i.url
+        url: i.url
       }));
 
       openGalleryLightbox(itemIndex);
@@ -1987,10 +1943,18 @@
       if (!m) return;
 
       const mediaContainer = document.getElementById('lightboxMediaContainer');
-      mediaContainer.innerHTML = `<img src="${m.img}" class="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl" alt="Media Lightbox">`;
+      if (m.type === 'video') {
+        mediaContainer.innerHTML = `
+          <video src="${m.url}" controls autoplay playsinline class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl bg-black">
+            Your browser does not support the video tag.
+          </video>
+        `;
+      } else {
+        mediaContainer.innerHTML = `<img src="${m.url}" class="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl" alt="Media Lightbox">`;
+      }
 
       document.getElementById('lightboxTag').innerText = m.tag || 'Moment';
-      document.getElementById('lightboxTitle').innerText = m.title;
+      document.getElementById('lightboxTitle').innerText = m.title || '';
 
       const modal = document.getElementById('galleryLightboxModal');
       modal.classList.remove('hidden');
@@ -2008,7 +1972,17 @@
       const modal = document.getElementById('galleryLightboxModal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
-      document.getElementById('lightboxMediaContainer').innerHTML = '';
+      const container = document.getElementById('lightboxMediaContainer');
+      if (container) container.innerHTML = '';
+    }
+
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+      });
     }
 
     async function saveBatchMoments() {
@@ -2023,47 +1997,80 @@
       }
 
       const filesInput = document.getElementById('in-moment-files');
+      const saveBtn = document.getElementById('saveMomentsBtn');
       if (!filesInput.files || filesInput.files.length === 0) {
-        alert("Please select photos to upload!");
+        alert("Please select photos or videos to upload!");
         return;
       }
 
-      let newItems = [];
-      let defaultCover = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80";
-
+      // Check max size for video clips (7MB maximum to prevent RTDB write limits)
+      const MAX_VIDEO_BYTES = 7 * 1024 * 1024;
       for (let i = 0; i < filesInput.files.length; i++) {
         const file = filesInput.files[i];
-        const compressed = await compressFileToJpeg(file, 800, 0.65);
-        if (i === 0) defaultCover = compressed;
-        newItems.push({
-          type: "image",
-          url: compressed,
-          title: `${targetFolderName} #${i + 1}`
-        });
-      }
-
-      let existingFolder = albumsData.find(a => a.title.toLowerCase() === targetFolderName.toLowerCase());
-      if (existingFolder) {
-        existingFolder.items = existingFolder.items || [];
-        existingFolder.items.unshift(...newItems);
-        if (!existingFolder.coverImg || existingFolder.coverImg === defaultCover) {
-          existingFolder.coverImg = newItems[0].url || defaultCover;
+        if (file.type.startsWith('video') && file.size > MAX_VIDEO_BYTES) {
+          alert(`Video "${file.name}" is larger than 7MB. Please upload shorter video clips under 7MB.`);
+          return;
         }
-      } else {
-        albumsData.unshift({
-          id: "alb_" + Date.now(),
-          title: targetFolderName,
-          coverImg: defaultCover,
-          items: newItems
-        });
       }
 
-      syncNode('albumsData', albumsData);
-      document.getElementById('in-custom-folder-name').value = '';
-      filesInput.value = '';
-      document.getElementById('customFolderInputGroup').classList.add('hidden');
-      triggerFlowerRain();
-      alert(`Photos successfully saved into "${targetFolderName}" folder!`);
+      saveBtn.disabled = true;
+      saveBtn.innerText = "Processing & Saving Media...";
+
+      try {
+        let newItems = [];
+        let defaultCover = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80";
+
+        for (let i = 0; i < filesInput.files.length; i++) {
+          const file = filesInput.files[i];
+          const isVideo = file.type.startsWith('video');
+
+          if (isVideo) {
+            const mediaDataUrl = await readFileAsDataURL(file);
+            newItems.push({
+              type: "video",
+              url: mediaDataUrl,
+              title: `${targetFolderName} Video #${i + 1}`
+            });
+          } else {
+            const compressed = await compressFileToJpeg(file, 800, 0.65);
+            if (i === 0) defaultCover = compressed;
+            newItems.push({
+              type: "image",
+              url: compressed,
+              title: `${targetFolderName} Photo #${i + 1}`
+            });
+          }
+        }
+
+        let existingFolder = albumsData.find(a => a.title.toLowerCase() === targetFolderName.toLowerCase());
+        if (existingFolder) {
+          existingFolder.items = existingFolder.items || [];
+          existingFolder.items.unshift(...newItems);
+          const firstImg = existingFolder.items.find(it => it.type === 'image');
+          if (firstImg) existingFolder.coverImg = firstImg.url;
+        } else {
+          const firstImg = newItems.find(it => it.type === 'image');
+          albumsData.unshift({
+            id: "alb_" + Date.now(),
+            title: targetFolderName,
+            coverImg: firstImg ? firstImg.url : defaultCover,
+            items: newItems
+          });
+        }
+
+        syncNode('albumsData', albumsData);
+        document.getElementById('in-custom-folder-name').value = '';
+        filesInput.value = '';
+        document.getElementById('customFolderInputGroup').classList.add('hidden');
+        triggerFlowerRain();
+        alert(`Media successfully saved into "${targetFolderName}" folder!`);
+      } catch (err) {
+        console.error("Upload error:", err);
+        alert("Could not process all media files. Ensure videos are short/compact in size.");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "Save Media to Folder ✦";
+      }
     }
 
     function compressFileToJpeg(file, maxWidth = 800, quality = 0.60) {
@@ -2206,12 +2213,13 @@
 
     function removeSingleAlbumMedia(albumIdx, itemIdx) {
       if (!albumsData[albumIdx] || !albumsData[albumIdx].items) return;
-      if (confirm(`Delete this photo from "${albumsData[albumIdx].title}"?`)) {
+      if (confirm(`Delete this item from "${albumsData[albumIdx].title}"?`)) {
         albumsData[albumIdx].items.splice(itemIdx, 1);
         
-        if (albumsData[albumIdx].items.length > 0) {
-          albumsData[albumIdx].coverImg = albumsData[albumIdx].items[0].url;
-        } else {
+        const firstImg = albumsData[albumIdx].items.find(it => it.type === 'image');
+        if (firstImg) {
+          albumsData[albumIdx].coverImg = firstImg.url;
+        } else if (albumsData[albumIdx].items.length > 0) {
           albumsData[albumIdx].coverImg = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80";
         }
 
@@ -2222,7 +2230,7 @@
     function editSingleAlbumMediaTitle(albumIdx, itemIdx) {
       if (!albumsData[albumIdx] || !albumsData[albumIdx].items[itemIdx]) return;
       const currentTitle = albumsData[albumIdx].items[itemIdx].title || '';
-      const newTitle = prompt("Edit photo title/caption:", currentTitle);
+      const newTitle = prompt("Edit item title/caption:", currentTitle);
       if (newTitle !== null && newTitle.trim() !== '') {
         albumsData[albumIdx].items[itemIdx].title = sanitizeInput(newTitle);
         syncNode('albumsData', albumsData);
@@ -2299,7 +2307,7 @@
                   <img src="${alb.coverImg}" class="w-11 h-11 rounded-xl object-cover" alt="${sanitizeInput(alb.title)}" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80'">
                   <div>
                     <p class="text-xs font-bold text-white">${sanitizeInput(alb.title)}</p>
-                    <p class="text-[10px] text-amber-400">${items.length} photos total</p>
+                    <p class="text-[10px] text-amber-400">${items.length} items total</p>
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5">
@@ -2312,22 +2320,31 @@
 
               <div id="album-items-sublist-${i}" class="hidden pt-2 border-t border-white/10 space-y-1.5">
                 ${items.length === 0 ? `<p class="text-[11px] text-slate-400 py-1 text-center">Folder is currently empty.</p>` : ''}
-                ${items.map((item, itemIdx) => `
-                  <div class="flex items-center justify-between bg-black/40 p-2 rounded-xl border border-white/5">
-                    <div class="flex items-center gap-2.5 truncate">
-                      <img src="${item.url}" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="Item">
-                      <span class="text-[11px] text-slate-200 truncate">${sanitizeInput(item.title || ('Photo #' + (itemIdx + 1)))}</span>
+                ${items.map((item, itemIdx) => {
+                  const isVideo = item.type === 'video';
+                  return `
+                    <div class="flex items-center justify-between bg-black/40 p-2 rounded-xl border border-white/5">
+                      <div class="flex items-center gap-2.5 truncate">
+                        ${isVideo ? `
+                          <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="video" class="w-4 h-4 text-amber-400"></i>
+                          </div>
+                        ` : `
+                          <img src="${item.url}" class="w-8 h-8 rounded-lg object-cover flex-shrink-0" alt="Item">
+                        `}
+                        <span class="text-[11px] text-slate-200 truncate">${sanitizeInput(item.title || (isVideo ? 'Video' : 'Photo'))}</span>
+                      </div>
+                      <div class="flex items-center gap-1 flex-shrink-0 ml-2">
+                        <button onclick="editSingleAlbumMediaTitle(${i}, ${itemIdx})" class="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black border border-amber-500/30 text-[10px] rounded-lg font-bold transition cursor-pointer">
+                          Rename
+                        </button>
+                        <button onclick="removeSingleAlbumMedia(${i}, ${itemIdx})" class="px-2 py-0.5 bg-rose-500/20 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30 text-[10px] rounded-lg font-bold transition cursor-pointer">
+                          Remove
+                        </button>
+                      </div>
                     </div>
-                    <div class="flex items-center gap-1 flex-shrink-0 ml-2">
-                      <button onclick="editSingleAlbumMediaTitle(${i}, ${itemIdx})" class="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black border border-amber-500/30 text-[10px] rounded-lg font-bold transition cursor-pointer">
-                        Rename
-                      </button>
-                      <button onclick="removeSingleAlbumMedia(${i}, ${itemIdx})" class="px-2 py-0.5 bg-rose-500/20 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30 text-[10px] rounded-lg font-bold transition cursor-pointer">
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                `).join('')}
+                  `;
+                }).join('')}
               </div>
             </div>
           `;
@@ -2875,7 +2892,6 @@
       document.getElementById('login-pass').value = '';
     }
 
-    // Direct String Comparison for President (ID: ganesh | Pass: 0000)
     function verifyLeaderLogin() {
       const leaderId = document.getElementById('login-id').value.trim();
       const leaderPass = document.getElementById('login-pass').value.trim();
@@ -3231,7 +3247,6 @@
       }
     }
 
-    // Leader Panel Alert & Announcement Broadcaster
     function broadcastLeaderAlert() {
       const type = document.getElementById('in-notif-type').value;
       const title = sanitizeInput(document.getElementById('in-notif-title').value);
@@ -3281,4 +3296,4 @@
   <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9999] w-full h-full"></canvas>
 
 </body>
-         </html>
+      </html>
